@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -25,7 +25,7 @@
 
     /* ── SIDEBAR ── */
     #sidebar {
-      width: 235px; min-width: 235px;
+      width: 280px; min-width: 280px;
       background: #003057;
       display: flex; flex-direction: column;
       transition: width 0.3s ease, min-width 0.3s ease;
@@ -131,7 +131,7 @@
       width: 32px; height: 32px;
       background: rgba(255,255,255,0.1);
       border: none; border-radius: 50%;
-      cursor: pointer; color: rgba(255,255,255,0.7);
+      cursor: pointer; color: #ffffff;
       transition: background 0.2s, transform 0.3s;
       flex-shrink: 0;
     }
@@ -304,7 +304,7 @@
                 2026: [
                     {
                         id: 's26-ultra', name: 'Galaxy S26 Ultra',
-                        startMonth: 0, endMonth: 11, basePrice: 1469,
+                        startMonth: 2, endMonth: 11, basePrice: 1469, range: 'S',
                         colors: [
                             { name: 'Violet', hex: '#686884' }, { name: 'Noir', hex: '#494D53' },
                             { name: 'Bleu',   hex: '#B3CBD9' }, { name: 'Blanc', hex: '#F3F4F5' }
@@ -319,7 +319,7 @@
                     },
                     {
                         id: 's26plus', name: 'Galaxy S26+',
-                        startMonth: 0, endMonth: 11, basePrice: 1169,
+                        startMonth: 2, endMonth: 11, basePrice: 1169, range: 'S',
                         colors: [
                             { name: 'Noir', hex: '#494D53' }, { name: 'Gris', hex: '#9E9E9E' },
                             { name: 'Crème', hex: '#F5F5F0' }
@@ -333,7 +333,7 @@
                     },
                     {
                         id: 's26', name: 'Galaxy S26',
-                        startMonth: 0, endMonth: 11, basePrice: 899,
+                        startMonth: 2, endMonth: 11, basePrice: 899, range: 'S',
                         colors: [
                             { name: 'Noir', hex: '#494D53' }, { name: 'Crème', hex: '#F5F5F0' },
                             { name: 'Lavande', hex: '#E6E6FA' }
@@ -346,8 +346,8 @@
                         colorClass: 'bg-slate-500'
                     },
                     {
-                        id: 'a56', name: 'Galaxy A56',
-                        startMonth: 2, endMonth: 11, basePrice: 499,
+                        id: 'a57', name: 'Galaxy A57',
+                        startMonth: 3, endMonth: 11, basePrice: 499, range: 'A',
                         colors: [
                             { name: 'Awesome Navy',    hex: '#000080' },
                             { name: 'Awesome Iceblue', hex: '#ADD8E6' },
@@ -361,8 +361,8 @@
                         colorClass: 'bg-blue-500'
                     },
                     {
-                        id: 'a36', name: 'Galaxy A36',
-                        startMonth: 2, endMonth: 11, basePrice: 399,
+                        id: 'a37', name: 'Galaxy A37',
+                        startMonth: 3, endMonth: 11, basePrice: 399, range: 'A',
                         colors: [
                             { name: 'Noir',      hex: '#2C2C2C' },
                             { name: 'Jaune',     hex: '#FFD700' },
@@ -376,8 +376,8 @@
                         colorClass: 'bg-blue-400'
                     },
                     {
-                        id: 'zfold7', name: 'Galaxy Z Fold 7',
-                        startMonth: 6, endMonth: 11, basePrice: 1999,
+                        id: 'zfold7', name: 'Galaxy Z Fold7',
+                        startMonth: 0, endMonth: 6, basePrice: 1999, range: 'Z',
                         colors: [
                             { name: 'Phantom Black', hex: '#1C1C1C' },
                             { name: 'Icy Blue',      hex: '#A5C2CC' }
@@ -391,8 +391,8 @@
                         colorClass: 'bg-zinc-800'
                     },
                     {
-                        id: 'zflip7', name: 'Galaxy Z Flip 7',
-                        startMonth: 6, endMonth: 11, basePrice: 1199,
+                        id: 'zflip7', name: 'Galaxy Z Flip7',
+                        startMonth: 0, endMonth: 6, basePrice: 1199, range: 'Z',
                         colors: [
                             { name: 'Mint',     hex: '#98FF98' },
                             { name: 'Graphite', hex: '#41424C' },
@@ -404,23 +404,111 @@
                             { ram: '8 Go', rom: '512 Go', rrp: 1319 }
                         ],
                         colorClass: 'bg-zinc-600'
+                    },
+                    {
+                        id: 'a27', name: 'Galaxy A27',
+                        startMonth: 6, endMonth: 11, basePrice: 349, range: 'A',
+                        colors: [
+                            { name: 'Noir',  hex: '#2C2C2C' },
+                            { name: 'Bleu',  hex: '#4169E1' },
+                            { name: 'Blanc', hex: '#F5F5F5' }
+                        ],
+                        screen: 'Super AMOLED ; 6,7&quot; ; FHD+ ; 120Hz',
+                        variants: [
+                            { ram: '6 Go', rom: '128 Go', rrp: 349 },
+                            { ram: '8 Go', rom: '256 Go', rrp: 399 }
+                        ],
+                        colorClass: 'bg-blue-300'
                     }
                 ],
                 2027: [
                     {
-                        id: 's27-ultra', name: 'Galaxy S27 Ultra',
-                        startMonth: 0, endMonth: 11, basePrice: 1549,
+                        id: 's26-ultra-cont', name: 'Galaxy S26 Ultra',
+                        startMonth: 0, endMonth: 2, basePrice: 1469, range: 'S',
                         colors: [
-                            { name: 'Titanium Black',  hex: '#3B3B3B' },
-                            { name: 'Titanium Silver', hex: '#C0C0C0' }
+                            { name: 'Violet', hex: '#686884' }, { name: 'Noir', hex: '#494D53' },
+                            { name: 'Bleu',   hex: '#B3CBD9' }, { name: 'Blanc', hex: '#F3F4F5' }
                         ],
-                        screen: 'Ecran Infinity O ; 6,9&quot; ; QHD+ ; 144Hz adaptatif ; Nouveau verre Gorilla',
+                        screen: 'Ecran Infinity O ; 6,9&quot; ; QHD+ ; 3120 x 1440p ; 499ppp ; 120Hz adaptatif',
                         variants: [
-                            { ram: '16 Go', rom: '256 Go', rrp: 1549 },
-                            { ram: '16 Go', rom: '512 Go', rrp: 1749 },
-                            { ram: '16 Go', rom: '1 To',   rrp: 2049 }
+                            { ram: '12 Go', rom: '256 Go', rrp: 1469 },
+                            { ram: '12 Go', rom: '512 Go', rrp: 1669 },
+                            { ram: '16 Go', rom: '1 To',   rrp: 1969 }
                         ],
-                        colorClass: 'bg-slate-900'
+                        colorClass: 'bg-slate-800'
+                    },
+                    {
+                        id: 's26plus-cont', name: 'Galaxy S26+',
+                        startMonth: 0, endMonth: 2, basePrice: 1169, range: 'S',
+                        colors: [
+                            { name: 'Noir', hex: '#494D53' }, { name: 'Gris', hex: '#9E9E9E' },
+                            { name: 'Crème', hex: '#F5F5F0' }
+                        ],
+                        screen: 'Ecran Infinity O ; 6,7&quot; ; QHD+ ; 120Hz adaptatif',
+                        variants: [
+                            { ram: '12 Go', rom: '256 Go', rrp: 1169 },
+                            { ram: '12 Go', rom: '512 Go', rrp: 1299 }
+                        ],
+                        colorClass: 'bg-slate-600'
+                    },
+                    {
+                        id: 's26-cont', name: 'Galaxy S26',
+                        startMonth: 0, endMonth: 2, basePrice: 899, range: 'S',
+                        colors: [
+                            { name: 'Noir', hex: '#494D53' }, { name: 'Crème', hex: '#F5F5F0' },
+                            { name: 'Lavande', hex: '#E6E6FA' }
+                        ],
+                        screen: 'Ecran Infinity O ; 6,2&quot; ; FHD+ ; 120Hz adaptatif',
+                        variants: [
+                            { ram: '8 Go', rom: '128 Go', rrp: 899 },
+                            { ram: '8 Go', rom: '256 Go', rrp: 959 }
+                        ],
+                        colorClass: 'bg-slate-500'
+                    },
+                    {
+                        id: 'a57-cont', name: 'Galaxy A57',
+                        startMonth: 0, endMonth: 3, basePrice: 499, range: 'A',
+                        colors: [
+                            { name: 'Awesome Navy',    hex: '#000080' },
+                            { name: 'Awesome Iceblue', hex: '#ADD8E6' },
+                            { name: 'Awesome Lilac',   hex: '#C8A2C8' }
+                        ],
+                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
+                        variants: [
+                            { ram: '8 Go', rom: '128 Go', rrp: 499 },
+                            { ram: '8 Go', rom: '256 Go', rrp: 549 }
+                        ],
+                        colorClass: 'bg-blue-500'
+                    },
+                    {
+                        id: 'a37-cont', name: 'Galaxy A37',
+                        startMonth: 0, endMonth: 3, basePrice: 399, range: 'A',
+                        colors: [
+                            { name: 'Noir',      hex: '#2C2C2C' },
+                            { name: 'Jaune',     hex: '#FFD700' },
+                            { name: 'Bleu clair', hex: '#ADD8E6' }
+                        ],
+                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
+                        variants: [
+                            { ram: '6 Go', rom: '128 Go', rrp: 399 },
+                            { ram: '8 Go', rom: '256 Go', rrp: 449 }
+                        ],
+                        colorClass: 'bg-blue-400'
+                    },
+                    {
+                        id: 'a27-cont', name: 'Galaxy A27',
+                        startMonth: 0, endMonth: 6, basePrice: 349, range: 'A',
+                        colors: [
+                            { name: 'Noir',  hex: '#2C2C2C' },
+                            { name: 'Bleu',  hex: '#4169E1' },
+                            { name: 'Blanc', hex: '#F5F5F5' }
+                        ],
+                        screen: 'Super AMOLED ; 6,7&quot; ; FHD+ ; 120Hz',
+                        variants: [
+                            { ram: '6 Go', rom: '128 Go', rrp: 349 },
+                            { ram: '8 Go', rom: '256 Go', rrp: 399 }
+                        ],
+                        colorClass: 'bg-blue-300'
                     }
                 ]
             },
@@ -662,9 +750,47 @@
             const [activeYear, setActiveYear]         = useState(2026);
             const [selectedProduct, setSelectedProduct] = useState(null);
 
-            const currentData = mockData[activeCategory]?.[activeYear] || [];
-            const maxPrice    = 2500;
-            const priceSteps  = [0, 500, 1000, 1500, 2000, 2500];
+            // Filtres par gamme (uniquement pertinents pour Smartphones et Tablettes)
+            const rangeFilters = [
+                { id: 'sz',      label: 'Gamme S/Z',     match: ['S', 'Z'], min: 500, max: 2500, steps: [500, 1000, 1500, 2000, 2500] },
+                { id: 'a',       label: 'Gamme A',       match: ['A'],      min: 0,   max: 900,  steps: [0, 300, 600, 900] },
+                { id: 'durcie',  label: 'Gamme Durcie',  match: ['Durcie'], min: 0,   max: 1500, steps: [0, 500, 1000, 1500] },
+            ];
+            const showRangeFilter = activeCategory === 'smartphones' || activeCategory === 'tablets';
+            const [activeRange, setActiveRange] = useState('sz');
+            const currentRangeFilter = showRangeFilter ? (rangeFilters.find(r => r.id === activeRange) || rangeFilters[0]) : null;
+
+            const baseData = mockData[activeCategory]?.[activeYear] || [];
+            const currentData = (currentRangeFilter
+                ? baseData.filter(p => currentRangeFilter.match.includes(p.range))
+                : baseData
+            ).slice().sort((a, b) => a.basePrice - b.basePrice);
+
+            const minPrice    = currentRangeFilter ? currentRangeFilter.min : 0;
+            const maxPrice    = currentRangeFilter ? currentRangeFilter.max : 2500;
+            const priceSteps  = currentRangeFilter ? currentRangeFilter.steps : [0, 500, 1000, 1500, 2000, 2500];
+            const priceSpan   = (maxPrice - minPrice) || 1;
+
+            // Attribution de &quot;lanes&quot; verticales pour éviter que les barres ne se
+            // superposent lorsque leurs périodes se chevauchent et que leurs prix
+            // sont trop proches (ce qui empêchait de cliquer dessus correctement).
+            const positionedData = (() => {
+                const lanes = [];
+                return currentData.map(product => {
+                    let lane = 0;
+                    while (
+                        lanes[lane] &amp;&amp; lanes[lane].some(o =>
+                            product.startMonth <= o.endMonth &amp;&amp; product.endMonth >= o.startMonth &amp;&amp;
+                            Math.abs(product.basePrice - o.basePrice) < 220
+                        )
+                    ) {
+                        lane++;
+                    }
+                    if (!lanes[lane]) lanes[lane] = [];
+                    lanes[lane].push(product);
+                    return { ...product, _lane: lane };
+                });
+            })();
 
             return (
                 <div className=&quot;min-h-screen&quot;>
@@ -711,6 +837,21 @@
                                     );
                                 })}
                             </div>
+                            {showRangeFilter &amp;&amp; (
+                                <div className=&quot;flex space-x-2 pb-4 pt-1&quot;>
+                                    {rangeFilters.map(rf => (
+                                        <button
+                                            key={rf.id}
+                                            onClick={() => setActiveRange(rf.id)}
+                                            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                                                activeRange === rf.id
+                                                    ? 'bg-blue-600 border-blue-600 text-white'
+                                                    : 'bg-white border-gray-200 text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                            }`}
+                                        >{rf.label}</button>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </header>
 
@@ -757,22 +898,23 @@
                                         <div
                                             key={i}
                                             className=&quot;absolute left-0 right-0 border-b border-dashed border-gray-200 opacity-50&quot;
-                                            style={{ bottom: `${(price / maxPrice) * 100}%` }}
+                                            style={{ bottom: `${((price - minPrice) / priceSpan) * 100}%` }}
                                         />
                                     ))}
 
                                     {/* Produits */}
-                                    {currentData.length > 0 ? currentData.map(product => {
-                                        const bottomPercent = (product.basePrice / maxPrice) * 100;
+                                    {positionedData.length > 0 ? positionedData.map(product => {
+                                        const bottomPercent = ((product.basePrice - minPrice) / priceSpan) * 100;
                                         const leftPercent   = (product.startMonth / 12) * 100;
                                         const widthPercent  = ((product.endMonth - product.startMonth + 1) / 12) * 100;
+                                        const laneOffset    = product._lane * 38;
                                         return (
                                             <div
                                                 key={product.id}
                                                 onClick={() => setSelectedProduct(product)}
                                                 className={`absolute h-8 rounded-full shadow-md cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:z-50 flex items-center px-4 overflow-hidden z-10 ${product.colorClass} text-white border border-white/10`}
                                                 style={{
-                                                    bottom: `calc(${bottomPercent}% - 16px)`,
+                                                    bottom: `calc(${bottomPercent}% - 16px + ${laneOffset}px)`,
                                                     left:   `${leftPercent}%`,
                                                     width:  `${widthPercent}%`,
                                                 }}
@@ -805,7 +947,8 @@
 window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.samsungNav &amp;&amp; window.__rpNav) window.__rpNav(e.data.samsungNav); });
         </script>
 </body>
-</html>"></iframe>
+</html>
+"></iframe>
     <iframe id="frame-smt" class="section-frame" srcdoc="<!DOCTYPE html>
 <html lang=&quot;fr&quot;>
 <head>
@@ -3601,10 +3744,8 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             { category: &quot;Smartphone&quot;, model: &quot;Z Flip7 FE&quot;, range: &quot;Z&quot;, weight: 187, recycledWeight: 22.4, recycledRatio: 12, recyclability: 12.8, pkgWeight: 118, pkgRecycled: 100, pkgRecyclable: 100, lcaTotal: 40.7, lcaMfg: 35, lcaDist: 3.0, lcaUse: 2.6, lcaDisp: 0.1 },
 
             // Smartphones A Series
-            { category: &quot;Smartphone&quot;, model: &quot;A57&quot;, range: &quot;A&quot;, weight: 179, recycledWeight: 15.9, recycledRatio: 8.9, recyclability: 13.5, pkgWeight: null, pkgRecycled: 100, pkgRecyclable: 100, lcaTotal: null, lcaMfg: null, lcaDist: null, lcaUse: null, lcaDisp: null },
-            { category: &quot;Smartphone&quot;, model: &quot;A37&quot;, range: &quot;A&quot;, weight: 196, recycledWeight: 15.5, recycledRatio: 7.9, recyclability: 12.1, pkgWeight: null, pkgRecycled: 100, pkgRecyclable: 100, lcaTotal: 37.5, lcaMfg: 31.1, lcaDist: 2.6, lcaUse: 3.7, lcaDisp: 0.1 },
-            { category: &quot;Smartphone&quot;, model: &quot;A56&quot;, range: &quot;A&quot;, weight: 198, recycledWeight: 14.7, recycledRatio: 7.4, recyclability: 13.2, pkgWeight: 84, pkgRecycled: 84, pkgRecyclable: 100, lcaTotal: 38.3, lcaMfg: 32.1, lcaDist: 2.6, lcaUse: 3.5, lcaDisp: 0.1 },
-            { category: &quot;Smartphone&quot;, model: &quot;A36&quot;, range: &quot;A&quot;, weight: 195, recycledWeight: 18.1, recycledRatio: 9.3, recyclability: 11.2, pkgWeight: 78, pkgRecycled: 84, pkgRecyclable: 100, lcaTotal: 41.1, lcaMfg: 35, lcaDist: 2.5, lcaUse: 3.4, lcaDisp: 0.1 },
+            { category: &quot;Smartphone&quot;, model: &quot;A57&quot;, range: &quot;A&quot;, weight: 179, recycledWeight: 15.9, recycledRatio: 8.9, recyclability: 13.5, pkgWeight: 102, pkgRecycled: 70, pkgRecyclable: 100, lcaTotal: 34.5, lcaMfg: 28.9, lcaDist: 2.8, lcaUse: 2.7, lcaDisp: 0.1},
+            { category: &quot;Smartphone&quot;, model: &quot;A37&quot;, range: &quot;A&quot;, weight: 196, recycledWeight: 15.5, recycledRatio: 7.9, recyclability: 12.1, pkgWeight: 87, pkgRecycled: 84, pkgRecyclable: 100, lcaTotal: 37.5, lcaMfg: 31.1, lcaDist: 2.6, lcaUse: 3.7, lcaDisp: 0.1 },
             { category: &quot;Smartphone&quot;, model: &quot;A26&quot;, range: &quot;A&quot;, weight: 200, recycledWeight: 6.4, recycledRatio: 3.2, recyclability: 11.8, pkgWeight: 42, pkgRecycled: 0, pkgRecyclable: 100, lcaTotal: 41.7, lcaMfg: 33.6, lcaDist: 2.2, lcaUse: 5.8, lcaDisp: 0.1 },
             { category: &quot;Smartphone&quot;, model: &quot;A17 5G&quot;, range: &quot;A&quot;, weight: 192, recycledWeight: 2.3, recycledRatio: 1.4, recyclability: 12.2, pkgWeight: 45, pkgRecycled: 0, pkgRecyclable: 100, lcaTotal: 38.8, lcaMfg: 32.6, lcaDist: 2.4, lcaUse: 3.7, lcaDisp: 0.1 },
             { category: &quot;Smartphone&quot;, model: &quot;A17 4G&quot;, range: &quot;A&quot;, weight: 190, recycledWeight: 2.7, recycledRatio: 1.0, recyclability: 10.1, pkgWeight: 45, pkgRecycled: 0, pkgRecyclable: 100, lcaTotal: 38, lcaMfg: 35.7, lcaDist: 2.4, lcaUse: 3.4, lcaDisp: 0.1 },
