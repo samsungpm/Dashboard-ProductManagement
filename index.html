@@ -23,7 +23,7 @@
       height: 100vh;
     }
 
-    /* ── SIDEBAR ── */
+    /* -- SIDEBAR -- */
     #sidebar {
       width: 280px; min-width: 280px;
       background: #003057;
@@ -138,7 +138,7 @@
     #toggle-btn:hover { background: rgba(255,255,255,0.2); color: white; }
     #sidebar.collapsed #toggle-btn { transform: rotate(180deg); }
 
-    /* ── MAIN CONTENT ── */
+    /* -- MAIN CONTENT -- */
     #main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 
     .section-frame {
@@ -539,9 +539,9 @@
 
         const months = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
 
-        // ─────────────────────────────────────────────────────────────────
+        // -----------------------------------------------------------------
         // CLOUDFLARE WORKER — proxy sécurisé vers l'API Anthropic
-        // ─────────────────────────────────────────────────────────────────
+        // -----------------------------------------------------------------
         const WORKER_URL = &quot;https://roadmap-asp-proxy.baptiste-araujo-pro.workers.dev&quot;;
 
         // Clé de cache localStorage pour un variant donné
@@ -598,9 +598,9 @@
             return { result, fromCache: false };
         }
 
-        // ─────────────────────────────────────────────────────────────────
+        // -----------------------------------------------------------------
         // MODAL PRODUIT
-        // ─────────────────────────────────────────────────────────────────
+        // -----------------------------------------------------------------
         function ProductModal({ product, onClose }) {
             const [aspData, setAspData]             = useState({});
             const [betaUnlocked, setBetaUnlocked]   = useState(false);
@@ -852,12 +852,12 @@
                 </div>
             );
         }
-        // ─────────────────────────────────────────────────────────────────
+        // -----------------------------------------------------------------
         // APP PRINCIPALE
+        // -----------------------------------------------------------------
         // ─────────────────────────────────────────────────────────────────
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // EDITEUR DE DONNEES (Mode Edition)
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ─────────────────────────────────────────────────────────────────
         function DataEditor({ data, setData, activeCategory, activeYear, categories }) {
             const products = data[activeCategory]?.[activeYear] || [];
 
@@ -951,7 +951,7 @@
             return (
                 <div className=&quot;space-y-4&quot;>
                     <div className=&quot;bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-700&quot;>
-                        Edition des produits â€” <strong>{categories.find(c => c.id === activeCategory)?.name} {activeYear}</strong>.
+                        Edition des produits — <strong>{categories.find(c => c.id === activeCategory)?.name} {activeYear}</strong>.
                         Les modifications sont enregistrees automatiquement dans ce navigateur. Pensez a cliquer sur <strong>Exporter (JSON)</strong> pour transmettre les changements.
                     </div>
 
@@ -987,7 +987,7 @@
                                     <input type=&quot;number&quot; min=&quot;1&quot; max=&quot;12&quot; className={inputCls} value={(product.endMonth ?? 0) + 1} onChange={e => updateMonth(pIdx, 'endMonth', e.target.value)} />
                                 </div>
                                 <div>
-                                    <label className={labelCls}>Prix base (â‚¬)</label>
+                                    <label className={labelCls}>Prix base (€)</label>
                                     <input type=&quot;number&quot; className={inputCls} value={product.basePrice ?? 0} onChange={e => updateField(pIdx, 'basePrice', parseInt(e.target.value, 10) || 0)} />
                                 </div>
                                 <div>
@@ -1052,7 +1052,7 @@
                                         <div key={vIdx} className=&quot;grid grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center&quot;>
                                             <input className={inputCls} value={variant.ram || ''} onChange={e => updateVariant(pIdx, vIdx, 'ram', e.target.value)} placeholder=&quot;RAM (ex: 12 Go)&quot; />
                                             <input className={inputCls} value={variant.rom || ''} onChange={e => updateVariant(pIdx, vIdx, 'rom', e.target.value)} placeholder=&quot;Stockage (ex: 256 Go)&quot; />
-                                            <input type=&quot;number&quot; className={inputCls} value={variant.rrp ?? 0} onChange={e => updateVariant(pIdx, vIdx, 'rrp', e.target.value)} placeholder=&quot;RRP (â‚¬)&quot; />
+                                            <input type=&quot;number&quot; className={inputCls} value={variant.rrp ?? 0} onChange={e => updateVariant(pIdx, vIdx, 'rrp', e.target.value)} placeholder=&quot;RRP (€)&quot; />
                                             <button onClick={() => removeVariant(pIdx, vIdx)} className=&quot;p-1.5 text-gray-400 hover:text-red-500 transition-colors&quot;><X className=&quot;w-4 h-4&quot; /></button>
                                         </div>
                                     ))}
@@ -1073,7 +1073,7 @@
             const [activeYear, setActiveYear]         = useState(2026);
             const [selectedProduct, setSelectedProduct] = useState(null);
 
-            // â”€â”€â”€ Mode Edition (admin) â”€â”€â”€
+            // ─── Mode Edition (admin) ───
             const [data, setData] = useState(() => {
                 try {
                     const saved = localStorage.getItem('roadmapGPEditData');
@@ -1138,9 +1138,9 @@
             const priceSteps  = currentRangeFilter ? currentRangeFilter.steps : [0, 500, 1000, 1500, 2000, 2500];
             const priceSpan   = (maxPrice - minPrice) || 1;
 
-            // Attribution de &quot;lanes&quot; verticales pour Ã©viter que les barres ne se
-            // superposent lorsque leurs pÃ©riodes se chevauchent et que leurs prix
-            // sont trop proches (ce qui empÃªchait de cliquer dessus correctement).
+            // Attribution de &quot;lanes&quot; verticales pour éviter que les barres ne se
+            // superposent lorsque leurs périodes se chevauchent et que leurs prix
+            // sont trop proches (ce qui empêchait de cliquer dessus correctement).
             const positionedData = (() => {
                 const lanes = [];
                 return currentData.map(product => {
@@ -1305,7 +1305,7 @@
                                     {categories.find(c => c.id === activeCategory)?.name} {activeYear}
                                 </h2>
                                 <p className=&quot;text-sm text-gray-500 mt-1&quot;>
-                                    Les produits sont positionnÃ©s selon leur mois de lancement estimÃ© et leur prix d'entrÃ©e (RRP).
+                                    Les produits sont positionnés selon leur mois de lancement estimé et leur prix d'entrée (RRP).
                                 </p>
                             </div>
 
@@ -1315,7 +1315,7 @@
                                 <div className=&quot;absolute left-0 top-0 bottom-8 w-16 border-r border-gray-200 flex flex-col justify-between text-xs text-gray-400 font-medium&quot;>
                                     {priceSteps.slice().reverse().map((price, i) => (
                                         <div key={i} className=&quot;relative h-0 flex items-center justify-end pr-2&quot;>
-                                            <span className=&quot;absolute -translate-y-1/2&quot;>{price}â‚¬</span>
+                                            <span className=&quot;absolute -translate-y-1/2&quot;>{price}€</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1360,13 +1360,13 @@
                                                 }}
                                             >
                                                 <span className=&quot;text-sm font-semibold truncate drop-shadow-md&quot;>
-                                                    {product.name} <span className=&quot;opacity-75 font-normal ml-1&quot;>({product.basePrice}â‚¬)</span>
+                                                    {product.name} <span className=&quot;opacity-75 font-normal ml-1&quot;>({product.basePrice}€)</span>
                                                 </span>
                                             </div>
                                         );
                                     }) : (
                                         <div className=&quot;absolute inset-0 flex items-center justify-center text-gray-400&quot;>
-                                            <p>Aucune donnÃ©e disponible pour cette annÃ©e et cette catÃ©gorie.</p>
+                                            <p>Aucune donnée disponible pour cette année et cette catégorie.</p>
                                         </div>
                                     )}
                                 </div>
@@ -1896,9 +1896,9 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                     mergedMap.set(key, {
                         model: item.model, category: item.category, range: finalRange,
                         launch: item.launch,
-                        smrDuration: type === 'smr' ? item.value : 'Non spÃ©cifiÃ©',
+                        smrDuration: type === 'smr' ? item.value : 'Non spécifié',
                         endSupport: type === 'smr' ? item.endSupport : null,
-                        osCount: type === 'os' ? item.value : 'Non spÃ©cifiÃ©',
+                        osCount: type === 'os' ? item.value : 'Non spécifié',
                         androidFinal: type === 'os' ? item.endSupport : null,
                     });
                 } else {
@@ -2756,7 +2756,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                 if (currentView === 'editor') setCurrentView('roadmap');
             };
             const handleResetData = () => {
-                if (!window.confirm(&quot;RÃ©initialiser toutes les modifications et revenir aux donnÃ©es d'origine ?&quot;)) return;
+                if (!window.confirm(&quot;Réinitialiser toutes les modifications et revenir aux données d'origine ?&quot;)) return;
                 setData(buildInitialData());
             };
             const handleExportData = () => {
@@ -2800,7 +2800,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                                             </button>
                                         )}
                                     </div>
-                                    <button onClick={() => editMode ? handleAdminLock() : setShowAdminInput(v => !v)} className={`p-2 rounded-lg transition-colors ${editMode ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`} title={editMode ? 'Quitter le mode Ã©dition' : 'Mode Ã©dition'}>
+                                    <button onClick={() => editMode ? handleAdminLock() : setShowAdminInput(v => !v)} className={`p-2 rounded-lg transition-colors ${editMode ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`} title={editMode ? 'Quitter le mode édition' : 'Mode édition'}>
                                         {editMode ? <Unlock size={18} /> : <Lock size={18} />}
                                     </button>
                                 </div>
@@ -2820,7 +2820,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                                     autoFocus
                                 />
                                 <button onClick={handleAdminUnlock} className=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>
-                                    AccÃ©der
+                                    Accéder
                                 </button>
                                 {adminError &amp;&amp; <span className=&quot;text-red-300 text-xs whitespace-nowrap&quot;>Mot de passe incorrect</span>}
                             </div>
@@ -2830,13 +2830,13 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                     {editMode &amp;&amp; (
                         <div className=&quot;bg-yellow-50 border-b border-yellow-200&quot;>
                             <div className=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2&quot;>
-                                <span className=&quot;text-xs font-bold text-yellow-800&quot;>Mode Ã©dition activÃ© â€” les modifications sont enregistrÃ©es dans ce navigateur</span>
+                                <span className=&quot;text-xs font-bold text-yellow-800&quot;>Mode édition activé — les modifications sont enregistrées dans ce navigateur</span>
                                 <div className=&quot;flex items-center gap-2&quot;>
                                     <button onClick={handleExportData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors&quot;>
                                         <Download size={14} /> Exporter (JSON)
                                     </button>
                                     <button onClick={handleResetData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-yellow-800 border border-yellow-300 hover:bg-yellow-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
-                                        <RotateCcw size={14} /> RÃ©initialiser
+                                        <RotateCcw size={14} /> Réinitialiser
                                     </button>
                                 </div>
                             </div>
@@ -2855,11 +2855,11 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                             <div className=&quot;flex flex-col md:flex-row justify-between items-start gap-4&quot;>
                                 <div>
                                     <img src=&quot;Logo Black/Samsung_Orig_Wordmark_BLACK_CMYK.svg&quot; alt=&quot;Samsung&quot; className=&quot;h-5 w-auto&quot; />
-                                    <p className=&quot;mt-2 text-xs md:text-sm text-gray-500 max-w-xs&quot;>Une sÃ©curitÃ© de niveau dÃ©fense pour protÃ©ger ce qui compte le plus.</p>
+                                    <p className=&quot;mt-2 text-xs md:text-sm text-gray-500 max-w-xs&quot;>Une sécurité de niveau défense pour protéger ce qui compte le plus.</p>
                                 </div>
                             </div>
                             <div className=&quot;border-t border-gray-100 mt-6 pt-6&quot;>
-                                <div className=&quot;text-[10px] md:text-xs text-gray-400 text-center md:text-left&quot;>Â© {new Date().getFullYear()} Samsung Electronics Co., Ltd. Les images sont simulÃ©es.</div>
+                                <div className=&quot;text-[10px] md:text-xs text-gray-400 text-center md:text-left&quot;>© {new Date().getFullYear()} Samsung Electronics Co., Ltd. Les images sont simulées.</div>
                             </div>
                         </div>
                     </footer>
@@ -2954,19 +2954,19 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
     <div id=&quot;admin-password-panel&quot; class=&quot;hidden max-w-sm mx-auto -mt-4 mb-2 bg-[#003057] text-white rounded-xl shadow-lg p-3 flex items-center gap-2 relative z-20&quot;>
         <i data-lucide=&quot;lock&quot; class=&quot;w-4 h-4 text-yellow-400 shrink-0&quot;></i>
         <input type=&quot;password&quot; id=&quot;admin-pwd-input&quot; placeholder=&quot;Mot de passe&quot; class=&quot;flex-1 px-2 py-1 rounded text-gray-800 text-sm focus:outline-none&quot; onkeydown=&quot;if(event.key==='Enter') handleAdminUnlock();&quot;>
-        <button onclick=&quot;handleAdminUnlock()&quot; class=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>AccÃ©der</button>
+        <button onclick=&quot;handleAdminUnlock()&quot; class=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>Accéder</button>
     </div>
     <p id=&quot;admin-pwd-error&quot; class=&quot;hidden text-center text-red-500 text-xs font-bold mb-6&quot;>Mot de passe incorrect.</p>
 
     <!-- BANDEAU MODE EDITION -->
     <div id=&quot;edit-mode-banner&quot; class=&quot;hidden max-w-[1400px] mx-auto mb-6 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-2 flex flex-wrap items-center justify-between gap-2&quot;>
-        <span class=&quot;text-xs font-bold text-yellow-800&quot;>Mode Ã©dition activÃ© â€” les modifications sont enregistrÃ©es dans ce navigateur</span>
+        <span class=&quot;text-xs font-bold text-yellow-800&quot;>Mode édition activé — les modifications sont enregistrées dans ce navigateur</span>
         <div class=&quot;flex items-center gap-2&quot;>
             <button onclick=&quot;exportRoadmapData()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors&quot;>
                 <i data-lucide=&quot;download&quot; class=&quot;w-4 h-4&quot;></i> Exporter (JSON)
             </button>
             <button onclick=&quot;resetRoadmapData()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-yellow-800 border border-yellow-300 hover:bg-yellow-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
-                <i data-lucide=&quot;rotate-ccw&quot; class=&quot;w-4 h-4&quot;></i> RÃ©initialiser
+                <i data-lucide=&quot;rotate-ccw&quot; class=&quot;w-4 h-4&quot;></i> Réinitialiser
             </button>
         </div>
     </div>
@@ -3280,7 +3280,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                 }
             });
 
-            // Actions spÃ©cifiques lors du changement d'onglet
+            // Actions spécifiques lors du changement d'onglet
             if(tabId === 'roadmap') renderTimeline();
             if(tabId === 'comparator') initComparator();
             if(tabId === 'referencement') renderReferencement();
@@ -3908,7 +3908,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         }
 
         function resetRoadmapData() {
-            if (!confirm(&quot;RÃ©initialiser toutes les modifications et revenir aux donnÃ©es d'origine ?&quot;)) return;
+            if (!confirm(&quot;Réinitialiser toutes les modifications et revenir aux données d'origine ?&quot;)) return;
             roadmapData = JSON.parse(JSON.stringify(baseRoadmapData));
             saveRoadmapData();
             renderTimeline();
@@ -3932,13 +3932,13 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         }
 
         function addModel() {
-            roadmapData.push({ id: 'modele-' + Date.now(), name: 'Nouveau modÃ¨le', image: '', startDate: 'Janvier 2026', endDate: 'Janvier 2027', options: {}, variants: [] });
+            roadmapData.push({ id: 'modele-' + Date.now(), name: 'Nouveau modèle', image: '', startDate: 'Janvier 2026', endDate: 'Janvier 2027', options: {}, variants: [] });
             saveRoadmapData();
             renderEditor();
         }
 
         function removeModel(modelIdx) {
-            if (!confirm('Supprimer ce modÃ¨le et toutes ses variantes ?')) return;
+            if (!confirm('Supprimer ce modèle et toutes ses variantes ?')) return;
             roadmapData.splice(modelIdx, 1);
             saveRoadmapData();
             renderEditor();
@@ -3965,7 +3965,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             let html = `
                 <div class=&quot;flex justify-end mb-4&quot;>
                     <button onclick=&quot;addModel()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
-                        <i data-lucide=&quot;plus&quot; class=&quot;w-4 h-4&quot;></i> Ajouter un modÃ¨le
+                        <i data-lucide=&quot;plus&quot; class=&quot;w-4 h-4&quot;></i> Ajouter un modèle
                     </button>
                 </div>
                 <div class=&quot;space-y-6&quot;>
@@ -3976,11 +3976,11 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                     <div class=&quot;bg-white rounded-2xl border border-gray-200 shadow-sm p-4 md:p-6&quot;>
                         <div class=&quot;grid grid-cols-1 md:grid-cols-4 gap-3 mb-4&quot;>
                             <div class=&quot;md:col-span-2&quot;>
-                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Nom du modÃ¨le</label>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Nom du modèle</label>
                                 <input type=&quot;text&quot; value=&quot;${escAttr(model.name)}&quot; onchange=&quot;updateModelField(${mIdx},'name',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm font-bold&quot;>
                             </div>
                             <div>
-                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Date de dÃ©but</label>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Date de début</label>
                                 <input type=&quot;text&quot; value=&quot;${escAttr(model.startDate)}&quot; onchange=&quot;updateModelField(${mIdx},'startDate',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm&quot;>
                             </div>
                             <div>
@@ -3993,7 +3993,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                             </div>
                             <div class=&quot;flex items-end&quot;>
                                 <button onclick=&quot;removeModel(${mIdx})&quot; class=&quot;w-full flex items-center justify-center gap-1.5 text-xs font-bold text-red-600 border border-red-200 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors&quot;>
-                                    <i data-lucide=&quot;trash-2&quot; class=&quot;w-4 h-4&quot;></i> Supprimer le modÃ¨le
+                                    <i data-lucide=&quot;trash-2&quot; class=&quot;w-4 h-4&quot;></i> Supprimer le modèle
                                 </button>
                             </div>
                         </div>
@@ -4001,7 +4001,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                             <table class=&quot;min-w-full text-xs divide-y divide-gray-100&quot;>
                                 <thead class=&quot;bg-gray-50&quot;>
                                     <tr>
-                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Ã‰cran</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Écran</th>
                                         <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Processeur</th>
                                         <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>RAM</th>
                                         <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Stockage</th>
@@ -4641,9 +4641,9 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             );
         };
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ─────────────────────────────────────────────────────────────────
         // EDITEUR DE DONNEES (Mode Edition)
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ─────────────────────────────────────────────────────────────────
         const ECO_FIELDS = [
             { key: 'category',       label: 'Categorie',           type: 'text' },
             { key: 'model',          label: 'Modele',              type: 'text' },
@@ -4890,7 +4890,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                         <div className=&quot;max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6&quot;>
                             <div className=&quot;text-gray-400 text-sm text-center md:text-left&quot;>
                                 <p className=&quot;font-semibold text-gray-900 mb-1&quot;>Samsung Electronics France</p>
-                                <p>DonnÃ©es issues du rapport RSE. Valeurs indicatives.</p>
+                                <p>Données issues du rapport RSE. Valeurs indicatives.</p>
                             </div>
                             <div className=&quot;flex gap-4&quot;>
                                 <div className=&quot;w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-colors cursor-pointer&quot;><Leaf size={14}/></div>
