@@ -289,6 +289,12 @@
         const Sparkles  = ({ className }) => <IconBase className={className}><path d=&quot;m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z&quot;/></IconBase>;
         const Loader2   = ({ className }) => <IconBase className={className}><path d=&quot;M21 12a9 9 0 1 1-6.219-8.56&quot;/></IconBase>;
         const Info      = ({ className }) => <IconBase className={className}><circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;10&quot;/><path d=&quot;M12 16v-4&quot;/><path d=&quot;M12 8h.01&quot;/></IconBase>;
+        const Lock      = ({ className }) => <IconBase className={className}><rect width=&quot;18&quot; height=&quot;11&quot; x=&quot;3&quot; y=&quot;11&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M7 11V7a5 5 0 0 1 10 0v4&quot;/></IconBase>;
+        const Unlock    = ({ className }) => <IconBase className={className}><rect width=&quot;18&quot; height=&quot;11&quot; x=&quot;3&quot; y=&quot;11&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M7 11V7a5 5 0 0 1 9.9-1&quot;/></IconBase>;
+        const Plus      = ({ className }) => <IconBase className={className}><path d=&quot;M5 12h14&quot;/><path d=&quot;M12 5v14&quot;/></IconBase>;
+        const Trash2    = ({ className }) => <IconBase className={className}><path d=&quot;M3 6h18&quot;/><path d=&quot;M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2&quot;/><line x1=&quot;10&quot; x2=&quot;10&quot; y1=&quot;11&quot; y2=&quot;17&quot;/><line x1=&quot;14&quot; x2=&quot;14&quot; y1=&quot;11&quot; y2=&quot;17&quot;/></IconBase>;
+        const Download  = ({ className }) => <IconBase className={className}><path d=&quot;M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4&quot;/><polyline points=&quot;7 10 12 15 17 10&quot;/><line x1=&quot;12&quot; x2=&quot;12&quot; y1=&quot;15&quot; y2=&quot;3&quot;/></IconBase>;
+        const RotateCcw = ({ className }) => <IconBase className={className}><path d=&quot;M3 12a9 9 0 1 0 2.64-6.36L3 8&quot;/><path d=&quot;M3 3v5h5&quot;/></IconBase>;
 
         // --- DATA ---
         const categories = [
@@ -849,11 +855,267 @@
         // ─────────────────────────────────────────────────────────────────
         // APP PRINCIPALE
         // ─────────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // EDITEUR DE DONNEES (Mode Edition)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        function DataEditor({ data, setData, activeCategory, activeYear, categories }) {
+            const products = data[activeCategory]?.[activeYear] || [];
+
+            const updateProducts = (newProducts) => {
+                setData(prev => ({
+                    ...prev,
+                    [activeCategory]: { ...prev[activeCategory], [activeYear]: newProducts }
+                }));
+            };
+
+            const updateField = (idx, field, value) => {
+                updateProducts(products.map((p, i) => i === idx ? { ...p, [field]: value } : p));
+            };
+
+            const updateMonth = (idx, field, value) => {
+                let m = parseInt(value, 10);
+                if (isNaN(m)) m = 1;
+                m = Math.min(12, Math.max(1, m)) - 1;
+                updateField(idx, field, m);
+            };
+
+            const updateColor = (pIdx, cIdx, field, value) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    const colors = (p.colors || []).map((c, ci) => ci === cIdx ? { ...c, [field]: value } : c);
+                    return { ...p, colors };
+                }));
+            };
+
+            const addColor = (pIdx) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    const colors = [...(p.colors || [])];
+                    if (colors.length >= 4) return p;
+                    colors.push({ name: '', hex: '#000000' });
+                    return { ...p, colors };
+                }));
+            };
+
+            const removeColor = (pIdx, cIdx) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    return { ...p, colors: (p.colors || []).filter((_, ci) => ci !== cIdx) };
+                }));
+            };
+
+            const updateVariant = (pIdx, vIdx, field, value) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    const variants = (p.variants || []).map((v, vi) => vi === vIdx ? { ...v, [field]: field === 'rrp' ? (parseInt(value, 10) || 0) : value } : v);
+                    return { ...p, variants };
+                }));
+            };
+
+            const addVariant = (pIdx) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    const variants = [...(p.variants || [])];
+                    if (variants.length >= 4) return p;
+                    variants.push({ ram: '', rom: '', rrp: 0 });
+                    return { ...p, variants };
+                }));
+            };
+
+            const removeVariant = (pIdx, vIdx) => {
+                updateProducts(products.map((p, i) => {
+                    if (i !== pIdx) return p;
+                    return { ...p, variants: (p.variants || []).filter((_, vi) => vi !== vIdx) };
+                }));
+            };
+
+            const addProduct = () => {
+                const newProduct = {
+                    id: `new-${Date.now()}`,
+                    name: 'Nouveau produit',
+                    startMonth: 0, endMonth: 11, basePrice: 0, range: 'A',
+                    colors: [], screen: '', variants: [{ ram: '', rom: '', rrp: 0 }],
+                    colorClass: 'bg-slate-500', idealoUrl: null
+                };
+                updateProducts([...products, newProduct]);
+            };
+
+            const removeProduct = (idx) => {
+                if (!window.confirm('Supprimer ce produit ?')) return;
+                updateProducts(products.filter((_, i) => i !== idx));
+            };
+
+            const inputCls = &quot;w-full px-2 py-1.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-blue-500&quot;;
+            const labelCls = &quot;block text-xs font-medium text-gray-500 mb-1&quot;;
+
+            return (
+                <div className=&quot;space-y-4&quot;>
+                    <div className=&quot;bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-700&quot;>
+                        Edition des produits â€” <strong>{categories.find(c => c.id === activeCategory)?.name} {activeYear}</strong>.
+                        Les modifications sont enregistrees automatiquement dans ce navigateur. Pensez a cliquer sur <strong>Exporter (JSON)</strong> pour transmettre les changements.
+                    </div>
+
+                    {products.length === 0 &amp;&amp; (
+                        <div className=&quot;text-center text-gray-400 py-8&quot;>Aucun produit pour cette categorie / annee.</div>
+                    )}
+
+                    {products.map((product, pIdx) => (
+                        <div key={product.id || pIdx} className=&quot;bg-white border border-gray-200 rounded-2xl p-5 space-y-4 shadow-sm&quot;>
+                            <div className=&quot;flex items-start justify-between gap-4&quot;>
+                                <div className=&quot;flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3&quot;>
+                                    <div>
+                                        <label className={labelCls}>Nom produit</label>
+                                        <input className={inputCls} value={product.name || ''} onChange={e => updateField(pIdx, 'name', e.target.value)} />
+                                    </div>
+                                    <div>
+                                        <label className={labelCls}>ID (technique)</label>
+                                        <input className={`${inputCls} font-mono text-xs bg-gray-50`} value={product.id || ''} onChange={e => updateField(pIdx, 'id', e.target.value)} />
+                                    </div>
+                                </div>
+                                <button onClick={() => removeProduct(pIdx)} className=&quot;p-2 rounded-lg border border-red-100 text-red-500 hover:bg-red-50 transition-colors flex-shrink-0&quot; title=&quot;Supprimer ce produit&quot;>
+                                    <Trash2 className=&quot;w-4 h-4&quot; />
+                                </button>
+                            </div>
+
+                            <div className=&quot;grid grid-cols-2 sm:grid-cols-5 gap-3&quot;>
+                                <div>
+                                    <label className={labelCls}>Mois debut (1-12)</label>
+                                    <input type=&quot;number&quot; min=&quot;1&quot; max=&quot;12&quot; className={inputCls} value={(product.startMonth ?? 0) + 1} onChange={e => updateMonth(pIdx, 'startMonth', e.target.value)} />
+                                </div>
+                                <div>
+                                    <label className={labelCls}>Mois fin (1-12)</label>
+                                    <input type=&quot;number&quot; min=&quot;1&quot; max=&quot;12&quot; className={inputCls} value={(product.endMonth ?? 0) + 1} onChange={e => updateMonth(pIdx, 'endMonth', e.target.value)} />
+                                </div>
+                                <div>
+                                    <label className={labelCls}>Prix base (â‚¬)</label>
+                                    <input type=&quot;number&quot; className={inputCls} value={product.basePrice ?? 0} onChange={e => updateField(pIdx, 'basePrice', parseInt(e.target.value, 10) || 0)} />
+                                </div>
+                                <div>
+                                    <label className={labelCls}>Gamme</label>
+                                    <select className={inputCls} value={product.range || 'A'} onChange={e => updateField(pIdx, 'range', e.target.value)}>
+                                        <option value=&quot;S&quot;>S</option>
+                                        <option value=&quot;Z&quot;>Z</option>
+                                        <option value=&quot;A&quot;>A</option>
+                                        <option value=&quot;Durcie&quot;>Durcie</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className={labelCls}>colorClass</label>
+                                    <input className={`${inputCls} font-mono text-xs`} value={product.colorClass || ''} onChange={e => updateField(pIdx, 'colorClass', e.target.value)} />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className={labelCls}>Description ecran</label>
+                                <textarea className={`${inputCls} resize-none`} rows=&quot;2&quot; value={product.screen || ''} onChange={e => updateField(pIdx, 'screen', e.target.value)} />
+                            </div>
+
+                            <div>
+                                <label className={labelCls}>Lien Idealo</label>
+                                <input className={inputCls} value={product.idealoUrl || ''} onChange={e => updateField(pIdx, 'idealoUrl', e.target.value || null)} placeholder=&quot;https://www.idealo.fr/...&quot; />
+                            </div>
+
+                            {/* Couleurs */}
+                            <div>
+                                <div className=&quot;flex items-center justify-between mb-2&quot;>
+                                    <label className={labelCls + ' mb-0'}>Couleurs ({(product.colors || []).length}/4)</label>
+                                    {(product.colors || []).length < 4 &amp;&amp; (
+                                        <button onClick={() => addColor(pIdx)} className=&quot;inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium&quot;>
+                                            <Plus className=&quot;w-3 h-3&quot; />Ajouter une couleur
+                                        </button>
+                                    )}
+                                </div>
+                                <div className=&quot;grid grid-cols-1 sm:grid-cols-2 gap-2&quot;>
+                                    {(product.colors || []).map((color, cIdx) => (
+                                        <div key={cIdx} className=&quot;flex items-center gap-2 bg-gray-50 p-2 rounded-lg border border-gray-100&quot;>
+                                            <input type=&quot;color&quot; className=&quot;w-8 h-8 rounded border border-gray-200 flex-shrink-0&quot; value={color.hex || '#000000'} onChange={e => updateColor(pIdx, cIdx, 'hex', e.target.value)} />
+                                            <input className={`${inputCls} bg-white`} value={color.name || ''} onChange={e => updateColor(pIdx, cIdx, 'name', e.target.value)} placeholder=&quot;Nom couleur&quot; />
+                                            <input className={`${inputCls} bg-white font-mono text-xs w-24 flex-shrink-0`} value={color.hex || ''} onChange={e => updateColor(pIdx, cIdx, 'hex', e.target.value)} />
+                                            <button onClick={() => removeColor(pIdx, cIdx)} className=&quot;p-1.5 text-gray-400 hover:text-red-500 transition-colors flex-shrink-0&quot;><X className=&quot;w-4 h-4&quot; /></button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Variantes */}
+                            <div>
+                                <div className=&quot;flex items-center justify-between mb-2&quot;>
+                                    <label className={labelCls + ' mb-0'}>Variantes ({(product.variants || []).length}/4)</label>
+                                    {(product.variants || []).length < 4 &amp;&amp; (
+                                        <button onClick={() => addVariant(pIdx)} className=&quot;inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-medium&quot;>
+                                            <Plus className=&quot;w-3 h-3&quot; />Ajouter une variante
+                                        </button>
+                                    )}
+                                </div>
+                                <div className=&quot;space-y-2&quot;>
+                                    {(product.variants || []).map((variant, vIdx) => (
+                                        <div key={vIdx} className=&quot;grid grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center&quot;>
+                                            <input className={inputCls} value={variant.ram || ''} onChange={e => updateVariant(pIdx, vIdx, 'ram', e.target.value)} placeholder=&quot;RAM (ex: 12 Go)&quot; />
+                                            <input className={inputCls} value={variant.rom || ''} onChange={e => updateVariant(pIdx, vIdx, 'rom', e.target.value)} placeholder=&quot;Stockage (ex: 256 Go)&quot; />
+                                            <input type=&quot;number&quot; className={inputCls} value={variant.rrp ?? 0} onChange={e => updateVariant(pIdx, vIdx, 'rrp', e.target.value)} placeholder=&quot;RRP (â‚¬)&quot; />
+                                            <button onClick={() => removeVariant(pIdx, vIdx)} className=&quot;p-1.5 text-gray-400 hover:text-red-500 transition-colors&quot;><X className=&quot;w-4 h-4&quot; /></button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    <button onClick={addProduct} className=&quot;w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-gray-200 rounded-2xl text-gray-500 hover:text-blue-600 hover:border-blue-300 transition-colors font-medium text-sm&quot;>
+                        <Plus className=&quot;w-4 h-4&quot; />Ajouter un produit
+                    </button>
+                </div>
+            );
+        }
         function App() {
             const [activeCategory, setActiveCategory] = useState('smartphones');
             React.useEffect(() => { window.__rpNav = setActiveCategory; }, []);
             const [activeYear, setActiveYear]         = useState(2026);
             const [selectedProduct, setSelectedProduct] = useState(null);
+
+            // â”€â”€â”€ Mode Edition (admin) â”€â”€â”€
+            const [data, setData] = useState(() => {
+                try {
+                    const saved = localStorage.getItem('roadmapGPEditData');
+                    if (saved) return JSON.parse(saved);
+                } catch (_) {}
+                return JSON.parse(JSON.stringify(mockData));
+            });
+            React.useEffect(() => {
+                try { localStorage.setItem('roadmapGPEditData', JSON.stringify(data)); } catch (_) {}
+            }, [data]);
+
+            const [editMode, setEditMode]             = useState(false);
+            const [showAdminInput, setShowAdminInput] = useState(false);
+            const [adminPassword, setAdminPassword]   = useState('');
+            const [adminError, setAdminError]         = useState(false);
+            const [editorView, setEditorView]         = useState(false);
+
+            const handleAdminUnlock = () => {
+                if (adminPassword === 'admin') {
+                    setEditMode(true); setShowAdminInput(false);
+                    setAdminError(false); setAdminPassword('');
+                } else { setAdminError(true); }
+            };
+
+            const handleAdminLock = () => {
+                setEditMode(false); setEditorView(false);
+                setShowAdminInput(false); setAdminPassword(''); setAdminError(false);
+            };
+
+            const handleResetData = () => {
+                if (!window.confirm(&quot;Reinitialiser toutes les modifications et revenir aux donnees d'origine ?&quot;)) return;
+                setData(JSON.parse(JSON.stringify(mockData)));
+            };
+
+            const handleExportData = () => {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'roadmap-gp-data.json';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
 
             // Filtres par gamme (uniquement pertinents pour Smartphones et Tablettes)
             const rangeFilters = [
@@ -865,7 +1127,7 @@
             const [activeRange, setActiveRange] = useState('sz');
             const currentRangeFilter = showRangeFilter ? (rangeFilters.find(r => r.id === activeRange) || rangeFilters[0]) : null;
 
-            const baseData = mockData[activeCategory]?.[activeYear] || [];
+            const baseData = data[activeCategory]?.[activeYear] || [];
             const currentData = (currentRangeFilter
                 ? baseData.filter(p => currentRangeFilter.match.includes(p.range))
                 : baseData
@@ -876,9 +1138,9 @@
             const priceSteps  = currentRangeFilter ? currentRangeFilter.steps : [0, 500, 1000, 1500, 2000, 2500];
             const priceSpan   = (maxPrice - minPrice) || 1;
 
-            // Attribution de &quot;lanes&quot; verticales pour éviter que les barres ne se
-            // superposent lorsque leurs périodes se chevauchent et que leurs prix
-            // sont trop proches (ce qui empêchait de cliquer dessus correctement).
+            // Attribution de &quot;lanes&quot; verticales pour Ã©viter que les barres ne se
+            // superposent lorsque leurs pÃ©riodes se chevauchent et que leurs prix
+            // sont trop proches (ce qui empÃªchait de cliquer dessus correctement).
             const positionedData = (() => {
                 const lanes = [];
                 return currentData.map(product => {
@@ -909,20 +1171,90 @@
                                     </div>
                                     <h1 className=&quot;text-2xl font-bold tracking-tight&quot;>Roadmap Produits GP</h1>
                                 </div>
-                                <div className=&quot;flex space-x-2 bg-gray-100 p-1 rounded-lg&quot;>
-                                    {years.map(year => (
+                                <div className=&quot;flex items-center space-x-2&quot;>
+                                    <div className=&quot;flex space-x-2 bg-gray-100 p-1 rounded-lg&quot;>
+                                        {years.map(year => (
+                                            <button
+                                                key={year}
+                                                onClick={() => setActiveYear(year)}
+                                                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                                                    activeYear === year
+                                                        ? 'bg-white shadow text-blue-600'
+                                                        : 'text-gray-500 hover:text-gray-700'
+                                                }`}
+                                            >{year}</button>
+                                        ))}
+                                    </div>
+                                    {!editMode ? (
                                         <button
-                                            key={year}
-                                            onClick={() => setActiveYear(year)}
-                                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-                                                activeYear === year
-                                                    ? 'bg-white shadow text-blue-600'
-                                                    : 'text-gray-500 hover:text-gray-700'
-                                            }`}
-                                        >{year}</button>
-                                    ))}
+                                            onClick={() => { setShowAdminInput(s => !s); setAdminError(false); setAdminPassword(''); }}
+                                            className=&quot;p-2.5 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-colors&quot;
+                                            title=&quot;Mode Edition&quot;
+                                        >
+                                            <Lock className=&quot;w-4 h-4&quot; />
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={handleAdminLock}
+                                            className=&quot;p-2.5 rounded-lg border border-green-200 bg-green-50 text-green-600 hover:bg-green-100 transition-colors&quot;
+                                            title=&quot;Quitter le mode edition&quot;
+                                        >
+                                            <Unlock className=&quot;w-4 h-4&quot; />
+                                        </button>
+                                    )}
                                 </div>
                             </div>
+
+                            {/* Barre mot de passe Admin */}
+                            {showAdminInput &amp;&amp; !editMode &amp;&amp; (
+                                <div className=&quot;bg-gray-900 px-4 py-3 -mx-4 sm:-mx-6 lg:-mx-8 mb-2 flex items-center gap-3&quot;>
+                                    <Lock className=&quot;w-4 h-4 text-yellow-400 flex-shrink-0&quot; />
+                                    <span className=&quot;text-xs text-gray-300 font-medium whitespace-nowrap&quot;>Mode Edition</span>
+                                    <input
+                                        type=&quot;password&quot;
+                                        value={adminPassword}
+                                        onChange={e => { setAdminPassword(e.target.value); setAdminError(false); }}
+                                        onKeyDown={e => e.key === 'Enter' &amp;&amp; handleAdminUnlock()}
+                                        placeholder=&quot;Mot de passe&quot;
+                                        autoFocus
+                                        className={`flex-1 bg-gray-800 text-white text-xs px-3 py-1.5 rounded-lg border outline-none focus:border-blue-500 ${adminError ? 'border-red-500' : 'border-gray-700'}`}
+                                    />
+                                    <button
+                                        onClick={handleAdminUnlock}
+                                        className=&quot;px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap&quot;
+                                    >Acceder</button>
+                                    {adminError &amp;&amp; <span className=&quot;text-xs text-red-400 whitespace-nowrap&quot;>Mot de passe incorrect</span>}
+                                </div>
+                            )}
+
+                            {/* Bandeau mode edition actif */}
+                            {editMode &amp;&amp; (
+                                <div className=&quot;bg-yellow-50 border-y border-yellow-200 px-4 py-2 -mx-4 sm:-mx-6 lg:-mx-8 mb-2 flex flex-wrap items-center gap-2&quot;>
+                                    <Sparkles className=&quot;w-3.5 h-3.5 text-yellow-500&quot; />
+                                    <span className=&quot;text-xs font-semibold text-yellow-700&quot;>Mode Edition actif</span>
+                                    <div className=&quot;flex bg-white rounded-lg border border-yellow-200 p-0.5 ml-2&quot;>
+                                        <button
+                                            onClick={() => setEditorView(false)}
+                                            className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${!editorView ? 'bg-yellow-500 text-white' : 'text-gray-500'}`}
+                                        >Vue Roadmap</button>
+                                        <button
+                                            onClick={() => setEditorView(true)}
+                                            className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${editorView ? 'bg-yellow-500 text-white' : 'text-gray-500'}`}
+                                        >Editeur</button>
+                                    </div>
+                                    <div className=&quot;ml-auto flex items-center gap-2&quot;>
+                                        <button
+                                            onClick={handleExportData}
+                                            className=&quot;inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors&quot;
+                                        ><Download className=&quot;w-3.5 h-3.5&quot; />Exporter (JSON)</button>
+                                        <button
+                                            onClick={handleResetData}
+                                            className=&quot;inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 hover:bg-gray-50 text-gray-600 text-xs font-medium rounded-lg transition-colors&quot;
+                                        ><RotateCcw className=&quot;w-3.5 h-3.5&quot; />Reinitialiser</button>
+                                    </div>
+                                </div>
+                            )}
+
                             <div className=&quot;flex space-x-6 overflow-x-auto pb-px scrollbar-hide&quot;>
                                 {categories.map(cat => {
                                     const Icon = cat.icon;
@@ -942,7 +1274,7 @@
                                     );
                                 })}
                             </div>
-                            {showRangeFilter &amp;&amp; (
+                            {showRangeFilter &amp;&amp; !(editMode &amp;&amp; editorView) &amp;&amp; (
                                 <div className=&quot;flex space-x-2 pb-4 pt-1&quot;>
                                     {rangeFilters.map(rf => (
                                         <button
@@ -962,6 +1294,9 @@
 
                     {/* MAIN */}
                     <main className=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8&quot;>
+                        {editMode &amp;&amp; editorView ? (
+                            <DataEditor data={data} setData={setData} activeCategory={activeCategory} activeYear={activeYear} categories={categories} />
+                        ) : (
                         <div className=&quot;bg-white rounded-2xl shadow-sm border border-gray-200 p-6 overflow-hidden&quot;>
                             <div className=&quot;mb-6&quot;>
                                 <h2 className=&quot;text-xl font-bold flex items-center&quot;>
@@ -970,7 +1305,7 @@
                                     {categories.find(c => c.id === activeCategory)?.name} {activeYear}
                                 </h2>
                                 <p className=&quot;text-sm text-gray-500 mt-1&quot;>
-                                    Les produits sont positionnés selon leur mois de lancement estimé et leur prix d'entrée (RRP).
+                                    Les produits sont positionnÃ©s selon leur mois de lancement estimÃ© et leur prix d'entrÃ©e (RRP).
                                 </p>
                             </div>
 
@@ -980,7 +1315,7 @@
                                 <div className=&quot;absolute left-0 top-0 bottom-8 w-16 border-r border-gray-200 flex flex-col justify-between text-xs text-gray-400 font-medium&quot;>
                                     {priceSteps.slice().reverse().map((price, i) => (
                                         <div key={i} className=&quot;relative h-0 flex items-center justify-end pr-2&quot;>
-                                            <span className=&quot;absolute -translate-y-1/2&quot;>{price}€</span>
+                                            <span className=&quot;absolute -translate-y-1/2&quot;>{price}â‚¬</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1025,18 +1360,19 @@
                                                 }}
                                             >
                                                 <span className=&quot;text-sm font-semibold truncate drop-shadow-md&quot;>
-                                                    {product.name} <span className=&quot;opacity-75 font-normal ml-1&quot;>({product.basePrice}€)</span>
+                                                    {product.name} <span className=&quot;opacity-75 font-normal ml-1&quot;>({product.basePrice}â‚¬)</span>
                                                 </span>
                                             </div>
                                         );
                                     }) : (
                                         <div className=&quot;absolute inset-0 flex items-center justify-center text-gray-400&quot;>
-                                            <p>Aucune donnée disponible pour cette année et cette catégorie.</p>
+                                            <p>Aucune donnÃ©e disponible pour cette annÃ©e et cette catÃ©gorie.</p>
                                         </div>
                                     )}
                                 </div>
                             </div>
                         </div>
+                        )}
                     </main>
 
                     {/* MODAL */}
@@ -1046,7 +1382,6 @@
                 </div>
             );
         }
-
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
 window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.samsungNav &amp;&amp; window.__rpNav) window.__rpNav(e.data.samsungNav); });
@@ -1203,7 +1538,7 @@ window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.sams
             Search, Smartphone, Tablet, Shield, ArrowUpCircle, 
             Check, Info, X, Calendar, Clock, ChevronRight, Filter, 
             Layout, Map as MapIcon, SlidersHorizontal, ArrowRightLeft, 
-            ExternalLink, Menu, AlertTriangle, Lock, Unlock, Settings, Save, Plus, Edit3, Download, Trash2
+            ExternalLink, Menu, AlertTriangle, Lock, Unlock, Settings, Save, Plus, Edit3, Download, Trash2, RotateCcw
         } from 'lucide-react';
 
         // ==================================================================================
@@ -1541,34 +1876,10 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         };
 
         // ==================================================================================
-        // 3. FUSION DES DONNÉES (Base de données + LocalStorage Admin)
+        // 3. PREPARATION DES DONNEES (fusion SMR + OS, calculee une seule fois au demarrage)
         // ==================================================================================
-        
-        // Ces fonctions prennent la base de données brute et appliquent les modifications faites via l'Admin.
-        const getMergedComparisonProducts = (customData) => {
-            const base = { ...comparisonProducts };
-            Object.entries(customData).forEach(([key, custom]) => {
-                if (custom.comparison) {
-                    base[key] = { name: custom.name, ...custom.comparison };
-                }
-            });
-            return base;
-        };
 
-        const getMergedRoadmapProducts = (customData) => {
-            const base = [...roadmapProducts];
-            Object.values(customData).forEach(custom => {
-                if (custom.roadmap) {
-                    const idx = base.findIndex(p => normalizeModel(p.name) === normalizeModel(custom.name));
-                    const newEntry = { name: custom.name, ...custom.roadmap };
-                    if (idx >= 0) base[idx] = newEntry;
-                    else base.push(newEntry);
-                }
-            });
-            return base;
-        };
-
-        const getParsedOSAndSMRData = (customData) => {
+        const buildInitialOsSmrRows = () => {
             const smrList = parseCSV(rawSMRData);
             const osList = parseCSV(rawOSData);
             const mergedMap = new Map();
@@ -1583,13 +1894,12 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
 
                 if (!mergedMap.has(key)) {
                     mergedMap.set(key, {
-                        id: key, model: item.model, category: item.category, range: finalRange,
-                        launch: item.launch, launchTimestamp: new Date(item.launch).getTime(),
-                        smrDuration: type === 'smr' ? item.value : 'Non spécifié',
+                        model: item.model, category: item.category, range: finalRange,
+                        launch: item.launch,
+                        smrDuration: type === 'smr' ? item.value : 'Non spÃ©cifiÃ©',
                         endSupport: type === 'smr' ? item.endSupport : null,
-                        osCount: type === 'os' ? item.value : 'Non spécifié', 
+                        osCount: type === 'os' ? item.value : 'Non spÃ©cifiÃ©',
                         androidFinal: type === 'os' ? item.endSupport : null,
-                        endYear: null, isNew: false 
                     });
                 } else {
                     const existing = mergedMap.get(key);
@@ -1603,7 +1913,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             osList.forEach(item => {
                 let found = false;
                 const normalizedInput = normalizeModel(item.model);
-                if(mergedMap.has(normalizedInput)) {
+                if (mergedMap.has(normalizedInput)) {
                     const entry = mergedMap.get(normalizedInput);
                     entry.osCount = item.value; entry.androidFinal = item.endSupport; found = true;
                 } else {
@@ -1613,40 +1923,25 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                         }
                     }
                 }
-                if(!found) processItem(item, 'os');
+                if (!found) processItem(item, 'os');
             });
 
-            // Appliquer les surcharges Admin
-            Object.values(customData).forEach(custom => {
-                if (custom.ossmr) {
-                    const key = normalizeModel(custom.name);
-                    const launchStr = custom.ossmr.launch || custom.roadmap?.start || '';
-                    mergedMap.set(key, {
-                        id: key, model: custom.name,
-                        category: custom.ossmr.category || 'Smartphone',
-                        range: custom.ossmr.range || 'Gamme S/Z',
-                        launch: launchStr,
-                        launchTimestamp: new Date(launchStr).getTime() || 0,
-                        smrDuration: custom.ossmr.smrDuration || 'Non spécifié',
-                        endSupport: custom.ossmr.endSupport || null,
-                        osCount: custom.ossmr.osCount || 'Non spécifié',
-                        androidFinal: custom.ossmr.androidFinal || null,
-                        endYear: null, isNew: false
-                    });
-                }
-            });
+            return Array.from(mergedMap.values());
+        };
 
-            let finalDevices = Array.from(mergedMap.values()).map(d => ({ 
-                ...d, 
+        const getParsedOSAndSMRData = (rows) => {
+            let finalDevices = rows.map((d, idx) => ({
+                ...d,
+                id: `${normalizeModel(d.model)}-${idx}`,
+                launchTimestamp: new Date(d.launch).getTime() || 0,
                 endYear: calculateEndOfSupport(d.launch, d.smrDuration),
-                isEOL: isProductEOL(d.endSupport) 
+                isEOL: isProductEOL(d.endSupport)
             }));
-            
+
             finalDevices.sort((a, b) => b.launchTimestamp - a.launchTimestamp);
             const top3Ids = new Set(finalDevices.slice(0, 3).map(d => d.id));
             return finalDevices.map(d => ({ ...d, isNew: top3Ids.has(d.id) }));
         };
-
         // ==================================================================================
         // 4. COMPOSANTS D'INTERFACE (REACT)
         // ==================================================================================
@@ -1712,13 +2007,13 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             );
         };
 
-        const ViewRoadmapEE = ({ customData }) => {
+        const ViewRoadmapEE = ({ roadmapProducts }) => {
             const [catFilter, setCatFilter] = useState('all');
             const [typeFilter, setTypeFilter] = useState('all');
             const [selectedProduct, setSelectedProduct] = useState(null);
             const [showPrices, setShowPrices] = useState(false);
 
-            const activeRoadmap = useMemo(() => getMergedRoadmapProducts(customData), [customData]);
+            const activeRoadmap = roadmapProducts;
 
             const START_YEAR = 2024;
             const END_YEAR = 2028;
@@ -1950,8 +2245,8 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             );
         };
 
-        const ViewOSAndSMR = ({ customData }) => {
-            const activeDevices = useMemo(() => getParsedOSAndSMRData(customData), [customData]);
+        const ViewOSAndSMR = ({ rows }) => {
+            const activeDevices = useMemo(() => getParsedOSAndSMRData(rows), [rows]);
             const [filteredDevices, setFilteredDevices] = useState(activeDevices);
             const [searchTerm, setSearchTerm] = useState('');
             const [categoryFilter, setCategoryFilter] = useState('Tous');
@@ -2038,8 +2333,8 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
 
         // --- VUE 3 : COMPARATEUR ---
 
-        const ViewComparison = ({ customData }) => {
-            const activeComparison = useMemo(() => getMergedComparisonProducts(customData), [customData]);
+        const ViewComparison = ({ products }) => {
+            const activeComparison = products;
             const [selectedProducts, setSelectedProducts] = useState(['s26ultra', 'tab_s11 ultra', 's26', 'a56', 'tab_active_5 Pro']);
 
             const groups = useMemo(() => {
@@ -2178,281 +2473,308 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             );
         };
 
-        // --- VUE 4 : ADMIN (LOCAL) ---
+        // --- EDITEUR DE DONNEES (MODE EDITION) ---
 
-        const ViewAdmin = ({ customData, setCustomData }) => {
-            const [mode, setMode] = useState('add'); // 'add', 'edit', 'export'
-            
-            const initialForm = {
-                id: '', name: '', globalRange: 'Gamme S/Z', type: 'phone', price: '', launchDate: '',
-                eolDate: '', memory: '', notes: '',
-                smrDuration: '', endSupport: '', osCount: '', androidFinal: '',
-                c_category: 'Smartphones - Gamme S', c_img: '', c_ee: '', c_os: '', c_screen: '', c_proc: '', c_storage: '', c_battery: '', c_photo: '', c_conn: '', c_sim: '', c_security: '', c_weight: '', c_plus: '', c_code: '', c_fiche: ''
+        const EditorShell = ({ title, onAdd, addLabel, children }) => (
+            <div className=&quot;bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden&quot;>
+                <div className=&quot;flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50&quot;>
+                    <h3 className=&quot;font-bold text-gray-700 text-sm&quot;>{title}</h3>
+                    {onAdd &amp;&amp; (
+                        <button onClick={onAdd} className=&quot;flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                            <Plus size={14} /> {addLabel}
+                        </button>
+                    )}
+                </div>
+                <div className=&quot;overflow-x-auto&quot;>
+                    {children}
+                </div>
+            </div>
+        );
+
+        const EditorTh = ({ children }) => (
+            <th className=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase tracking-wide whitespace-nowrap&quot;>{children}</th>
+        );
+
+        const EditorInput = (props) => (
+            <input {...props} className={`w-full min-w-[90px] px-2 py-1 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 ${props.className || ''}`} />
+        );
+
+        const ComparisonEditor = ({ products, setProducts }) => {
+            const FIELDS = ['name','category','price','img','ee','os','screen','proc','storage','battery','photo','conn','sim','security','weight','plus','code','fiche'];
+            const BOOL_FIELDS = ['ee', 'os'];
+            const entries = Object.entries(products);
+
+            const updateField = (key, field, value) => {
+                setProducts(prev => ({ ...prev, [key]: { ...prev[key], [field]: value } }));
             };
-            const [form, setForm] = useState(initialForm);
-
-            // Génère la liste consolidée pour le mode &quot;Edit&quot;
-            const allProductsList = useMemo(() => {
-                const list = [];
-                const comp = getMergedComparisonProducts(customData);
-                Object.entries(comp).forEach(([k, v]) => list.push({ id: k, name: v.name }));
-                return list.sort((a,b) => a.name.localeCompare(b.name));
-            }, [customData]);
-
-            const handleChange = (e) => {
-                const { name, value } = e.target;
-                setForm(prev => ({ ...prev, [name]: value }));
-                if (name === 'name' &amp;&amp; mode === 'add') {
-                    setForm(prev => ({ ...prev, id: normalizeModel(value) }));
-                }
-            };
-
-            const loadProduct = (e) => {
-                const targetId = e.target.value;
-                if(!targetId) return;
-                
-                let loaded = { ...initialForm, id: targetId };
-                
-                // 1. Chercher dans Comparateur
-                const comp = getMergedComparisonProducts(customData)[targetId];
-                if (comp) {
-                    loaded.name = comp.name; loaded.price = comp.price; loaded.c_category = comp.category;
-                    loaded.c_img = comp.img; loaded.c_ee = comp.ee; loaded.c_os = comp.os; loaded.c_screen = comp.screen;
-                    loaded.c_proc = comp.proc; loaded.c_storage = comp.storage; loaded.c_battery = comp.battery;
-                    loaded.c_photo = comp.photo; loaded.c_conn = comp.conn; loaded.c_sim = comp.sim;
-                    loaded.c_security = comp.security; loaded.c_weight = comp.weight; loaded.c_plus = comp.plus;
-                    loaded.c_code = comp.code; loaded.c_fiche = comp.fiche;
-                }
-
-                // 2. Chercher dans Roadmap
-                const rmList = getMergedRoadmapProducts(customData);
-                const rm = rmList.find(p => normalizeModel(p.name) === targetId || normalizeModel(p.name) === normalizeModel(loaded.name));
-                if (rm) {
-                    if(!loaded.name) loaded.name = rm.name;
-                    loaded.globalRange = rm.cat; loaded.type = rm.type; loaded.memory = rm.memory;
-                    loaded.launchDate = rm.start; loaded.eolDate = rm.end; loaded.notes = rm.notes;
-                    if(!loaded.price &amp;&amp; rm.price) loaded.price = rm.price;
-                }
-
-                // 3. Chercher dans OS/SMR
-                const osList = getParsedOSAndSMRData(customData);
-                let osData = osList.find(p => p.id === targetId);
-                
-                if (!osData &amp;&amp; loaded.name) {
-                    // Nettoyage intelligent pour faciliter la correspondance (&quot;Galaxy A17 5G&quot; vs &quot;A17 4G et 5G&quot;)
-                    const cleanName1 = normalizeModel(loaded.name).replace('galaxy', '');
-                    
-                    osData = osList.find(p => {
-                        const cleanName2 = normalizeModel(p.model).replace('galaxy', '').replace('4get', '').replace('ee', '');
-                        // On évite les correspondances trop courtes (ex: &quot;s&quot; ou &quot;a&quot;)
-                        if (cleanName2.length < 3 &amp;&amp; cleanName1 !== cleanName2) return false;
-                        return cleanName1 === cleanName2 || cleanName1.includes(cleanName2) || cleanName2.includes(cleanName1);
-                    });
-                }
-
-                if (osData) {
-                    if(!loaded.name) loaded.name = osData.model;
-                    loaded.smrDuration = osData.smrDuration; loaded.endSupport = osData.endSupport;
-                    loaded.osCount = osData.osCount; loaded.androidFinal = osData.androidFinal;
-                    if(!loaded.launchDate &amp;&amp; osData.launch) loaded.launchDate = osData.launch;
-                }
-
-                setForm(loaded);
-            };
-
-            const handleSave = (e) => {
-                e.preventDefault();
-                if(!form.id || !form.name) return alert(&quot;Le nom du produit est obligatoire.&quot;);
-
-                const newCustomData = { ...customData };
-                
-                newCustomData[form.id] = {
-                    id: form.id,
-                    name: form.name,
-                    roadmap: { cat: form.globalRange, type: form.type, memory: form.memory, price: form.price, start: form.launchDate, end: form.eolDate, notes: form.notes },
-                    ossmr: { category: form.type === 'phone' ? 'Smartphone' : 'Tablette', range: form.globalRange, launch: form.launchDate, smrDuration: form.smrDuration, endSupport: form.endSupport, osCount: form.osCount, androidFinal: form.androidFinal },
-                    comparison: { category: form.c_category, price: form.price, img: form.c_img, ee: form.c_ee, os: form.c_os, screen: form.c_screen, proc: form.c_proc, storage: form.c_storage, battery: form.c_battery, photo: form.c_photo, conn: form.c_conn, sim: form.c_sim, security: form.c_security, weight: form.c_weight, plus: form.c_plus, code: form.c_code, fiche: form.c_fiche }
-                };
-
-                setCustomData(newCustomData);
-                localStorage.setItem('mx_custom_data', JSON.stringify(newCustomData));
-                alert(&quot;Produit sauvegardé localement avec succès !&quot;);
-                if (mode === 'add') setForm(initialForm);
-            };
-
-            const handleDelete = () => {
-                if(!form.id) return;
-                if(confirm(&quot;Supprimer la surcharge locale pour ce produit ? (S'il s'agit d'un produit de base, ses anciennes données reviendront).&quot;)) {
-                    const newCustomData = { ...customData };
-                    delete newCustomData[form.id];
-                    setCustomData(newCustomData);
-                    localStorage.setItem('mx_custom_data', JSON.stringify(newCustomData));
-                    setForm(initialForm);
-                    alert(&quot;Surcharge supprimée.&quot;);
-                }
-            };
-
-            const generateExportText = () => {
-                if (Object.keys(customData).length === 0) return &quot;Aucune donnée locale à exporter. Ajoutez ou modifiez un produit d'abord.&quot;;
-
-                let compStr = &quot;/* ==========================================\n   POUR LE COMPARATEUR (A coller dans la constante 'comparisonProducts')\n========================================== */\n&quot;;
-                let rmStr = &quot;\n/* ==========================================\n   POUR LA ROADMAP (A coller dans la constante 'roadmapProducts')\n========================================== */\n&quot;;
-                let smrStr = &quot;\n/* ==========================================\n   POUR SMR (A coller à la fin de la constante 'rawSMRData')\n========================================== */\n&quot;;
-                let osStr = &quot;\n/* ==========================================\n   POUR OS (A coller à la fin de la constante 'rawOSData')\n========================================== */\n&quot;;
-
-                Object.values(customData).forEach(item => {
-                    const c = item.comparison || {};
-                    const r = item.roadmap || {};
-                    const o = item.ossmr || {};
-
-                    compStr += `            '${item.id}': { name: '${item.name}', category: '${c.category || ''}', price: '${c.price || ''}', img: '${c.img || ''}', ee: '${c.ee || ''}', os: '${c.os || ''}', screen: '${c.screen || ''}', proc: '${c.proc || ''}', storage: '${c.storage || ''}', battery: '${c.battery || ''}', photo: '${c.photo || ''}', conn: '${c.conn || ''}', sim: '${c.sim || ''}', security: '${c.security || ''}', weight: '${c.weight || ''}', plus: '${c.plus || ''}', code: '${c.code || ''}', fiche: &quot;${c.fiche || ''}&quot; },\n`;
-                    
-                    rmStr += `            { cat: &quot;${r.cat || ''}&quot;, type: &quot;${r.type || ''}&quot;, name: &quot;${item.name}&quot;, memory: &quot;${r.memory || ''}&quot;, price: &quot;${r.price || ''}&quot;, start: &quot;${r.start || ''}&quot;, end: &quot;${r.end || ''}&quot;, notes: &quot;${r.notes || ''}&quot; },\n`;
-                    
-                    smrStr += `${o.category || ''},${o.launch || ''},${o.range || ''},${item.name},${o.smrDuration || ''},${o.endSupport || ''}\n`;
-                    
-                    osStr += `${o.category || ''},${o.launch || ''},${o.range || ''},${item.name},${o.osCount || ''},${o.androidFinal || ''}\n`;
+            const updateKey = (oldKey, newKey) => {
+                const cleaned = (newKey || '').trim();
+                if (!cleaned || cleaned === oldKey || products[cleaned]) return;
+                setProducts(prev => {
+                    const next = {};
+                    Object.entries(prev).forEach(([k, v]) => { next[k === oldKey ? cleaned : k] = v; });
+                    return next;
                 });
-
-                return compStr + rmStr + smrStr + osStr;
+            };
+            const addRow = () => {
+                const newKey = `produit-${Date.now()}`;
+                const blank = {};
+                FIELDS.forEach(f => { blank[f] = BOOL_FIELDS.includes(f) ? false : ''; });
+                blank.name = 'Nouveau produit';
+                setProducts(prev => ({ ...prev, [newKey]: blank }));
+            };
+            const removeRow = (key) => {
+                if (!window.confirm('Supprimer ce produit du comparateur ?')) return;
+                setProducts(prev => {
+                    const next = { ...prev };
+                    delete next[key];
+                    return next;
+                });
             };
 
             return (
-                <div className=&quot;max-w-5xl mx-auto p-4 md:p-8 animate-in fade-in&quot;>
-                    <div className=&quot;bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 rounded shadow-sm&quot;>
-                        <div className=&quot;flex&quot;>
-                            <AlertTriangle className=&quot;h-6 w-6 text-yellow-600 mr-3&quot; />
-                            <div>
-                                <h3 className=&quot;text-yellow-800 font-bold&quot;>Espace Administrateur (Mode Local)</h3>
-                                <p className=&quot;text-yellow-700 text-sm mt-1&quot;>
-                                    Vos modifications sont enregistrées <b>uniquement dans votre navigateur actuel</b>. 
-                                    Pour figer ces modifications et les partager avec vos collègues, utilisez l'onglet &quot;Exporter&quot; pour récupérer le code.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className=&quot;bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden&quot;>
-                        <div className=&quot;flex border-b border-gray-200 bg-gray-50 overflow-x-auto&quot;>
-                            <button onClick={() => {setMode('add'); setForm(initialForm);}} className={`px-6 py-4 text-sm font-bold flex items-center gap-2 ${mode === 'add' ? 'bg-white border-b-2 border-[#003057] text-[#003057]' : 'text-gray-500 hover:text-gray-700'}`}><Plus size={16}/> Ajouter</button>
-                            <button onClick={() => {setMode('edit'); setForm(initialForm);}} className={`px-6 py-4 text-sm font-bold flex items-center gap-2 ${mode === 'edit' ? 'bg-white border-b-2 border-[#003057] text-[#003057]' : 'text-gray-500 hover:text-gray-700'}`}><Edit3 size={16}/> Modifier</button>
-                            <button onClick={() => setMode('export')} className={`px-6 py-4 text-sm font-bold flex items-center gap-2 ml-auto ${mode === 'export' ? 'bg-white border-b-2 border-green-600 text-green-700' : 'text-gray-500 hover:text-green-600'}`}><Download size={16}/> Exporter</button>
-                        </div>
-
-                        <div className=&quot;p-6 md:p-8&quot;>
-                            {mode === 'export' ? (
-                                <div>
-                                    <h3 className=&quot;text-lg font-bold mb-4 text-gray-800&quot;>Exporter les modifications locales</h3>
-                                    <p className=&quot;text-sm text-gray-600 mb-4&quot;>Copiez les blocs de code ci-dessous et insérez-les dans les sections correspondantes au début du fichier source.</p>
-                                    <textarea readOnly value={generateExportText()} className=&quot;w-full h-[500px] font-mono text-xs p-4 bg-gray-900 text-green-400 rounded-lg outline-none whitespace-pre overflow-auto&quot; />
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSave} className=&quot;space-y-8&quot;>
-                                    
-                                    {mode === 'edit' &amp;&amp; (
-                                        <div className=&quot;bg-blue-50 p-4 rounded-lg flex flex-col md:flex-row items-center gap-4 border border-blue-100&quot;>
-                                            <label className=&quot;font-bold text-blue-900 whitespace-nowrap&quot;>Choisir un produit à modifier :</label>
-                                            <select onChange={loadProduct} className=&quot;flex-1 p-2 rounded border border-blue-200 outline-none&quot;>
-                                                <option value=&quot;&quot;>-- Sélectionnez --</option>
-                                                {allProductsList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                                            </select>
-                                        </div>
-                                    )}
-
-                                    {/* SECTION 1 : GLOBAL */}
-                                    <div>
-                                        <h3 className=&quot;text-base font-bold text-[#003057] border-b pb-2 mb-4 flex items-center gap-2&quot;><Smartphone size={18}/> Informations Générales &amp; Roadmap</h3>
-                                        <div className=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Nom du Produit *</label><input required name=&quot;name&quot; value={form.name} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: S27 Ultra&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>ID (Généré Auto)</label><input disabled name=&quot;id&quot; value={form.id} className=&quot;w-full p-2 border rounded bg-gray-100 text-gray-400&quot; /></div>
-                                            <div>
-                                                <label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Gamme *</label>
-                                                <select name=&quot;globalRange&quot; value={form.globalRange} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot;><option>Gamme S/Z</option><option>Gamme A</option><option>Durcie</option></select>
-                                            </div>
-                                            <div>
-                                                <label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Type *</label>
-                                                <select name=&quot;type&quot; value={form.type} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot;><option value=&quot;phone&quot;>Smartphone</option><option value=&quot;tablet&quot;>Tablette</option></select>
-                                            </div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Date Lancement (YYYY-MM-DD) *</label><input type=&quot;date&quot; required name=&quot;launchDate&quot; value={form.launchDate} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Date Fin de vie EOL (YYYY-MM-DD)</label><input type=&quot;date&quot; name=&quot;eolDate&quot; value={form.eolDate} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Prix (ex: 1469 €)</label><input name=&quot;price&quot; value={form.price} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Mémoire (ex: 12/256Go)</label><input name=&quot;memory&quot; value={form.memory} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div className=&quot;md:col-span-2&quot;><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Notes Roadmap</label><input name=&quot;notes&quot; value={form.notes} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: Disponible en 512Go...&quot; /></div>
-                                        </div>
-                                    </div>
-
-                                    {/* SECTION 2 : OS/SMR */}
-                                    <div>
-                                        <h3 className=&quot;text-base font-bold text-[#003057] border-b pb-2 mb-4 flex items-center gap-2&quot;><Shield size={18}/> Support (OS &amp; SMR)</h3>
-                                        <div className=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Durée SMR</label><input name=&quot;smrDuration&quot; value={form.smrDuration} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: 7 ans&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Fin Support SMR</label><input name=&quot;endSupport&quot; value={form.endSupport} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: Q1 2033&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Montées OS</label><input name=&quot;osCount&quot; value={form.osCount} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: 7 montées d'OS&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Android Final</label><input name=&quot;androidFinal&quot; value={form.androidFinal} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: Android 23&quot; /></div>
-                                        </div>
-                                    </div>
-
-                                    {/* SECTION 3 : COMPARATEUR */}
-                                    <div>
-                                        <h3 className=&quot;text-base font-bold text-[#003057] border-b pb-2 mb-4 flex items-center gap-2&quot;><SlidersHorizontal size={18}/> Spécifications Comparateur</h3>
-                                        <div className=&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4&quot;>
-                                            <div className=&quot;md:col-span-2 lg:col-span-3&quot;><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Catégorie Dropdown (ex: Smartphones - Gamme S)</label><input name=&quot;c_category&quot; value={form.c_category} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div className=&quot;md:col-span-2 lg:col-span-3&quot;><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>URL de l'image (Lien web externe)</label><input name=&quot;c_img&quot; value={form.c_img} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50 text-blue-600&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Enterprise Edition (EE)</label><select name=&quot;c_ee&quot; value={form.c_ee} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot;><option>Oui</option><option>Non</option><option>Mode projet</option></select></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>OS Base</label><input name=&quot;c_os&quot; value={form.c_os} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; placeholder=&quot;ex: Android 16&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Écran</label><input name=&quot;c_screen&quot; value={form.c_screen} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Processeur</label><input name=&quot;c_proc&quot; value={form.c_proc} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Stockage</label><input name=&quot;c_storage&quot; value={form.c_storage} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Batterie</label><input name=&quot;c_battery&quot; value={form.c_battery} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Appareil Photo</label><input name=&quot;c_photo&quot; value={form.c_photo} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Connectivité</label><input name=&quot;c_conn&quot; value={form.c_conn} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Carte SIM</label><input name=&quot;c_sim&quot; value={form.c_sim} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Sécurité</label><input name=&quot;c_security&quot; value={form.c_security} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Poids</label><input name=&quot;c_weight&quot; value={form.c_weight} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Fonction +</label><input name=&quot;c_plus&quot; value={form.c_plus} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Code Référence</label><input name=&quot;c_code&quot; value={form.c_code} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50&quot; /></div>
-                                            <div className=&quot;md:col-span-2 lg:col-span-3&quot;><label className=&quot;block text-xs font-bold text-gray-500 mb-1&quot;>Lien Fiche Produit (Sharepoint/Web)</label><input name=&quot;c_fiche&quot; value={form.c_fiche} onChange={handleChange} className=&quot;w-full p-2 border rounded bg-gray-50 text-blue-600&quot; /></div>
-                                        </div>
-                                    </div>
-
-                                    <div className=&quot;flex gap-4 pt-4 border-t border-gray-200&quot;>
-                                        <button type=&quot;submit&quot; className=&quot;flex items-center gap-2 px-6 py-3 bg-[#003057] text-white font-bold rounded-lg hover:bg-[#1428A0] transition shadow-md&quot;><Save size={18}/> Sauvegarder (Local)</button>
-                                        {mode === 'edit' &amp;&amp; customData[form.id] &amp;&amp; (
-                                            <button type=&quot;button&quot; onClick={handleDelete} className=&quot;flex items-center gap-2 px-6 py-3 bg-white border border-red-200 text-red-600 font-bold rounded-lg hover:bg-red-50 transition&quot;><Trash2 size={18}/> Supprimer la surcharge</button>
-                                        )}
-                                    </div>
-
-                                </form>
-                            )}
-                        </div>
-                    </div>
-                </div>
+                <EditorShell title={`Comparateur (${entries.length} produits)`} onAdd={addRow} addLabel=&quot;Ajouter un produit&quot;>
+                    <table className=&quot;min-w-full text-xs divide-y divide-gray-100&quot;>
+                        <thead className=&quot;bg-gray-50&quot;>
+                            <tr>
+                                <EditorTh>Cle</EditorTh>
+                                {FIELDS.map(f => <EditorTh key={f}>{f}</EditorTh>)}
+                                <EditorTh></EditorTh>
+                            </tr>
+                        </thead>
+                        <tbody className=&quot;divide-y divide-gray-50&quot;>
+                            {entries.map(([key, prod]) => (
+                                <tr key={key} className=&quot;hover:bg-gray-50&quot;>
+                                    <td className=&quot;px-2 py-1.5&quot;>
+                                        <EditorInput defaultValue={key} onBlur={(e) => updateKey(key, e.target.value)} className=&quot;font-mono text-[11px] min-w-[120px]&quot; />
+                                    </td>
+                                    {FIELDS.map(field => (
+                                        <td key={field} className=&quot;px-2 py-1.5&quot;>
+                                            {BOOL_FIELDS.includes(field) ? (
+                                                <input type=&quot;checkbox&quot; checked={!!prod[field]} onChange={(e) => updateField(key, field, e.target.checked)} className=&quot;w-4 h-4&quot; />
+                                            ) : (
+                                                <EditorInput value={prod[field] ?? ''} onChange={(e) => updateField(key, field, e.target.value)} />
+                                            )}
+                                        </td>
+                                    ))}
+                                    <td className=&quot;px-2 py-1.5&quot;>
+                                        <button onClick={() => removeRow(key)} className=&quot;text-gray-400 hover:text-red-600 p-1&quot;>
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </EditorShell>
             );
         };
 
+        const RoadmapEditor = ({ items, setItems }) => {
+            const updateField = (idx, field, value) => {
+                setItems(prev => prev.map((it, i) => i === idx ? { ...it, [field]: value } : it));
+            };
+            const addRow = () => {
+                setItems(prev => ([...prev, { cat: 'Smartphone', type: 'phone', name: 'Nouveau modele', memory: '', price: '', start: '2026-01-01', end: '2026-12-31', notes: '' }]));
+            };
+            const removeRow = (idx) => {
+                if (!window.confirm('Supprimer ce produit de la roadmap ?')) return;
+                setItems(prev => prev.filter((_, i) => i !== idx));
+            };
+
+            return (
+                <EditorShell title={`Roadmap Entreprise Edition (${items.length} produits)`} onAdd={addRow} addLabel=&quot;Ajouter un produit&quot;>
+                    <table className=&quot;min-w-full text-xs divide-y divide-gray-100&quot;>
+                        <thead className=&quot;bg-gray-50&quot;>
+                            <tr>
+                                <EditorTh>Categorie</EditorTh>
+                                <EditorTh>Type</EditorTh>
+                                <EditorTh>Nom</EditorTh>
+                                <EditorTh>Memoire</EditorTh>
+                                <EditorTh>Prix</EditorTh>
+                                <EditorTh>Debut</EditorTh>
+                                <EditorTh>Fin</EditorTh>
+                                <EditorTh>Notes</EditorTh>
+                                <EditorTh></EditorTh>
+                            </tr>
+                        </thead>
+                        <tbody className=&quot;divide-y divide-gray-50&quot;>
+                            {items.map((it, idx) => (
+                                <tr key={idx} className=&quot;hover:bg-gray-50&quot;>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.cat ?? ''} onChange={(e) => updateField(idx, 'cat', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.type ?? ''} onChange={(e) => updateField(idx, 'type', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.name ?? ''} onChange={(e) => updateField(idx, 'name', e.target.value)} className=&quot;min-w-[140px]&quot; /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.memory ?? ''} onChange={(e) => updateField(idx, 'memory', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.price ?? ''} onChange={(e) => updateField(idx, 'price', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput type=&quot;date&quot; value={it.start ?? ''} onChange={(e) => updateField(idx, 'start', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput type=&quot;date&quot; value={it.end ?? ''} onChange={(e) => updateField(idx, 'end', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={it.notes ?? ''} onChange={(e) => updateField(idx, 'notes', e.target.value)} className=&quot;min-w-[160px]&quot; /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;>
+                                        <button onClick={() => removeRow(idx)} className=&quot;text-gray-400 hover:text-red-600 p-1&quot;>
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </EditorShell>
+            );
+        };
+
+        const OsSmrEditor = ({ rows, setRows }) => {
+            const updateField = (idx, field, value) => {
+                setRows(prev => prev.map((r, i) => i === idx ? { ...r, [field]: value } : r));
+            };
+            const addRow = () => {
+                setRows(prev => ([...prev, { model: 'Nouveau modele', category: 'Smartphone', range: 'Gamme S', launch: '2026-01-01', smrDuration: '5 ans', endSupport: '', osCount: '', androidFinal: '' }]));
+            };
+            const removeRow = (idx) => {
+                if (!window.confirm('Supprimer cette ligne OS &amp; SMR ?')) return;
+                setRows(prev => prev.filter((_, i) => i !== idx));
+            };
+
+            return (
+                <EditorShell title={`OS &amp; SMR (${rows.length} appareils)`} onAdd={addRow} addLabel=&quot;Ajouter un appareil&quot;>
+                    <table className=&quot;min-w-full text-xs divide-y divide-gray-100&quot;>
+                        <thead className=&quot;bg-gray-50&quot;>
+                            <tr>
+                                <EditorTh>Modele</EditorTh>
+                                <EditorTh>Categorie</EditorTh>
+                                <EditorTh>Gamme</EditorTh>
+                                <EditorTh>Lancement</EditorTh>
+                                <EditorTh>Duree Support</EditorTh>
+                                <EditorTh>Fin Support</EditorTh>
+                                <EditorTh>Montees OS</EditorTh>
+                                <EditorTh>Android Final</EditorTh>
+                                <EditorTh></EditorTh>
+                            </tr>
+                        </thead>
+                        <tbody className=&quot;divide-y divide-gray-50&quot;>
+                            {rows.map((r, idx) => (
+                                <tr key={idx} className=&quot;hover:bg-gray-50&quot;>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.model ?? ''} onChange={(e) => updateField(idx, 'model', e.target.value)} className=&quot;min-w-[160px]&quot; /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.category ?? ''} onChange={(e) => updateField(idx, 'category', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.range ?? ''} onChange={(e) => updateField(idx, 'range', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput type=&quot;date&quot; value={r.launch ?? ''} onChange={(e) => updateField(idx, 'launch', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.smrDuration ?? ''} onChange={(e) => updateField(idx, 'smrDuration', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.endSupport ?? ''} onChange={(e) => updateField(idx, 'endSupport', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.osCount ?? ''} onChange={(e) => updateField(idx, 'osCount', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;><EditorInput value={r.androidFinal ?? ''} onChange={(e) => updateField(idx, 'androidFinal', e.target.value)} /></td>
+                                    <td className=&quot;px-2 py-1.5&quot;>
+                                        <button onClick={() => removeRow(idx)} className=&quot;text-gray-400 hover:text-red-600 p-1&quot;>
+                                            <Trash2 size={14} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </EditorShell>
+            );
+        };
+
+        const SmtDataEditor = ({ data, setData }) => {
+            const [tab, setTab] = useState('roadmap');
+
+            const setComparisonProducts = (updater) => {
+                setData(prev => ({ ...prev, comparisonProducts: typeof updater === 'function' ? updater(prev.comparisonProducts) : updater }));
+            };
+            const setRoadmapProducts = (updater) => {
+                setData(prev => ({ ...prev, roadmapProducts: typeof updater === 'function' ? updater(prev.roadmapProducts) : updater }));
+            };
+            const setOsSmrRows = (updater) => {
+                setData(prev => ({ ...prev, osSmrRows: typeof updater === 'function' ? updater(prev.osSmrRows) : updater }));
+            };
+
+            const tabs = [
+                { id: 'roadmap', label: 'Roadmap EE' },
+                { id: 'ossmr', label: 'OS &amp; SMR' },
+                { id: 'comparison', label: 'Comparateur' },
+            ];
+
+            return (
+                <div className=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-4&quot;>
+                    <div className=&quot;flex gap-2 border-b border-gray-200 pb-2&quot;>
+                        {tabs.map(t => (
+                            <button key={t.id} onClick={() => setTab(t.id)} className={`px-3 py-1.5 rounded-lg text-xs md:text-sm font-bold transition-colors ${tab === t.id ? 'bg-[#003057] text-white' : 'text-gray-500 hover:text-gray-700 bg-gray-100'}`}>
+                                {t.label}
+                            </button>
+                        ))}
+                    </div>
+                    {tab === 'roadmap' &amp;&amp; <RoadmapEditor items={data.roadmapProducts} setItems={setRoadmapProducts} />}
+                    {tab === 'ossmr' &amp;&amp; <OsSmrEditor rows={data.osSmrRows} setRows={setOsSmrRows} />}
+                    {tab === 'comparison' &amp;&amp; <ComparisonEditor products={data.comparisonProducts} setProducts={setComparisonProducts} />}
+                </div>
+            );
+        };
         // --- APPLICATION PRINCIPALE ---
 
         const DashboardMX = () => {
             const [currentView, setCurrentView] = useState('roadmap');
-            useEffect(() => { window.__smsNav = (v) => { if(v !== 'admin') setCurrentView(v); }; }, []);
-            
-            // Chargement des modifications locales depuis le navigateur
-            const [customData, setCustomData] = useState(() => {
-                try { return JSON.parse(localStorage.getItem('mx_custom_data')) || {}; }
-                catch(e) { return {}; }
+            useEffect(() => { window.__smsNav = (v) => { if (v !== 'editor') setCurrentView(v); }; }, []);
+
+            const buildInitialData = () => ({
+                comparisonProducts: JSON.parse(JSON.stringify(comparisonProducts)),
+                roadmapProducts: JSON.parse(JSON.stringify(roadmapProducts)),
+                osSmrRows: buildInitialOsSmrRows()
             });
 
-            const handleAdminAccess = () => {
-                if (currentView === 'admin') return;
-                const pwd = prompt(&quot;Veuillez saisir le mot de passe administrateur :&quot;);
-                if (pwd === 'adminmx') setCurrentView('admin');
-                else if (pwd !== null) alert('Mot de passe incorrect.');
+            const [data, setData] = useState(() => {
+                try {
+                    const saved = localStorage.getItem('smtEditData');
+                    if (saved) return JSON.parse(saved);
+                } catch (e) {}
+                return buildInitialData();
+            });
+
+            useEffect(() => {
+                try { localStorage.setItem('smtEditData', JSON.stringify(data)); } catch (e) {}
+            }, [data]);
+
+            const [editMode, setEditMode] = useState(false);
+            const [showAdminInput, setShowAdminInput] = useState(false);
+            const [adminPassword, setAdminPassword] = useState('');
+            const [adminError, setAdminError] = useState(false);
+
+            const handleAdminUnlock = () => {
+                if (adminPassword === 'admin') {
+                    setEditMode(true);
+                    setShowAdminInput(false);
+                    setAdminError(false);
+                    setAdminPassword('');
+                    setCurrentView('editor');
+                } else {
+                    setAdminError(true);
+                }
+            };
+            const handleAdminLock = () => {
+                setEditMode(false);
+                setShowAdminInput(false);
+                setAdminPassword('');
+                setAdminError(false);
+                if (currentView === 'editor') setCurrentView('roadmap');
+            };
+            const handleResetData = () => {
+                if (!window.confirm(&quot;RÃ©initialiser toutes les modifications et revenir aux donnÃ©es d'origine ?&quot;)) return;
+                setData(buildInitialData());
+            };
+            const handleExportData = () => {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'smt-data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
             };
 
             return (
                 <div className=&quot;min-h-screen bg-[#f8f9fa] font-sans text-gray-800 selection:bg-blue-100 flex flex-col pb-20 md:pb-0&quot;>
-                    
-                    <nav className={`bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all shadow-sm h-16`}>
+
+                    <nav className=&quot;bg-white/90 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50 transition-all shadow-sm h-16 relative&quot;>
                         <div className=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full&quot;>
                             <div className=&quot;flex justify-between items-center h-full&quot;>
                                 <div className=&quot;flex items-center gap-2 md:gap-3 cursor-pointer shrink-0&quot; onClick={() => {window.scrollTo(0,0); setCurrentView('roadmap');}}>
@@ -2460,30 +2782,72 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                                     <div className=&quot;h-4 w-px bg-gray-300 hidden sm:block&quot;></div>
                                     <span className=&quot;font-medium text-gray-600 tracking-tight text-xs md:text-base hidden sm:block&quot;>Product Management</span>
                                 </div>
-                                
-                                <div className=&quot;flex overflow-x-auto scrollbar-hide gap-2 p-1 max-w-[240px] md:max-w-none md:bg-gray-100 md:rounded-xl&quot;>
-                                    <button onClick={() => setCurrentView('roadmap')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'roadmap' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
-                                        <MapIcon size={14} className=&quot;md:w-4 md:h-4&quot; /> Roadmap EE
-                                    </button>
-                                    <button onClick={() => setCurrentView('os-smr')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'os-smr' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
-                                        <Layout size={14} className=&quot;md:w-4 md:h-4&quot; /> OS &amp; SMR
-                                    </button>
-                                    <button onClick={() => setCurrentView('comparison')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'comparison' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
-                                        <SlidersHorizontal size={14} className=&quot;md:w-4 md:h-4&quot; /> Comparer
-                                    </button>
-                                    <button onClick={handleAdminAccess} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ml-2 ${currentView === 'admin' ? 'bg-yellow-100 text-yellow-800 shadow-sm border border-yellow-300' : 'text-gray-400 hover:text-yellow-600'}`}>
-                                        <Settings size={14} className=&quot;md:w-4 md:h-4&quot; /> <span className=&quot;hidden md:inline&quot;>Admin</span>
+
+                                <div className=&quot;flex items-center gap-2&quot;>
+                                    <div className=&quot;flex overflow-x-auto scrollbar-hide gap-2 p-1 max-w-[240px] md:max-w-none md:bg-gray-100 md:rounded-xl&quot;>
+                                        <button onClick={() => setCurrentView('roadmap')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'roadmap' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
+                                            <MapIcon size={14} className=&quot;md:w-4 md:h-4&quot; /> Roadmap EE
+                                        </button>
+                                        <button onClick={() => setCurrentView('os-smr')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'os-smr' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
+                                            <Layout size={14} className=&quot;md:w-4 md:h-4&quot; /> OS &amp; SMR
+                                        </button>
+                                        <button onClick={() => setCurrentView('comparison')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'comparison' ? 'bg-[#003057] text-white md:bg-white md:text-[#003057] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>
+                                            <SlidersHorizontal size={14} className=&quot;md:w-4 md:h-4&quot; /> Comparer
+                                        </button>
+                                        {editMode &amp;&amp; (
+                                            <button onClick={() => setCurrentView('editor')} className={`whitespace-nowrap px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-xs md:text-sm font-bold transition-all flex items-center gap-2 ${currentView === 'editor' ? 'bg-yellow-400 text-yellow-900 shadow-sm' : 'text-yellow-600 hover:text-yellow-800'}`}>
+                                                <Edit3 size={14} className=&quot;md:w-4 md:h-4&quot; /> Editeur
+                                            </button>
+                                        )}
+                                    </div>
+                                    <button onClick={() => editMode ? handleAdminLock() : setShowAdminInput(v => !v)} className={`p-2 rounded-lg transition-colors ${editMode ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`} title={editMode ? 'Quitter le mode Ã©dition' : 'Mode Ã©dition'}>
+                                        {editMode ? <Unlock size={18} /> : <Lock size={18} />}
                                     </button>
                                 </div>
                             </div>
                         </div>
+
+                        {showAdminInput &amp;&amp; !editMode &amp;&amp; (
+                            <div className=&quot;absolute right-4 top-16 bg-[#003057] text-white rounded-b-lg shadow-lg p-3 flex items-center gap-2 z-50&quot;>
+                                <Lock size={16} className=&quot;text-yellow-400&quot; />
+                                <input
+                                    type=&quot;password&quot;
+                                    value={adminPassword}
+                                    onChange={(e) => { setAdminPassword(e.target.value); setAdminError(false); }}
+                                    onKeyDown={(e) => { if (e.key === 'Enter') handleAdminUnlock(); }}
+                                    placeholder=&quot;Mot de passe&quot;
+                                    className=&quot;px-2 py-1 rounded text-gray-800 text-sm focus:outline-none&quot;
+                                    autoFocus
+                                />
+                                <button onClick={handleAdminUnlock} className=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>
+                                    AccÃ©der
+                                </button>
+                                {adminError &amp;&amp; <span className=&quot;text-red-300 text-xs whitespace-nowrap&quot;>Mot de passe incorrect</span>}
+                            </div>
+                        )}
                     </nav>
 
+                    {editMode &amp;&amp; (
+                        <div className=&quot;bg-yellow-50 border-b border-yellow-200&quot;>
+                            <div className=&quot;max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap items-center justify-between gap-2&quot;>
+                                <span className=&quot;text-xs font-bold text-yellow-800&quot;>Mode Ã©dition activÃ© â€” les modifications sont enregistrÃ©es dans ce navigateur</span>
+                                <div className=&quot;flex items-center gap-2&quot;>
+                                    <button onClick={handleExportData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                                        <Download size={14} /> Exporter (JSON)
+                                    </button>
+                                    <button onClick={handleResetData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-yellow-800 border border-yellow-300 hover:bg-yellow-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                                        <RotateCcw size={14} /> RÃ©initialiser
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     <main className=&quot;flex-grow&quot;>
-                        {currentView === 'roadmap' &amp;&amp; <ViewRoadmapEE customData={customData} />}
-                        {currentView === 'os-smr' &amp;&amp; <ViewOSAndSMR customData={customData} />}
-                        {currentView === 'comparison' &amp;&amp; <ViewComparison customData={customData} />}
-                        {currentView === 'admin' &amp;&amp; <ViewAdmin customData={customData} setCustomData={setCustomData} />}
+                        {currentView === 'roadmap' &amp;&amp; <ViewRoadmapEE roadmapProducts={data.roadmapProducts} />}
+                        {currentView === 'os-smr' &amp;&amp; <ViewOSAndSMR rows={data.osSmrRows} />}
+                        {currentView === 'comparison' &amp;&amp; <ViewComparison products={data.comparisonProducts} />}
+                        {currentView === 'editor' &amp;&amp; editMode &amp;&amp; <SmtDataEditor data={data} setData={setData} />}
                     </main>
 
                     <footer className=&quot;bg-white border-t border-gray-200 mt-12 md:mt-20 pb-safe&quot;>
@@ -2491,18 +2855,17 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                             <div className=&quot;flex flex-col md:flex-row justify-between items-start gap-4&quot;>
                                 <div>
                                     <img src=&quot;Logo Black/Samsung_Orig_Wordmark_BLACK_CMYK.svg&quot; alt=&quot;Samsung&quot; className=&quot;h-5 w-auto&quot; />
-                                    <p className=&quot;mt-2 text-xs md:text-sm text-gray-500 max-w-xs&quot;>Une sécurité de niveau défense pour protéger ce qui compte le plus.</p>
+                                    <p className=&quot;mt-2 text-xs md:text-sm text-gray-500 max-w-xs&quot;>Une sÃ©curitÃ© de niveau dÃ©fense pour protÃ©ger ce qui compte le plus.</p>
                                 </div>
                             </div>
                             <div className=&quot;border-t border-gray-100 mt-6 pt-6&quot;>
-                                <div className=&quot;text-[10px] md:text-xs text-gray-400 text-center md:text-left&quot;>© {new Date().getFullYear()} Samsung Electronics Co., Ltd. Les images sont simulées.</div>
+                                <div className=&quot;text-[10px] md:text-xs text-gray-400 text-center md:text-left&quot;>Â© {new Date().getFullYear()} Samsung Electronics Co., Ltd. Les images sont simulÃ©es.</div>
                             </div>
                         </div>
                     </footer>
                 </div>
             );
         };
-
         window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.samsungNav &amp;&amp; window.__smsNav) window.__smsNav(e.data.samsungNav); });
         const rootElement = document.getElementById('root');
         window.addEventListener('load', () => {
@@ -2579,9 +2942,33 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         <button id=&quot;btn-tab-referencement&quot; onclick=&quot;switchTab('referencement')&quot; class=&quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-gray-200 transition-all&quot;>
             <i data-lucide=&quot;list&quot; class=&quot;w-4 h-4 inline-block mr-1&quot;></i> Référencement
         </button>
-        <button id=&quot;btn-tab-admin&quot; onclick=&quot;switchTab('admin')&quot; class=&quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-gray-200 transition-all text-red-600 hover:bg-red-50&quot;>
-            <i data-lucide=&quot;lock&quot; class=&quot;w-4 h-4 inline-block mr-1&quot;></i> Admin
+        <button id=&quot;btn-tab-editor&quot; onclick=&quot;switchTab('editor')&quot; class=&quot;hidden px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-yellow-300 bg-yellow-50 text-yellow-800 transition-all&quot;>
+            <i data-lucide=&quot;edit-3&quot; class=&quot;w-4 h-4 inline-block mr-1&quot;></i> Editeur
         </button>
+        <button id=&quot;btn-admin-lock&quot; onclick=&quot;toggleAdminPanel()&quot; class=&quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-gray-200 transition-all text-gray-400 hover:text-gray-600&quot;>
+            <i data-lucide=&quot;lock&quot; class=&quot;w-4 h-4 inline-block&quot;></i>
+        </button>
+    </div>
+
+    <!-- PANNEAU MOT DE PASSE ADMIN -->
+    <div id=&quot;admin-password-panel&quot; class=&quot;hidden max-w-sm mx-auto -mt-4 mb-2 bg-[#003057] text-white rounded-xl shadow-lg p-3 flex items-center gap-2 relative z-20&quot;>
+        <i data-lucide=&quot;lock&quot; class=&quot;w-4 h-4 text-yellow-400 shrink-0&quot;></i>
+        <input type=&quot;password&quot; id=&quot;admin-pwd-input&quot; placeholder=&quot;Mot de passe&quot; class=&quot;flex-1 px-2 py-1 rounded text-gray-800 text-sm focus:outline-none&quot; onkeydown=&quot;if(event.key==='Enter') handleAdminUnlock();&quot;>
+        <button onclick=&quot;handleAdminUnlock()&quot; class=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>AccÃ©der</button>
+    </div>
+    <p id=&quot;admin-pwd-error&quot; class=&quot;hidden text-center text-red-500 text-xs font-bold mb-6&quot;>Mot de passe incorrect.</p>
+
+    <!-- BANDEAU MODE EDITION -->
+    <div id=&quot;edit-mode-banner&quot; class=&quot;hidden max-w-[1400px] mx-auto mb-6 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-2 flex flex-wrap items-center justify-between gap-2&quot;>
+        <span class=&quot;text-xs font-bold text-yellow-800&quot;>Mode Ã©dition activÃ© â€” les modifications sont enregistrÃ©es dans ce navigateur</span>
+        <div class=&quot;flex items-center gap-2&quot;>
+            <button onclick=&quot;exportRoadmapData()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                <i data-lucide=&quot;download&quot; class=&quot;w-4 h-4&quot;></i> Exporter (JSON)
+            </button>
+            <button onclick=&quot;resetRoadmapData()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-yellow-800 border border-yellow-300 hover:bg-yellow-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                <i data-lucide=&quot;rotate-ccw&quot; class=&quot;w-4 h-4&quot;></i> RÃ©initialiser
+            </button>
+        </div>
     </div>
 
     <!-- CONTENU : ONGLET ROADMAP -->
@@ -2665,145 +3052,15 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         </div>
     </div>
 
-    <!-- CONTENU : ONGLET ADMIN -->
-    <div id=&quot;tab-admin&quot; class=&quot;hidden tab-content&quot;>
-        <div class=&quot;max-w-[1400px] mx-auto bg-white rounded-2xl md:rounded-3xl shadow-sm border border-gray-200 p-4 md:p-8&quot;>
-            
-            <!-- Écran de connexion -->
-            <div id=&quot;admin-login-screen&quot; class=&quot;max-w-md mx-auto text-center py-12&quot;>
-                <div class=&quot;w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4&quot;>
-                    <i data-lucide=&quot;shield-alert&quot; class=&quot;w-8 h-8&quot;></i>
-                </div>
-                <h2 class=&quot;text-2xl font-bold text-gray-800 mb-2&quot;>Accès Administrateur</h2>
-                <p class=&quot;text-gray-500 mb-6 text-sm&quot;>Veuillez saisir le mot de passe pour gérer la roadmap.</p>
-                
-                <form onsubmit=&quot;event.preventDefault(); checkAdminPassword();&quot; class=&quot;space-y-4&quot;>
-                    <input type=&quot;password&quot; id=&quot;admin-password-input&quot; placeholder=&quot;Mot de passe&quot; class=&quot;w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all&quot;>
-                    <p id=&quot;admin-error-msg&quot; class=&quot;text-red-500 text-xs font-bold hidden&quot;>Mot de passe incorrect.</p>
-                    <button type=&quot;submit&quot; class=&quot;w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-md transition-colors&quot;>
-                        Se connecter
-                    </button>
-                </form>
-            </div>
-
-            <!-- Dashboard Admin -->
-            <div id=&quot;admin-dashboard-screen&quot; class=&quot;hidden&quot;>
-                <div class=&quot;flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-100 pb-4 gap-4&quot;>
-                    <div>
-                        <h2 class=&quot;text-2xl font-bold text-gray-800 flex items-center&quot;>
-                            <i data-lucide=&quot;settings&quot; class=&quot;w-6 h-6 mr-3 text-red-600&quot;></i> Gestion des données
-                        </h2>
-                        <p class=&quot;text-gray-500 text-sm mt-1&quot;>Ajoutez ou modifiez les PC, puis générez le code HTML mis à jour.</p>
-                    </div>
-                    <button onclick=&quot;generateDataCode()&quot; class=&quot;px-5 py-2.5 bg-gray-900 hover:bg-black text-white text-sm font-bold rounded-xl shadow-md transition-colors flex items-center&quot;>
-                        <i data-lucide=&quot;code&quot; class=&quot;w-4 h-4 mr-2&quot;></i> Générer le code HTML
-                    </button>
-                </div>
-
-                <div class=&quot;grid grid-cols-1 lg:grid-cols-2 gap-8&quot;>
-                    <!-- Colonne 1: Formulaire d'ajout -->
-                    <div class=&quot;bg-gray-50 p-6 rounded-2xl border border-gray-200&quot;>
-                        <h3 class=&quot;text-lg font-bold text-gray-800 mb-4 flex items-center&quot;>
-                            <i data-lucide=&quot;plus-circle&quot; class=&quot;w-5 h-5 mr-2 text-blue-600&quot;></i> Ajouter / Modifier un PC
-                        </h3>
-                        <form id=&quot;admin-form&quot; class=&quot;space-y-4&quot; onsubmit=&quot;event.preventDefault(); submitAdminForm();&quot;>
-                            
-                            <div>
-                                <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Famille / Modèle Parent</label>
-                                <select id=&quot;admin-form-model&quot; onchange=&quot;toggleNewModelFields()&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none text-sm font-medium&quot;>
-                                    <option value=&quot;new&quot;>+ Créer un nouveau modèle parent</option>
-                                    <!-- Rempli par JS -->
-                                </select>
-                            </div>
-
-                            <div id=&quot;admin-new-model-fields&quot; class=&quot;space-y-4 p-4 bg-white rounded-xl border border-blue-100 shadow-sm&quot;>
-                                <div>
-                                    <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Nom du nouveau modèle</label>
-                                    <input type=&quot;text&quot; id=&quot;admin-model-name&quot; placeholder=&quot;Ex: Galaxy Book7 Edge&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                </div>
-                                <div>
-                                    <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>URL de l'image</label>
-                                    <input type=&quot;text&quot; id=&quot;admin-model-image&quot; placeholder=&quot;https://...&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                </div>
-                                <div class=&quot;flex gap-4&quot;>
-                                    <div class=&quot;flex-1&quot;>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Date de début</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-model-start&quot; placeholder=&quot;Ex: Mars 2026&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div class=&quot;flex-1&quot;>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Date de fin</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-model-end&quot; placeholder=&quot;Ex: Mars 2027&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class=&quot;pt-4 border-t border-gray-200&quot;>
-                                <h4 class=&quot;text-sm font-bold text-gray-800 mb-3&quot;>Caractéristiques de la variante (SKU)</h4>
-                                
-                                <div class=&quot;grid grid-cols-2 gap-4&quot;>
-                                    <div class=&quot;col-span-2&quot;>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Code SKU (Obligatoire)</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-sku&quot; required placeholder=&quot;Ex: NP964XXX-XXXX&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none font-mono&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Taille d'écran</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-screen&quot; placeholder='Ex: 16&quot;' class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Processeur</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-cpu&quot; placeholder=&quot;Ex: U7 (intel PTL)&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>RAM</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-ram&quot; placeholder=&quot;Ex: 32 Go&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Stockage (ROM)</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-rom&quot; placeholder=&quot;Ex: 1 To&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>Carte Graphique</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-cg&quot; placeholder=&quot;Laissez vide si intégrée&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                    <div>
-                                        <label class=&quot;block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1&quot;>OS</label>
-                                        <input type=&quot;text&quot; id=&quot;admin-var-os&quot; value=&quot;Windows 11 Pro&quot; class=&quot;w-full p-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 outline-none&quot;>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button type=&quot;submit&quot; class=&quot;w-full py-3 mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-colors flex justify-center items-center&quot;>
-                                <i data-lucide=&quot;save&quot; class=&quot;w-5 h-5 mr-2&quot;></i> Enregistrer cette variante
-                            </button>
-                        </form>
-                    </div>
-
-                    <!-- Colonne 2: Générateur de code -->
-                    <div class=&quot;bg-gray-900 p-6 rounded-2xl border border-gray-800 shadow-xl flex flex-col relative&quot;>
-                        <div class=&quot;absolute top-0 right-0 w-32 h-32 bg-indigo-500 rounded-full blur-[60px] opacity-20 pointer-events-none&quot;></div>
-                        <h3 class=&quot;text-lg font-bold text-white mb-2 flex items-center&quot;>
-                            <i data-lucide=&quot;terminal&quot; class=&quot;w-5 h-5 mr-2 text-emerald-400&quot;></i> Code source des données
-                        </h3>
-                        <p class=&quot;text-gray-400 text-xs mb-4&quot;>
-                            Une fois vos modifications terminées, cliquez sur le bouton &quot;Générer&quot; puis copiez ce code pour remplacer la variable <code>roadmapData</code> dans votre fichier HTML d'origine.
-                        </p>
-                        
-                        <textarea id=&quot;admin-export-area&quot; readonly class=&quot;flex-1 w-full p-4 rounded-xl bg-gray-950 text-emerald-400 font-mono text-xs border border-gray-700 focus:outline-none focus:border-blue-500 custom-scrollbar resize-none&quot; placeholder=&quot;// Cliquez sur Générer pour voir le code ici...&quot;></textarea>
-                        
-                        <button onclick=&quot;copyAdminCode()&quot; class=&quot;mt-4 px-5 py-2.5 bg-white hover:bg-gray-100 text-gray-900 text-sm font-bold rounded-xl shadow-md transition-colors flex items-center justify-center&quot;>
-                            <i data-lucide=&quot;copy&quot; class=&quot;w-4 h-4 mr-2&quot;></i> Copier le code
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- CONTENU : ONGLET EDITEUR -->
+    <div id=&quot;tab-editor&quot; class=&quot;hidden tab-content&quot;>
+        <div class=&quot;max-w-[1400px] mx-auto&quot; id=&quot;editor-root&quot;></div>
     </div>
-
     <!-- LOGIQUE JAVASCRIPT -->
     <script>
         // --- BASE DE DONNÉES DE LA ROADMAP ---
         // Les stocks ont été supprimés de cette structure.
-        let roadmapData = [
+        const baseRoadmapData = [
             {
                 id: 'gb6-ultra',
                 name: 'Galaxy Book6 Ultra',
@@ -2957,6 +3214,18 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             }
         ];
 
+        function loadRoadmapData() {
+            try {
+                const saved = localStorage.getItem('galaxyBookEditData');
+                if (saved) return JSON.parse(saved);
+            } catch (e) {}
+            return JSON.parse(JSON.stringify(baseRoadmapData));
+        }
+        function saveRoadmapData() {
+            try { localStorage.setItem('galaxyBookEditData', JSON.stringify(roadmapData)); } catch (e) {}
+        }
+        let roadmapData = loadRoadmapData();
+        let editMode = false;
         // --- GESTION DES DATES ---
         const monthNamesMap = {
             'janvier': 0, 'février': 1, 'mars': 2, 'avril': 3, 'mai': 4, 'juin': 5,
@@ -2985,38 +3254,37 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
 
         // --- GESTION DES ONGLETS ---
         function switchTab(tabId) {
-            const tabs = ['roadmap', 'comparator', 'referencement', 'admin'];
-            
+            const tabs = ['roadmap', 'comparator', 'referencement', 'editor'];
+
             tabs.forEach(tab => {
                 const tabEl = document.getElementById(`tab-${tab}`);
                 const btnEl = document.getElementById(`btn-tab-${tab}`);
-                
+                if (!tabEl || !btnEl) return;
+
                 if(tab === tabId) {
                     tabEl.classList.remove('hidden');
-                    
-                    // Style actif
-                    if(tab === 'admin') {
-                        btnEl.className = &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-md transition-all bg-red-600 text-white&quot;;
+                    btnEl.classList.remove('hidden');
+                    if (tab === 'editor') {
+                        btnEl.className = &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-md transition-all bg-yellow-400 text-yellow-900&quot;;
                     } else {
                         btnEl.className = &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-md transition-all bg-blue-600 text-white&quot;;
                     }
                 } else {
                     tabEl.classList.add('hidden');
-                    
-                    // Style inactif
-                    if(tab === 'admin') {
-                        btnEl.className = &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-gray-200 transition-all text-red-600 bg-white hover:bg-red-50&quot;;
+                    if (tab === 'editor') {
+                        if (!editMode) { btnEl.classList.add('hidden'); }
+                        btnEl.className = (editMode ? '' : 'hidden ') + &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-yellow-300 bg-yellow-50 text-yellow-800 transition-all&quot;;
                     } else {
                         btnEl.className = &quot;px-5 py-2.5 rounded-full text-sm font-bold shadow-sm border border-gray-200 transition-all text-gray-600 bg-white hover:bg-gray-50&quot;;
                     }
                 }
             });
 
-            // Actions spécifiques lors du changement d'onglet
+            // Actions spÃ©cifiques lors du changement d'onglet
             if(tabId === 'roadmap') renderTimeline();
             if(tabId === 'comparator') initComparator();
             if(tabId === 'referencement') renderReferencement();
-            if(tabId === 'admin') populateAdminModelSelect();
+            if(tabId === 'editor') renderEditor();
         }
 
         // --- INITIALISATION DE LA TIMELINE ---
@@ -3591,172 +3859,189 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             tbody.innerHTML = html;
         }
 
-        // Export du tableau en CSV
-        function exportToCSV() {
-            let csvContent = &quot;data:text/csv;charset=utf-8,&quot;;
-            csvContent += &quot;Modèle;Code SKU;Écran;Processeur;RAM;Stockage;Carte Graphique;OS\n&quot;;
-
-            roadmapData.forEach(model => {
-                model.variants.forEach(variant => {
-                    const row = [
-                        model.name,
-                        variant.sku || '',
-                        variant.screenSize || '',
-                        variant.processor || '',
-                        variant.ram || '',
-                        variant.rom || '',
-                        variant.cg || 'Intégrée',
-                        variant.os || ''
-                    ].map(field => `&quot;${field}&quot;`).join(&quot;;&quot;);
-                    csvContent += row + &quot;\n&quot;;
-                });
-            });
-
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement(&quot;a&quot;);
-            link.setAttribute(&quot;href&quot;, encodedUri);
-            link.setAttribute(&quot;download&quot;, &quot;referencement_galaxy_book.csv&quot;);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // --- MODE EDITION (MOT DE PASSE &quot;admin&quot;) ---
+        function toggleAdminPanel() {
+            if (editMode) { handleAdminLock(); return; }
+            const panel = document.getElementById('admin-password-panel');
+            panel.classList.toggle('hidden');
+            document.getElementById('admin-pwd-error').classList.add('hidden');
         }
 
-
-        // --- LOGIQUE ADMIN ---
-        function checkAdminPassword() {
-            const pwd = document.getElementById('admin-password-input').value;
-            if (pwd === 'admingb') {
-                document.getElementById('admin-login-screen').classList.add('hidden');
-                document.getElementById('admin-dashboard-screen').classList.remove('hidden');
-                populateAdminModelSelect();
+        function handleAdminUnlock() {
+            const pwd = document.getElementById('admin-pwd-input').value;
+            if (pwd === 'admin') {
+                editMode = true;
+                document.getElementById('admin-password-panel').classList.add('hidden');
+                document.getElementById('admin-pwd-error').classList.add('hidden');
+                document.getElementById('admin-pwd-input').value = '';
+                document.getElementById('edit-mode-banner').classList.remove('hidden');
+                const lockBtn = document.getElementById('btn-admin-lock');
+                lockBtn.innerHTML = '<i data-lucide=&quot;unlock&quot; class=&quot;w-4 h-4 inline-block&quot;></i>';
+                lockBtn.classList.add('bg-yellow-100', 'text-yellow-700');
+                lucide.createIcons({ root: lockBtn });
+                switchTab('editor');
             } else {
-                document.getElementById('admin-error-msg').classList.remove('hidden');
+                document.getElementById('admin-pwd-error').classList.remove('hidden');
             }
         }
 
-        function populateAdminModelSelect() {
-            const select = document.getElementById('admin-form-model');
-            select.innerHTML = '<option value=&quot;new&quot;>+ Créer un nouveau modèle parent</option>';
-            roadmapData.forEach(model => {
-                const opt = document.createElement('option');
-                opt.value = model.id;
-                opt.textContent = model.name;
-                select.appendChild(opt);
-            });
-            toggleNewModelFields();
+        function handleAdminLock() {
+            editMode = false;
+            document.getElementById('edit-mode-banner').classList.add('hidden');
+            const lockBtn = document.getElementById('btn-admin-lock');
+            lockBtn.innerHTML = '<i data-lucide=&quot;lock&quot; class=&quot;w-4 h-4 inline-block&quot;></i>';
+            lockBtn.classList.remove('bg-yellow-100', 'text-yellow-700');
+            lucide.createIcons({ root: lockBtn });
+            switchTab('roadmap');
         }
 
-        function toggleNewModelFields() {
-            const val = document.getElementById('admin-form-model').value;
-            const newFields = document.getElementById('admin-new-model-fields');
-            if(val === 'new') {
-                newFields.classList.remove('hidden');
-                document.getElementById('admin-model-name').required = true;
-            } else {
-                newFields.classList.add('hidden');
-                document.getElementById('admin-model-name').required = false;
-            }
+        function exportRoadmapData() {
+            const blob = new Blob([JSON.stringify(roadmapData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'galaxy-book-data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
-        function submitAdminForm() {
-            const modelIdSel = document.getElementById('admin-form-model').value;
-            
-            // Construit la variante
-            const variant = {
-                sku: document.getElementById('admin-var-sku').value,
-                screenSize: document.getElementById('admin-var-screen').value,
-                processor: document.getElementById('admin-var-cpu').value,
-                ram: document.getElementById('admin-var-ram').value,
-                rom: document.getElementById('admin-var-rom').value,
-                cg: document.getElementById('admin-var-cg').value,
-                os: document.getElementById('admin-var-os').value
-            };
-
-            // Nettoyage des clés vides
-            Object.keys(variant).forEach(key => {
-                if(!variant[key]) delete variant[key];
-            });
-
-            const dictIcons = { screenSize: 'monitor', processor: 'cpu', ram: 'memory-stick', rom: 'hard-drive', cg: 'circuit-board', os: 'layout-template' };
-            const dictLabels = { screenSize: &quot;Taille d'écran&quot;, processor: &quot;Processeur&quot;, ram: &quot;RAM&quot;, rom: &quot;Stockage (ROM)&quot;, cg: &quot;Carte Graphique&quot;, os: &quot;Système d'exploitation&quot; };
-
-            let targetModel = null;
-
-            if (modelIdSel === 'new') {
-                const name = document.getElementById('admin-model-name').value;
-                const id = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
-                
-                targetModel = {
-                    id: id,
-                    name: name,
-                    image: document.getElementById('admin-model-image').value,
-                    startDate: document.getElementById('admin-model-start').value || 'Janvier 2025',
-                    endDate: document.getElementById('admin-model-end').value || 'Janvier 2026',
-                    options: {},
-                    variants: []
-                };
-                roadmapData.push(targetModel);
-                populateAdminModelSelect(); // Refresh dropdown
-                document.getElementById('admin-form-model').value = id; // Select new
-            } else {
-                targetModel = roadmapData.find(m => m.id === modelIdSel);
-            }
-
-            // Ajout de la variante
-            targetModel.variants.push(variant);
-
-            // Mise à jour du dictionnaire d'options
-            Object.keys(variant).forEach(key => {
-                if(key !== 'sku') {
-                    if(!targetModel.options[key]) {
-                        targetModel.options[key] = { label: dictLabels[key] || key, icon: dictIcons[key] || 'box', values: [] };
-                    }
-                    if(!targetModel.options[key].values.includes(variant[key])) {
-                        targetModel.options[key].values.push(variant[key]);
-                    }
-                }
-            });
-
-            // Affichage réussite visuelle
-            alert(`La variante ${variant.sku} a été ajoutée avec succès au modèle ${targetModel.name}.`);
-            
-            // On vide les champs du variant
-            document.getElementById('admin-var-sku').value = '';
-            
-            // Optionnel : Générer directement le code après un ajout
-            generateDataCode();
-            
-            // Rafraîchir les autres onglets
+        function resetRoadmapData() {
+            if (!confirm(&quot;RÃ©initialiser toutes les modifications et revenir aux donnÃ©es d'origine ?&quot;)) return;
+            roadmapData = JSON.parse(JSON.stringify(baseRoadmapData));
+            saveRoadmapData();
             renderTimeline();
             initComparator();
             renderReferencement();
+            renderEditor();
         }
 
-        // Génère le code JS de la BDD pour l'export
-        function generateDataCode() {
-            const textArea = document.getElementById('admin-export-area');
-            const dataStr = JSON.stringify(roadmapData, null, 4);
-            const scriptStr = `let roadmapData = ${dataStr};`;
-            textArea.value = scriptStr;
+        function escAttr(str) {
+            return String(str == null ? '' : str).replace(/&amp;/g, '&amp;amp;').replace(/&quot;/g, '&amp;quot;').replace(/</g, '&amp;lt;').replace(/>/g, '&amp;gt;');
         }
 
-        function copyAdminCode() {
-            const textArea = document.getElementById('admin-export-area');
-            if(!textArea.value) return;
-            
-            textArea.select();
-            document.execCommand('copy');
-            
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = `<i data-lucide=&quot;check&quot; class=&quot;w-4 h-4 mr-2 text-green-600&quot;></i> Copié !`;
-            lucide.createIcons();
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                lucide.createIcons();
-            }, 2000);
+        function updateModelField(modelIdx, field, value) {
+            roadmapData[modelIdx][field] = value;
+            saveRoadmapData();
         }
 
+        function updateVariantField(modelIdx, variantIdx, field, value) {
+            roadmapData[modelIdx].variants[variantIdx][field] = value;
+            saveRoadmapData();
+        }
+
+        function addModel() {
+            roadmapData.push({ id: 'modele-' + Date.now(), name: 'Nouveau modÃ¨le', image: '', startDate: 'Janvier 2026', endDate: 'Janvier 2027', options: {}, variants: [] });
+            saveRoadmapData();
+            renderEditor();
+        }
+
+        function removeModel(modelIdx) {
+            if (!confirm('Supprimer ce modÃ¨le et toutes ses variantes ?')) return;
+            roadmapData.splice(modelIdx, 1);
+            saveRoadmapData();
+            renderEditor();
+        }
+
+        function addVariant(modelIdx) {
+            roadmapData[modelIdx].variants.push({ screenSize: '', processor: '', ram: '', rom: '', cg: '', os: 'Windows 11 Pro', sku: '' });
+            saveRoadmapData();
+            renderEditor();
+        }
+
+        function removeVariant(modelIdx, variantIdx) {
+            if (!confirm('Supprimer cette variante ?')) return;
+            roadmapData[modelIdx].variants.splice(variantIdx, 1);
+            saveRoadmapData();
+            renderEditor();
+        }
+
+        // Affiche l'editeur de donnees (modeles + variantes)
+        function renderEditor() {
+            const root = document.getElementById('editor-root');
+            if (!root) return;
+
+            let html = `
+                <div class=&quot;flex justify-end mb-4&quot;>
+                    <button onclick=&quot;addModel()&quot; class=&quot;flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                        <i data-lucide=&quot;plus&quot; class=&quot;w-4 h-4&quot;></i> Ajouter un modÃ¨le
+                    </button>
+                </div>
+                <div class=&quot;space-y-6&quot;>
+            `;
+
+            roadmapData.forEach((model, mIdx) => {
+                html += `
+                    <div class=&quot;bg-white rounded-2xl border border-gray-200 shadow-sm p-4 md:p-6&quot;>
+                        <div class=&quot;grid grid-cols-1 md:grid-cols-4 gap-3 mb-4&quot;>
+                            <div class=&quot;md:col-span-2&quot;>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Nom du modÃ¨le</label>
+                                <input type=&quot;text&quot; value=&quot;${escAttr(model.name)}&quot; onchange=&quot;updateModelField(${mIdx},'name',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm font-bold&quot;>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Date de dÃ©but</label>
+                                <input type=&quot;text&quot; value=&quot;${escAttr(model.startDate)}&quot; onchange=&quot;updateModelField(${mIdx},'startDate',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm&quot;>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>Date de fin</label>
+                                <input type=&quot;text&quot; value=&quot;${escAttr(model.endDate)}&quot; onchange=&quot;updateModelField(${mIdx},'endDate',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm&quot;>
+                            </div>
+                            <div class=&quot;md:col-span-3&quot;>
+                                <label class=&quot;block text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1&quot;>URL de l'image</label>
+                                <input type=&quot;text&quot; value=&quot;${escAttr(model.image)}&quot; onchange=&quot;updateModelField(${mIdx},'image',this.value)&quot; class=&quot;w-full p-2 border border-gray-300 rounded-lg text-sm font-mono text-xs&quot;>
+                            </div>
+                            <div class=&quot;flex items-end&quot;>
+                                <button onclick=&quot;removeModel(${mIdx})&quot; class=&quot;w-full flex items-center justify-center gap-1.5 text-xs font-bold text-red-600 border border-red-200 hover:bg-red-50 px-3 py-2 rounded-lg transition-colors&quot;>
+                                    <i data-lucide=&quot;trash-2&quot; class=&quot;w-4 h-4&quot;></i> Supprimer le modÃ¨le
+                                </button>
+                            </div>
+                        </div>
+                        <div class=&quot;overflow-x-auto&quot;>
+                            <table class=&quot;min-w-full text-xs divide-y divide-gray-100&quot;>
+                                <thead class=&quot;bg-gray-50&quot;>
+                                    <tr>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Ã‰cran</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Processeur</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>RAM</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Stockage</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>Carte Graphique</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>OS</th>
+                                        <th class=&quot;px-2 py-2 text-left font-bold text-gray-500 uppercase&quot;>SKU</th>
+                                        <th class=&quot;px-2 py-2&quot;></th>
+                                    </tr>
+                                </thead>
+                                <tbody class=&quot;divide-y divide-gray-50&quot;>
+                                    ${model.variants.map((v, vIdx) => `
+                                        <tr class=&quot;hover:bg-gray-50&quot;>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.screenSize)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'screenSize',this.value)&quot; class=&quot;w-full min-w-[70px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.processor)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'processor',this.value)&quot; class=&quot;w-full min-w-[110px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.ram)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'ram',this.value)&quot; class=&quot;w-full min-w-[70px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.rom)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'rom',this.value)&quot; class=&quot;w-full min-w-[70px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.cg)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'cg',this.value)&quot; class=&quot;w-full min-w-[90px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.os)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'os',this.value)&quot; class=&quot;w-full min-w-[110px] p-1.5 border border-gray-200 rounded-md&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;><input type=&quot;text&quot; value=&quot;${escAttr(v.sku)}&quot; onchange=&quot;updateVariantField(${mIdx},${vIdx},'sku',this.value)&quot; class=&quot;w-full min-w-[120px] p-1.5 border border-gray-200 rounded-md font-mono&quot;></td>
+                                            <td class=&quot;px-2 py-1.5&quot;>
+                                                <button onclick=&quot;removeVariant(${mIdx},${vIdx})&quot; class=&quot;text-gray-400 hover:text-red-600 p-1&quot;>
+                                                    <i data-lucide=&quot;trash-2&quot; class=&quot;w-3.5 h-3.5&quot;></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        <button onclick=&quot;addVariant(${mIdx})&quot; class=&quot;mt-3 flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                            <i data-lucide=&quot;plus&quot; class=&quot;w-4 h-4&quot;></i> Ajouter une variante
+                        </button>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            root.innerHTML = html;
+            lucide.createIcons({ root: root });
+        }
 
         // Démarrage
         document.addEventListener('DOMContentLoaded', () => {
@@ -3833,6 +4118,11 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
         const Smartphone = (props) => <IconWrapper {...props}><rect width=&quot;14&quot; height=&quot;20&quot; x=&quot;5&quot; y=&quot;2&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M12 18h.01&quot;/></IconWrapper>;
         const Trash2 = (props) => <IconWrapper {...props}><path d=&quot;M3 6h18&quot;/><path d=&quot;M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6&quot;/><path d=&quot;M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2&quot;/><line x1=&quot;10&quot; x2=&quot;10&quot; y1=&quot;11&quot; y2=&quot;17&quot;/><line x1=&quot;14&quot; x2=&quot;14&quot; y1=&quot;11&quot; y2=&quot;17&quot;/></IconWrapper>;
         const ExternalLink = (props) => <IconWrapper {...props}><path d=&quot;M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6&quot;/><polyline points=&quot;15 3 21 3 21 9&quot;/><line x1=&quot;10&quot; x2=&quot;21&quot; y1=&quot;14&quot; y2=&quot;3&quot;/></IconWrapper>;
+        const Lock = (props) => <IconWrapper {...props}><rect width=&quot;18&quot; height=&quot;11&quot; x=&quot;3&quot; y=&quot;11&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M7 11V7a5 5 0 0 1 10 0v4&quot;/></IconWrapper>;
+        const Unlock = (props) => <IconWrapper {...props}><rect width=&quot;18&quot; height=&quot;11&quot; x=&quot;3&quot; y=&quot;11&quot; rx=&quot;2&quot; ry=&quot;2&quot;/><path d=&quot;M7 11V7a5 5 0 0 1 9.9-1&quot;/></IconWrapper>;
+        const Plus = (props) => <IconWrapper {...props}><path d=&quot;M5 12h14&quot;/><path d=&quot;M12 5v14&quot;/></IconWrapper>;
+        const Download = (props) => <IconWrapper {...props}><path d=&quot;M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4&quot;/><polyline points=&quot;7 10 12 15 17 10&quot;/><line x1=&quot;12&quot; x2=&quot;12&quot; y1=&quot;15&quot; y2=&quot;3&quot;/></IconWrapper>;
+        const RotateCcw = (props) => <IconWrapper {...props}><path d=&quot;M3 12a9 9 0 1 0 2.64-6.36L3 8&quot;/><path d=&quot;M3 3v5h5&quot;/></IconWrapper>;
 
         // --- DONNÉES (Data RSE2.csv) ---
         const rawData = [
@@ -4351,7 +4641,147 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
             );
         };
 
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // EDITEUR DE DONNEES (Mode Edition)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        const ECO_FIELDS = [
+            { key: 'category',       label: 'Categorie',           type: 'text' },
+            { key: 'model',          label: 'Modele',              type: 'text' },
+            { key: 'range',          label: 'Gamme',               type: 'text' },
+            { key: 'weight',         label: 'Poids (g)',           type: 'num' },
+            { key: 'recycledWeight', label: 'Poids recycle (g)',   type: 'num' },
+            { key: 'recycledRatio',  label: 'Ratio recycle (%)',   type: 'num' },
+            { key: 'recyclability',  label: 'Recyclabilite (%)',   type: 'num' },
+            { key: 'pkgWeight',      label: 'Poids pkg (g)',       type: 'num', nullable: true },
+            { key: 'pkgRecycled',    label: 'Pkg recycle (%)',     type: 'num', nullable: true },
+            { key: 'pkgRecyclable',  label: 'Pkg recyclable (%)',  type: 'num', nullable: true },
+            { key: 'lcaTotal',       label: 'LCA total (kgCO2e)',  type: 'num', nullable: true },
+            { key: 'lcaMfg',         label: 'LCA fabrication',     type: 'num', nullable: true },
+            { key: 'lcaDist',        label: 'LCA distribution',    type: 'num', nullable: true },
+            { key: 'lcaUse',         label: 'LCA usage',           type: 'num', nullable: true },
+            { key: 'lcaDisp',        label: 'LCA fin de vie',      type: 'num', nullable: true },
+        ];
+
+        const EcoDataEditor = ({ data, setData }) => {
+            const updateField = (idx, key, value, field) => {
+                let v = value;
+                if (field.type === 'num') {
+                    if (value === '') {
+                        v = field.nullable ? null : 0;
+                    } else {
+                        v = parseFloat(value);
+                        if (isNaN(v)) v = field.nullable ? null : 0;
+                    }
+                }
+                setData(prev => prev.map((row, i) => i === idx ? { ...row, [key]: v } : row));
+            };
+
+            const addRow = () => {
+                const blank = {};
+                ECO_FIELDS.forEach(f => { blank[f.key] = f.type === 'num' ? (f.nullable ? null : 0) : ''; });
+                setData(prev => [...prev, blank]);
+            };
+
+            const removeRow = (idx) => {
+                if (!window.confirm('Supprimer cette ligne ?')) return;
+                setData(prev => prev.filter((_, i) => i !== idx));
+            };
+
+            const inputCls = &quot;w-full min-w-[90px] px-2 py-1.5 text-sm border border-gray-200 rounded-lg outline-none focus:border-blue-500 bg-white&quot;;
+
+            return (
+                <section className=&quot;mb-24&quot;>
+                    <SectionTitle
+                        title=&quot;Editeur de donnees&quot;
+                        subtitle=&quot;Modifiez les valeurs ci-dessous, puis exportez le fichier JSON pour transmission.&quot;
+                    />
+                    <div className=&quot;bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-700 mb-6&quot;>
+                        Edition des donnees produits ({data.length} lignes). Les modifications sont enregistrees automatiquement dans ce navigateur.
+                        Pensez a cliquer sur <strong>Exporter (JSON)</strong> pour transmettre les changements.
+                    </div>
+                    <div className=&quot;overflow-x-auto bg-white rounded-2xl border border-gray-100 shadow-sm&quot;>
+                        <table className=&quot;min-w-full text-sm&quot;>
+                            <thead>
+                                <tr className=&quot;bg-gray-50&quot;>
+                                    {ECO_FIELDS.map(f => (
+                                        <th key={f.key} className=&quot;px-2 py-2 text-left text-xs font-bold text-gray-500 uppercase tracking-wide whitespace-nowrap&quot;>{f.label}</th>
+                                    ))}
+                                    <th className=&quot;px-2 py-2&quot;></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.map((row, idx) => (
+                                    <tr key={idx} className=&quot;border-t border-gray-100&quot;>
+                                        {ECO_FIELDS.map(f => (
+                                            <td key={f.key} className=&quot;px-2 py-1.5&quot;>
+                                                <input
+                                                    type={f.type === 'num' ? 'number' : 'text'}
+                                                    className={inputCls}
+                                                    value={row[f.key] === null || row[f.key] === undefined ? '' : row[f.key]}
+                                                    onChange={e => updateField(idx, f.key, e.target.value, f)}
+                                                />
+                                            </td>
+                                        ))}
+                                        <td className=&quot;px-2 py-1.5&quot;>
+                                            <button onClick={() => removeRow(idx)} className=&quot;p-1.5 text-gray-400 hover:text-red-500 transition-colors&quot; title=&quot;Supprimer cette ligne&quot;>
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <button onClick={addRow} className=&quot;mt-4 w-full flex items-center justify-center gap-2 py-3 border-2 border-dashed border-gray-200 rounded-2xl text-gray-500 hover:text-blue-600 hover:border-blue-300 transition-colors font-medium text-sm&quot;>
+                        <Plus size={16} />Ajouter une ligne
+                    </button>
+                </section>
+            );
+        };
         const App = () => {
+            const [data, setData] = useState(() => {
+                try {
+                    const saved = localStorage.getItem('ecoEditData');
+                    if (saved) return JSON.parse(saved);
+                } catch (_) {}
+                return JSON.parse(JSON.stringify(rawData));
+            });
+            React.useEffect(() => {
+                try { localStorage.setItem('ecoEditData', JSON.stringify(data)); } catch (_) {}
+            }, [data]);
+
+            const [editMode, setEditMode]             = useState(false);
+            const [showAdminInput, setShowAdminInput] = useState(false);
+            const [adminPassword, setAdminPassword]   = useState('');
+            const [adminError, setAdminError]         = useState(false);
+            const [editorView, setEditorView]         = useState(false);
+
+            const handleAdminUnlock = () => {
+                if (adminPassword === 'admin') {
+                    setEditMode(true); setShowAdminInput(false);
+                    setAdminError(false); setAdminPassword('');
+                } else { setAdminError(true); }
+            };
+
+            const handleAdminLock = () => {
+                setEditMode(false); setEditorView(false);
+                setShowAdminInput(false); setAdminPassword(''); setAdminError(false);
+            };
+
+            const handleResetData = () => {
+                if (!window.confirm(&quot;Reinitialiser toutes les modifications et revenir aux donnees d'origine ?&quot;)) return;
+                setData(JSON.parse(JSON.stringify(rawData)));
+            };
+
+            const handleExportData = () => {
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url; a.download = 'ecodesign-data.json';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            };
+
             return (
                 <div className=&quot;min-h-screen bg-gray-50 font-sans text-gray-900 pb-20 selection:bg-blue-100&quot;>
                     <nav className=&quot;sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all&quot;>
@@ -4359,33 +4789,108 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                             <div className=&quot;font-bold text-xl tracking-tight flex items-center gap-2&quot;>
                                 SAMSUNG <span className=&quot;w-px h-4 bg-gray-300 mx-1&quot;></span> <span className=&quot;font-normal text-gray-500 text-sm uppercase tracking-wider&quot;>Eco-Dashboard</span>
                             </div>
-                            <div className=&quot;hidden md:flex gap-8 text-sm font-bold text-gray-500&quot;>
-                                <a 
-                                    href=&quot;https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669&quot; 
-                                    target=&quot;_blank&quot; 
-                                    rel=&quot;noopener noreferrer&quot;
-                                    className=&quot;hover:text-blue-600 transition-colors py-2 relative group flex items-center gap-2&quot;
-                                >
-                                    Site EPREL
-                                    <ExternalLink size={14} />
-                                    <span className=&quot;absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full&quot;></span>
-                                </a>
+                            <div className=&quot;flex items-center gap-6&quot;>
+                                <div className=&quot;hidden md:flex gap-8 text-sm font-bold text-gray-500&quot;>
+                                    <a
+                                        href=&quot;https://eprel.ec.europa.eu/screen/product/smartphonestablets20231669&quot;
+                                        target=&quot;_blank&quot;
+                                        rel=&quot;noopener noreferrer&quot;
+                                        className=&quot;hover:text-blue-600 transition-colors py-2 relative group flex items-center gap-2&quot;
+                                    >
+                                        Site EPREL
+                                        <ExternalLink size={14} />
+                                        <span className=&quot;absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full&quot;></span>
+                                    </a>
+                                </div>
+                                {!editMode ? (
+                                    <button
+                                        onClick={() => { setShowAdminInput(s => !s); setAdminError(false); setAdminPassword(''); }}
+                                        className=&quot;p-2.5 rounded-lg border border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300 transition-colors&quot;
+                                        title=&quot;Mode Edition&quot;
+                                    >
+                                        <Lock size={16} />
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleAdminLock}
+                                        className=&quot;p-2.5 rounded-lg border border-green-200 bg-green-50 text-green-600 hover:bg-green-100 transition-colors&quot;
+                                        title=&quot;Quitter le mode edition&quot;
+                                    >
+                                        <Unlock size={16} />
+                                    </button>
+                                )}
                             </div>
                         </div>
+
+                        {/* Barre mot de passe Admin */}
+                        {showAdminInput &amp;&amp; !editMode &amp;&amp; (
+                            <div className=&quot;bg-gray-900 px-4 py-3 flex items-center gap-3&quot;>
+                                <Lock size={16} className=&quot;text-yellow-400 flex-shrink-0&quot; />
+                                <span className=&quot;text-xs text-gray-300 font-medium whitespace-nowrap&quot;>Mode Edition</span>
+                                <input
+                                    type=&quot;password&quot;
+                                    value={adminPassword}
+                                    onChange={e => { setAdminPassword(e.target.value); setAdminError(false); }}
+                                    onKeyDown={e => e.key === 'Enter' &amp;&amp; handleAdminUnlock()}
+                                    placeholder=&quot;Mot de passe&quot;
+                                    autoFocus
+                                    className={`flex-1 max-w-xs bg-gray-800 text-white text-xs px-3 py-1.5 rounded-lg border outline-none focus:border-blue-500 ${adminError ? 'border-red-500' : 'border-gray-700'}`}
+                                />
+                                <button
+                                    onClick={handleAdminUnlock}
+                                    className=&quot;px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors whitespace-nowrap&quot;
+                                >Acceder</button>
+                                {adminError &amp;&amp; <span className=&quot;text-xs text-red-400 whitespace-nowrap&quot;>Mot de passe incorrect</span>}
+                            </div>
+                        )}
+
+                        {/* Bandeau mode edition actif */}
+                        {editMode &amp;&amp; (
+                            <div className=&quot;bg-yellow-50 border-y border-yellow-200 px-4 py-2 flex flex-wrap items-center gap-2&quot;>
+                                <Leaf size={14} className=&quot;text-yellow-500&quot; />
+                                <span className=&quot;text-xs font-semibold text-yellow-700&quot;>Mode Edition actif</span>
+                                <div className=&quot;flex bg-white rounded-lg border border-yellow-200 p-0.5 ml-2&quot;>
+                                    <button
+                                        onClick={() => setEditorView(false)}
+                                        className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${!editorView ? 'bg-yellow-500 text-white' : 'text-gray-500'}`}
+                                    >Vue Dashboard</button>
+                                    <button
+                                        onClick={() => setEditorView(true)}
+                                        className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${editorView ? 'bg-yellow-500 text-white' : 'text-gray-500'}`}
+                                    >Editeur</button>
+                                </div>
+                                <div className=&quot;ml-auto flex items-center gap-2&quot;>
+                                    <button
+                                        onClick={handleExportData}
+                                        className=&quot;inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors&quot;
+                                    ><Download size={14} />Exporter (JSON)</button>
+                                    <button
+                                        onClick={handleResetData}
+                                        className=&quot;inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 hover:bg-gray-50 text-gray-600 text-xs font-medium rounded-lg transition-colors&quot;
+                                    ><RotateCcw size={14} />Reinitialiser</button>
+                                </div>
+                            </div>
+                        )}
                     </nav>
 
                     <Hero />
 
                     <main className=&quot;max-w-6xl mx-auto px-6&quot;>
-                        <MaterialsSection data={rawData} />
-                        <LCASection data={rawData} />
+                        {editMode &amp;&amp; editorView ? (
+                            <EcoDataEditor data={data} setData={setData} />
+                        ) : (
+                            <React.Fragment>
+                                <MaterialsSection data={data} />
+                                <LCASection data={data} />
+                            </React.Fragment>
+                        )}
                     </main>
 
                     <footer className=&quot;border-t border-gray-200 mt-20 pt-12 pb-12 bg-white&quot;>
                         <div className=&quot;max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6&quot;>
                             <div className=&quot;text-gray-400 text-sm text-center md:text-left&quot;>
                                 <p className=&quot;font-semibold text-gray-900 mb-1&quot;>Samsung Electronics France</p>
-                                <p>Données issues du rapport RSE. Valeurs indicatives.</p>
+                                <p>DonnÃ©es issues du rapport RSE. Valeurs indicatives.</p>
                             </div>
                             <div className=&quot;flex gap-4&quot;>
                                 <div className=&quot;w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-colors cursor-pointer&quot;><Leaf size={14}/></div>
@@ -4396,7 +4901,6 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
                 </div>
             );
         };
-
         window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.samsungNav){ var el=document.getElementById(e.data.samsungNav); if(el) setTimeout(function(){ el.scrollIntoView({behavior:'smooth'}); },150); } });
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
