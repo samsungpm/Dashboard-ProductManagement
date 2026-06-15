@@ -306,235 +306,819 @@
         const years = [2026, 2027];
 
         const mockData = {
-            smartphones: {
-                2026: [
-                    {
-                        id: 's26-ultra', name: 'Galaxy S26 Ultra',
-                        startMonth: 2, endMonth: 11, basePrice: 1469, range: 'S',
-                        colors: [
-                            { name: 'Violet', hex: '#686884' }, { name: 'Noir', hex: '#494D53' },
-                            { name: 'Bleu',   hex: '#B3CBD9' }, { name: 'Blanc', hex: '#F3F4F5' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,9&quot; ; QHD+ ; 3120 x 1440p ; 499ppp ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '12 Go', rom: '256 Go', rrp: 1469 },
-                            { ram: '12 Go', rom: '512 Go', rrp: 1669 },
-                            { ram: '16 Go', rom: '1 To',   rrp: 1969 }
-                        ],
-                        colorClass: 'bg-slate-800',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 's26plus', name: 'Galaxy S26+',
-                        startMonth: 2, endMonth: 11, basePrice: 1169, range: 'S',
-                        colors: [
-                            { name: 'Noir', hex: '#494D53' }, { name: 'Gris', hex: '#9E9E9E' },
-                            { name: 'Crème', hex: '#F5F5F0' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,7&quot; ; QHD+ ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '12 Go', rom: '256 Go', rrp: 1169 },
-                            { ram: '12 Go', rom: '512 Go', rrp: 1299 }
-                        ],
-                        colorClass: 'bg-slate-600',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 's26', name: 'Galaxy S26',
-                        startMonth: 2, endMonth: 11, basePrice: 899, range: 'S',
-                        colors: [
-                            { name: 'Noir', hex: '#494D53' }, { name: 'Crème', hex: '#F5F5F0' },
-                            { name: 'Lavande', hex: '#E6E6FA' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,2&quot; ; FHD+ ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '8 Go', rom: '128 Go', rrp: 899 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 959 }
-                        ],
-                        colorClass: 'bg-slate-500',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a57', name: 'Galaxy A57',
-                        startMonth: 3, endMonth: 11, basePrice: 499, range: 'A',
-                        colors: [
-                            { name: 'Awesome Navy',    hex: '#000080' },
-                            { name: 'Awesome Iceblue', hex: '#ADD8E6' },
-                            { name: 'Awesome Lilac',   hex: '#C8A2C8' }
-                        ],
-                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '8 Go', rom: '128 Go', rrp: 499 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 549 }
-                        ],
-                        colorClass: 'bg-blue-500',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a37', name: 'Galaxy A37',
-                        startMonth: 3, endMonth: 11, basePrice: 399, range: 'A',
-                        colors: [
-                            { name: 'Noir',      hex: '#2C2C2C' },
-                            { name: 'Jaune',     hex: '#FFD700' },
-                            { name: 'Bleu clair', hex: '#ADD8E6' }
-                        ],
-                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '6 Go', rom: '128 Go', rrp: 399 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 449 }
-                        ],
-                        colorClass: 'bg-blue-400',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'zfold7', name: 'Galaxy Z Fold7',
-                        startMonth: 0, endMonth: 6, basePrice: 1999, range: 'Z',
-                        colors: [
-                            { name: 'Phantom Black', hex: '#1C1C1C' },
-                            { name: 'Icy Blue',      hex: '#A5C2CC' }
-                        ],
-                        screen: 'Interne : 7,6&quot; Dynamic AMOLED 2X 120Hz | Externe : 6,3&quot; Dynamic AMOLED 2X 120Hz',
-                        variants: [
-                            { ram: '12 Go', rom: '256 Go', rrp: 1999 },
-                            { ram: '12 Go', rom: '512 Go', rrp: 2119 },
-                            { ram: '12 Go', rom: '1 To',   rrp: 2359 }
-                        ],
-                        colorClass: 'bg-zinc-800',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'zflip7', name: 'Galaxy Z Flip7',
-                        startMonth: 0, endMonth: 6, basePrice: 1199, range: 'Z',
-                        colors: [
-                            { name: 'Mint',     hex: '#98FF98' },
-                            { name: 'Graphite', hex: '#41424C' },
-                            { name: 'Lavender', hex: '#E6E6FA' }
-                        ],
-                        screen: 'Interne : 6,7&quot; Dynamic AMOLED 2X 120Hz | Externe : 3,4&quot; Super AMOLED 60Hz',
-                        variants: [
-                            { ram: '8 Go', rom: '256 Go', rrp: 1199 },
-                            { ram: '8 Go', rom: '512 Go', rrp: 1319 }
-                        ],
-                        colorClass: 'bg-zinc-600',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a27', name: 'Galaxy A27',
-                        startMonth: 6, endMonth: 11, basePrice: 349, range: 'A',
-                        colors: [
-                            { name: 'Noir',  hex: '#2C2C2C' },
-                            { name: 'Bleu',  hex: '#4169E1' },
-                            { name: 'Blanc', hex: '#F5F5F5' }
-                        ],
-                        screen: 'Super AMOLED ; 6,7&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '6 Go', rom: '128 Go', rrp: 349 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 399 }
-                        ],
-                        colorClass: 'bg-blue-300',
-                        idealoUrl: null
-                    }
-                ],
-                2027: [
-                    {
-                        id: 's26-ultra-cont', name: 'Galaxy S26 Ultra',
-                        startMonth: 0, endMonth: 2, basePrice: 1469, range: 'S',
-                        colors: [
-                            { name: 'Violet', hex: '#686884' }, { name: 'Noir', hex: '#494D53' },
-                            { name: 'Bleu',   hex: '#B3CBD9' }, { name: 'Blanc', hex: '#F3F4F5' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,9&quot; ; QHD+ ; 3120 x 1440p ; 499ppp ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '12 Go', rom: '256 Go', rrp: 1469 },
-                            { ram: '12 Go', rom: '512 Go', rrp: 1669 },
-                            { ram: '16 Go', rom: '1 To',   rrp: 1969 }
-                        ],
-                        colorClass: 'bg-slate-800',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 's26plus-cont', name: 'Galaxy S26+',
-                        startMonth: 0, endMonth: 2, basePrice: 1169, range: 'S',
-                        colors: [
-                            { name: 'Noir', hex: '#494D53' }, { name: 'Gris', hex: '#9E9E9E' },
-                            { name: 'Crème', hex: '#F5F5F0' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,7&quot; ; QHD+ ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '12 Go', rom: '256 Go', rrp: 1169 },
-                            { ram: '12 Go', rom: '512 Go', rrp: 1299 }
-                        ],
-                        colorClass: 'bg-slate-600',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 's26-cont', name: 'Galaxy S26',
-                        startMonth: 0, endMonth: 2, basePrice: 899, range: 'S',
-                        colors: [
-                            { name: 'Noir', hex: '#494D53' }, { name: 'Crème', hex: '#F5F5F0' },
-                            { name: 'Lavande', hex: '#E6E6FA' }
-                        ],
-                        screen: 'Ecran Infinity O ; 6,2&quot; ; FHD+ ; 120Hz adaptatif',
-                        variants: [
-                            { ram: '8 Go', rom: '128 Go', rrp: 899 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 959 }
-                        ],
-                        colorClass: 'bg-slate-500',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a57-cont', name: 'Galaxy A57',
-                        startMonth: 0, endMonth: 3, basePrice: 499, range: 'A',
-                        colors: [
-                            { name: 'Awesome Navy',    hex: '#000080' },
-                            { name: 'Awesome Iceblue', hex: '#ADD8E6' },
-                            { name: 'Awesome Lilac',   hex: '#C8A2C8' }
-                        ],
-                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '8 Go', rom: '128 Go', rrp: 499 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 549 }
-                        ],
-                        colorClass: 'bg-blue-500',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a37-cont', name: 'Galaxy A37',
-                        startMonth: 0, endMonth: 3, basePrice: 399, range: 'A',
-                        colors: [
-                            { name: 'Noir',      hex: '#2C2C2C' },
-                            { name: 'Jaune',     hex: '#FFD700' },
-                            { name: 'Bleu clair', hex: '#ADD8E6' }
-                        ],
-                        screen: 'Super AMOLED ; 6,6&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '6 Go', rom: '128 Go', rrp: 399 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 449 }
-                        ],
-                        colorClass: 'bg-blue-400',
-                        idealoUrl: null
-                    },
-                    {
-                        id: 'a27-cont', name: 'Galaxy A27',
-                        startMonth: 0, endMonth: 6, basePrice: 349, range: 'A',
-                        colors: [
-                            { name: 'Noir',  hex: '#2C2C2C' },
-                            { name: 'Bleu',  hex: '#4169E1' },
-                            { name: 'Blanc', hex: '#F5F5F5' }
-                        ],
-                        screen: 'Super AMOLED ; 6,7&quot; ; FHD+ ; 120Hz',
-                        variants: [
-                            { ram: '6 Go', rom: '128 Go', rrp: 349 },
-                            { ram: '8 Go', rom: '256 Go', rrp: 399 }
-                        ],
-                        colorClass: 'bg-blue-300',
-                        idealoUrl: null
-                    }
-                ]
-            },
-            tablets:   { 2026: [], 2027: [] },
-            laptops:   { 2026: [], 2027: [] },
-            wearables: { 2026: [], 2027: [] }
+
+  &quot;smartphones&quot;: {
+    &quot;2026&quot;: [
+      {
+        &quot;id&quot;: &quot;s26-ultra&quot;,
+        &quot;name&quot;: &quot;Galaxy S26 Ultra&quot;,
+        &quot;startMonth&quot;: 2,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 1469,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Violet&quot;,
+            &quot;hex&quot;: &quot;#686884&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#B3CBD9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,9\&quot; ; QHD+ ; 3120 x 1440p ; 499ppp ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1469
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 1669
+          },
+          {
+            &quot;ram&quot;: &quot;16 Go&quot;,
+            &quot;rom&quot;: &quot;1 To&quot;,
+            &quot;rrp&quot;: 1969
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-800&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/209521981/samsung-galaxy-s26-ultra.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;s26plus&quot;,
+        &quot;name&quot;: &quot;Galaxy S26+&quot;,
+        &quot;startMonth&quot;: 2,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 1169,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Violet&quot;,
+            &quot;hex&quot;: &quot;#686884&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#B3CBD9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,7\&quot; ; QHD+ ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1169
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 1299
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-600&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/209522122/samsung-galaxy-s26-plus.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;s26&quot;,
+        &quot;name&quot;: &quot;Galaxy S26&quot;,
+        &quot;startMonth&quot;: 2,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 899,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Violet&quot;,
+            &quot;hex&quot;: &quot;#686884&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#B3CBD9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,3\&quot; ; FHD+ ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 899
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 959
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-500&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/209521888/samsung-galaxy-s26.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a57&quot;,
+        &quot;name&quot;: &quot;Galaxy A57&quot;,
+        &quot;startMonth&quot;: 3,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 499,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#383E4E&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Lavande&quot;,
+            &quot;hex&quot;: &quot;#A7B2E7&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#7E7D80&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Clair&quot;,
+            &quot;hex&quot;: &quot;#C8D8EB&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,6\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 499
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 549
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-500&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/209770533/samsung-galaxy-a57.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a37&quot;,
+        &quot;name&quot;: &quot;Galaxy A37&quot;,
+        &quot;startMonth&quot;: 3,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 399,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Graphite&quot;,
+            &quot;hex&quot;: &quot;#525257&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Lavande&quot;,
+            &quot;hex&quot;: &quot;#BCBDE2&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Vert Foncé&quot;,
+            &quot;hex&quot;: &quot;#5C707E&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,6\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;6 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 399
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 449
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-400&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/209770158/samsung-galaxy-a37.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;zfold7&quot;,
+        &quot;name&quot;: &quot;Galaxy Z Fold7&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 6,
+        &quot;basePrice&quot;: 1999,
+        &quot;range&quot;: &quot;Z&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir Absolu&quot;,
+            &quot;hex&quot;: &quot;#4A4A4D&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Nuit&quot;,
+            &quot;hex&quot;: &quot;#3B5B8A&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#B0B7B9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Vert d'Eau&quot;,
+            &quot;hex&quot;: &quot;#C8DDDD&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Interne : 7,6\&quot; Dynamic AMOLED 2X 120Hz | Externe : 6,3\&quot; Dynamic AMOLED 2X 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1999
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 2099
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-zinc-800&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;zflip7&quot;,
+        &quot;name&quot;: &quot;Galaxy Z Flip7&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 6,
+        &quot;basePrice&quot;: 999,
+        &quot;range&quot;: &quot;Z&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir Absolu&quot;,
+            &quot;hex&quot;: &quot;#4A4A4D&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Nuit&quot;,
+            &quot;hex&quot;: &quot;#3B5B8A&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Corail&quot;,
+            &quot;hex&quot;: &quot;#EE6779&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Vert d'Eau&quot;,
+            &quot;hex&quot;: &quot;#C8DDDD&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Interne : 6,9\&quot; Dynamic AMOLED 2X 120Hz | Externe : 4,1\&quot; Super AMOLED 60/120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 999
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-zinc-600&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/206912770/samsung-galaxy-z-flip7.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a27&quot;,
+        &quot;name&quot;: &quot;Galaxy A27&quot;,
+        &quot;startMonth&quot;: 6,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 349,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#2C2C2C&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#4169E1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F5F5F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,7\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;6 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 349
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 399
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-300&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;zflip7fe&quot;,
+        &quot;name&quot;: &quot;Galaxy Z Flip7 FE&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 6,
+        &quot;basePrice&quot;: 799,
+        &quot;range&quot;: &quot;Z&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#212721&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F5F7F6&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Interne : 6,7\&quot; Dynamic AMOLED 2X 120Hz | Externe : 3,4\&quot; Super AMOLED 60Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 799
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 899
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-zinc-500&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/206912771/samsung-galaxy-z-flip7-fe.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;s25&quot;,
+        &quot;name&quot;: &quot;Galaxy S25&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 799,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#7F7F7E&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Nuit&quot;,
+            &quot;hex&quot;: &quot;#3C5B8A&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Clair&quot;,
+            &quot;hex&quot;: &quot;#C8D3DF&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Vert d'Eau&quot;,
+            &quot;hex&quot;: &quot;#D3E8DD&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,2\&quot; ; FHD+ ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 799
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-500&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/205569450/samsung-galaxy-s25.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;s25fe&quot;,
+        &quot;name&quot;: &quot;Galaxy S25 FE&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 7,
+        &quot;basePrice&quot;: 749,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir Absolu&quot;,
+            &quot;hex&quot;: &quot;#494A4D&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F5F7F6&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Clair&quot;,
+            &quot;hex&quot;: &quot;#BECAE9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Nuit&quot;,
+            &quot;hex&quot;: &quot;#3C5B8A&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,7\&quot; ; FHD+ ; 60/120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 749
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-400&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/207654118/samsung-galaxy-s25-fe.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;s25edge&quot;,
+        &quot;name&quot;: &quot;Galaxy S25 Edge&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 1249,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir Absolu Titane&quot;,
+            &quot;hex&quot;: &quot;#494A4D&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Argent Titane&quot;,
+            &quot;hex&quot;: &quot;#B0B7B9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Claire Titane&quot;,
+            &quot;hex&quot;: &quot;#C8D3DF&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,7\&quot; ; Dynamic AMOLED ; QHD+ ; 120Hz Adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1249
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 1449
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-700&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/206351120/samsung-galaxy-s25-edge.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a26&quot;,
+        &quot;name&quot;: &quot;Galaxy A26&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 5,
+        &quot;basePrice&quot;: 319,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#2D2926&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F4&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Vert d'Eau&quot;,
+            &quot;hex&quot;: &quot;#BCE5DF&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,7\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;6 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 319
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-300&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/206013932/samsung-galaxy-a26.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a17-5g&quot;,
+        &quot;name&quot;: &quot;Galaxy A17 5G&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 248,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#404145&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#9B9CA1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#004680&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,7\&quot; ; FHD+ ; 90Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;4 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 249
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-200&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/207227647/samsung-galaxy-a17-5g.html&quot;
+      },
+      {
+        &quot;id&quot;: &quot;a17-4g&quot;,
+        &quot;name&quot;: &quot;Galaxy A17 4G&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 11,
+        &quot;basePrice&quot;: 199,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#404145&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#9B9CA1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu Clair&quot;,
+            &quot;hex&quot;: &quot;#A4C8E1&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,7\&quot; ; FHD+ ; 90Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;4 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 199
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-200&quot;,
+        &quot;idealoUrl&quot;: &quot;https://www.idealo.fr/prix/207663975/samsung-galaxy-a17-4g.html&quot;
+      }
+    ],
+    &quot;2027&quot;: [
+      {
+        &quot;id&quot;: &quot;s26-ultra-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy S26 Ultra&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 2,
+        &quot;basePrice&quot;: 1469,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Violet&quot;,
+            &quot;hex&quot;: &quot;#686884&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#B3CBD9&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F3F4F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,9\&quot; ; QHD+ ; 3120 x 1440p ; 499ppp ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1469
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 1669
+          },
+          {
+            &quot;ram&quot;: &quot;16 Go&quot;,
+            &quot;rom&quot;: &quot;1 To&quot;,
+            &quot;rrp&quot;: 1969
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-800&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;s26plus-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy S26+&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 2,
+        &quot;basePrice&quot;: 1169,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Gris&quot;,
+            &quot;hex&quot;: &quot;#9E9E9E&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Crème&quot;,
+            &quot;hex&quot;: &quot;#F5F5F0&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,7\&quot; ; QHD+ ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 1169
+          },
+          {
+            &quot;ram&quot;: &quot;12 Go&quot;,
+            &quot;rom&quot;: &quot;512 Go&quot;,
+            &quot;rrp&quot;: 1299
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-600&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;s26-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy S26&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 2,
+        &quot;basePrice&quot;: 899,
+        &quot;range&quot;: &quot;S&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#494D53&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Crème&quot;,
+            &quot;hex&quot;: &quot;#F5F5F0&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Lavande&quot;,
+            &quot;hex&quot;: &quot;#E6E6FA&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Ecran Infinity O ; 6,2\&quot; ; FHD+ ; 120Hz adaptatif&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 899
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 959
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-slate-500&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;a57-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy A57&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 3,
+        &quot;basePrice&quot;: 499,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Awesome Navy&quot;,
+            &quot;hex&quot;: &quot;#000080&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Awesome Iceblue&quot;,
+            &quot;hex&quot;: &quot;#ADD8E6&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Awesome Lilac&quot;,
+            &quot;hex&quot;: &quot;#C8A2C8&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,6\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 499
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 549
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-500&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;a37-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy A37&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 3,
+        &quot;basePrice&quot;: 399,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#2C2C2C&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Jaune&quot;,
+            &quot;hex&quot;: &quot;#FFD700&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu clair&quot;,
+            &quot;hex&quot;: &quot;#ADD8E6&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,6\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;6 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 399
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 449
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-400&quot;,
+        &quot;idealoUrl&quot;: null
+      },
+      {
+        &quot;id&quot;: &quot;a27-cont&quot;,
+        &quot;name&quot;: &quot;Galaxy A27&quot;,
+        &quot;startMonth&quot;: 0,
+        &quot;endMonth&quot;: 6,
+        &quot;basePrice&quot;: 349,
+        &quot;range&quot;: &quot;A&quot;,
+        &quot;colors&quot;: [
+          {
+            &quot;name&quot;: &quot;Noir&quot;,
+            &quot;hex&quot;: &quot;#2C2C2C&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Bleu&quot;,
+            &quot;hex&quot;: &quot;#4169E1&quot;
+          },
+          {
+            &quot;name&quot;: &quot;Blanc&quot;,
+            &quot;hex&quot;: &quot;#F5F5F5&quot;
+          }
+        ],
+        &quot;screen&quot;: &quot;Super AMOLED ; 6,7\&quot; ; FHD+ ; 120Hz&quot;,
+        &quot;variants&quot;: [
+          {
+            &quot;ram&quot;: &quot;6 Go&quot;,
+            &quot;rom&quot;: &quot;128 Go&quot;,
+            &quot;rrp&quot;: 349
+          },
+          {
+            &quot;ram&quot;: &quot;8 Go&quot;,
+            &quot;rom&quot;: &quot;256 Go&quot;,
+            &quot;rrp&quot;: 399
+          }
+        ],
+        &quot;colorClass&quot;: &quot;bg-blue-300&quot;,
+        &quot;idealoUrl&quot;: null
+      }
+    ]
+  },
+  &quot;tablets&quot;: {
+    &quot;2026&quot;: [],
+    &quot;2027&quot;: []
+  },
+  &quot;laptops&quot;: {
+    &quot;2026&quot;: [],
+    &quot;2027&quot;: []
+  },
+  &quot;wearables&quot;: {
+    &quot;2026&quot;: [],
+    &quot;2027&quot;: []
+  }
+
         };
 
         const months = ['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Aoû','Sep','Oct','Nov','Déc'];
@@ -1118,14 +1702,29 @@
             };
 
             // Filtres par gamme (uniquement pertinents pour Smartphones et Tablettes)
+            // Chaque filtre définit des tranches de prix (bands) utilisées comme axe des
+            // ordonnées : les produits sont regroupés par tranche, puis empilés à
+            // l'intérieur de leur tranche selon leur période de lancement, pour éviter
+            // toute superposition sans devoir respecter le prix exact.
             const rangeFilters = [
-                { id: 'sz',      label: 'Gamme S/Z',     match: ['S', 'Z'], min: 500, max: 2500, steps: [500, 1000, 1500, 2000, 2500] },
-                { id: 'a',       label: 'Gamme A',       match: ['A'],      min: 0,   max: 900,  steps: [0, 300, 600, 900] },
-                { id: 'durcie',  label: 'Gamme Durcie',  match: ['Durcie'], min: 0,   max: 1500, steps: [0, 500, 1000, 1500] },
+                { id: 'sz',      label: 'Gamme S/Z',     match: ['S', 'Z'], bands: [
+                    { label: '600€ - 999€', max: 999 },
+                    { label: '+ 1000€',     max: Infinity },
+                ] },
+                { id: 'a',       label: 'Gamme A',       match: ['A'], bands: [
+                    { label: '0€ - 299€', max: 299 },
+                    { label: '+ 300€',    max: Infinity },
+                ] },
+                { id: 'durcie',  label: 'Gamme Durcie',  match: ['Durcie'], bands: [
+                    { label: '0€ - 499€', max: 499 },
+                    { label: '+ 500€',    max: Infinity },
+                ] },
             ];
+            const defaultBands = [{ label: 'Tous prix', max: Infinity }];
             const showRangeFilter = activeCategory === 'smartphones' || activeCategory === 'tablets';
             const [activeRange, setActiveRange] = useState('sz');
             const currentRangeFilter = showRangeFilter ? (rangeFilters.find(r => r.id === activeRange) || rangeFilters[0]) : null;
+            const priceBands = currentRangeFilter ? currentRangeFilter.bands : defaultBands;
 
             const baseData = data[activeCategory]?.[activeYear] || [];
             const currentData = (currentRangeFilter
@@ -1133,31 +1732,41 @@
                 : baseData
             ).slice().sort((a, b) => a.basePrice - b.basePrice);
 
-            const minPrice    = currentRangeFilter ? currentRangeFilter.min : 0;
-            const maxPrice    = currentRangeFilter ? currentRangeFilter.max : 2500;
-            const priceSteps  = currentRangeFilter ? currentRangeFilter.steps : [0, 500, 1000, 1500, 2000, 2500];
-            const priceSpan   = (maxPrice - minPrice) || 1;
+            // Hauteur d'une ligne de produit, et espace réservé en haut/bas de chaque tranche.
+            const ROW_HEIGHT_PX   = 40;
+            const BAND_PADDING_PX = 12;
+            const BAR_HEIGHT_PX   = 32;
 
-            // Attribution de &quot;lanes&quot; verticales pour éviter que les barres ne se
-            // superposent lorsque leurs périodes se chevauchent et que leurs prix
-            // sont trop proches (ce qui empêchait de cliquer dessus correctement).
-            const positionedData = (() => {
-                const lanes = [];
+            const bandIndexFor = (price) => priceBands.findIndex(b => price <= b.max);
+
+            // Empilement par tranche : pour chaque produit, on cherche la première
+            // &quot;ligne&quot; de sa tranche dont le dernier produit placé se termine avant
+            // son propre début (pas de chevauchement temporel).
+            const withBandRow = (() => {
+                const bandRows = priceBands.map(() => []);
                 return currentData.map(product => {
-                    let lane = 0;
-                    while (
-                        lanes[lane] &amp;&amp; lanes[lane].some(o =>
-                            product.startMonth <= o.endMonth &amp;&amp; product.endMonth >= o.startMonth &amp;&amp;
-                            Math.abs(product.basePrice - o.basePrice) < 220
-                        )
-                    ) {
-                        lane++;
-                    }
-                    if (!lanes[lane]) lanes[lane] = [];
-                    lanes[lane].push(product);
-                    return { ...product, _lane: lane };
+                    const bandIdx = bandIndexFor(product.basePrice);
+                    const rows = bandRows[bandIdx];
+                    let rowIdx = rows.findIndex(lastEnd => lastEnd < product.startMonth);
+                    if (rowIdx === -1) { rowIdx = rows.length; rows.push(product.endMonth); }
+                    else { rows[rowIdx] = product.endMonth; }
+                    return { ...product, _bandIdx: bandIdx, _rowIdx: rowIdx };
                 });
             })();
+
+            const bandRowCounts = priceBands.map((_, bandIdx) =>
+                Math.max(1, withBandRow.filter(p => p._bandIdx === bandIdx).reduce((max, p) => Math.max(max, p._rowIdx + 1), 0))
+            );
+            const bandHeights = bandRowCounts.map(rows => rows * ROW_HEIGHT_PX + 2 * BAND_PADDING_PX);
+            // Décalage (en px) du bas de chaque tranche par rapport au bas du graphique
+            // (la tranche d'index 0 est la tranche de prix la plus basse, en bas du graphique).
+            const bandBottomOffsets = bandHeights.map((_, idx) => bandHeights.slice(0, idx).reduce((a, b) => a + b, 0));
+            const PLOT_HEIGHT_PX = bandHeights.reduce((a, b) => a + b, 0);
+
+            const positionedData = withBandRow.map(product => ({
+                ...product,
+                _bottomPx: bandBottomOffsets[product._bandIdx] + BAND_PADDING_PX + product._rowIdx * ROW_HEIGHT_PX + (ROW_HEIGHT_PX - BAR_HEIGHT_PX) / 2,
+            }));
 
             return (
                 <div className=&quot;min-h-screen&quot;>
@@ -1310,12 +1919,12 @@
                             </div>
 
                             {/* GRAPHIQUE */}
-                            <div className=&quot;relative w-full h-[600px] mt-8 bg-gray-50 rounded-xl border border-gray-100&quot;>
-                                {/* Axe Y */}
-                                <div className=&quot;absolute left-0 top-0 bottom-8 w-16 border-r border-gray-200 flex flex-col justify-between text-xs text-gray-400 font-medium&quot;>
-                                    {priceSteps.slice().reverse().map((price, i) => (
-                                        <div key={i} className=&quot;relative h-0 flex items-center justify-end pr-2&quot;>
-                                            <span className=&quot;absolute -translate-y-1/2&quot;>{price}€</span>
+                            <div className=&quot;relative w-full mt-8 bg-gray-50 rounded-xl border border-gray-100&quot; style={{ height: `${PLOT_HEIGHT_PX + 32}px` }}>
+                                {/* Axe Y : tranches de prix */}
+                                <div className=&quot;absolute left-0 top-0 bottom-8 w-16 border-r border-gray-200 flex flex-col-reverse text-xs text-gray-400 font-medium&quot;>
+                                    {priceBands.map((band, i) => (
+                                        <div key={i} className=&quot;flex items-center justify-end text-right pr-2 border-t border-gray-100 first:border-t-0&quot; style={{ height: `${bandHeights[i]}px` }}>
+                                            <span>{band.label}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1333,28 +1942,26 @@
                                         ))}
                                     </div>
 
-                                    {/* Lignes horizontales prix */}
-                                    {priceSteps.map((price, i) => (
+                                    {/* Lignes horizontales entre tranches de prix */}
+                                    {priceBands.slice(0, -1).map((_, i) => (
                                         <div
                                             key={i}
                                             className=&quot;absolute left-0 right-0 border-b border-dashed border-gray-200 opacity-50&quot;
-                                            style={{ bottom: `${((price - minPrice) / priceSpan) * 100}%` }}
+                                            style={{ bottom: `${bandBottomOffsets[i + 1]}px` }}
                                         />
                                     ))}
 
                                     {/* Produits */}
                                     {positionedData.length > 0 ? positionedData.map(product => {
-                                        const bottomPercent = ((product.basePrice - minPrice) / priceSpan) * 100;
                                         const leftPercent   = (product.startMonth / 12) * 100;
                                         const widthPercent  = ((product.endMonth - product.startMonth + 1) / 12) * 100;
-                                        const laneOffset    = product._lane * 38;
                                         return (
                                             <div
                                                 key={product.id}
                                                 onClick={() => setSelectedProduct(product)}
                                                 className={`absolute h-8 rounded-full shadow-md cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:z-50 flex items-center px-4 overflow-hidden z-10 ${product.colorClass} text-white border border-white/10`}
                                                 style={{
-                                                    bottom: `calc(${bottomPercent}% - 16px + ${laneOffset}px)`,
+                                                    bottom: `${product._bottomPx - 16}px`,
                                                     left:   `${leftPercent}%`,
                                                     width:  `${widthPercent}%`,
                                                 }}
