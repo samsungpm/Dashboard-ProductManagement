@@ -251,7 +251,7 @@
     <script src=&quot;https://unpkg.com/react-dom@18/umd/react-dom.production.min.js&quot; crossorigin></script>
     
     <!-- Babel pour compiler le JSX dans le navigateur -->
-    <script src=&quot;https://unpkg.com/@babel/standalone/babel.min.js&quot;></script>
+    <script src=&quot;https://unpkg.com/@babel/standalone@7.24.4/babel.min.js&quot;></script>
 
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -1737,7 +1737,10 @@
             const BAND_PADDING_PX = 12;
             const BAR_HEIGHT_PX   = 32;
 
-            const bandIndexFor = (price) => priceBands.findIndex(b => price <= b.max);
+            const bandIndexFor = (price) => {
+                const idx = priceBands.findIndex(b => price <= b.max);
+                return idx === -1 ? priceBands.length - 1 : idx;
+            };
 
             // Empilement par tranche : pour chaque produit, on cherche la première
             // &quot;ligne&quot; de sa tranche dont le dernier produit placé se termine avant
@@ -4679,7 +4682,7 @@ Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13`;
     <script src=&quot;https://unpkg.com/recharts@2.10.3/umd/Recharts.js&quot;></script>
     
     <!-- Babel pour interpréter le JSX -->
-    <script src=&quot;https://unpkg.com/@babel/standalone/babel.min.js&quot;></script>
+    <script src=&quot;https://unpkg.com/@babel/standalone@7.24.4/babel.min.js&quot;></script>
     
     <!-- Tailwind CSS -->
     <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
