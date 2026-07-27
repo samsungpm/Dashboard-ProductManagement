@@ -1,0 +1,21 @@
+# Fichiers temporaires Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Fichiers de verrouillage Office (créés quand quelqu'un ouvre un .xlsx du dossier partagé)
+~$*
+*.tmp
+
+# Réglages Claude Code propres à chaque poste (chemins locaux, autorisations)
+.claude/settings.local.json
+
+# Documentation interne de l'équipe (conservée uniquement sur le dossier partagé)
+README.md
+CLAUDE.md
+
+# Exports de données temporaires (à intégrer dans index.html, pas à versionner)
+smt-data*.json
+galaxy-book-data*.json
+ecodesign-data*.json
