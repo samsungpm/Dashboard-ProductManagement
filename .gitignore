@@ -4,18 +4,19 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Fichiers de verrouillage Office (créés quand quelqu'un ouvre un .xlsx du dossier partagé)
+# Fichiers de verrouillage Office (crÃ©Ã©s quand quelqu'un ouvre un .xlsx du dossier partagÃ©)
 ~$*
 *.tmp
 
-# Réglages Claude Code propres à chaque poste (chemins locaux, autorisations)
+# RÃ©glages Claude Code propres Ã  chaque poste (chemins locaux, autorisations)
 .claude/settings.local.json
 
-# Documentation interne de l'équipe (conservée uniquement sur le dossier partagé)
+# Documentation interne de l'Ã©quipe (conservÃ©e uniquement sur le dossier partagÃ©)
 README.md
 CLAUDE.md
 
-# Exports de données temporaires (à intégrer dans index.html, pas à versionner)
+# Exports de donnÃ©es temporaires (Ã  intÃ©grer dans index.html, pas Ã  versionner)
 smt-data*.json
 galaxy-book-data*.json
 ecodesign-data*.json
+roadmap-gp-data*.json
