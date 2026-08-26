@@ -196,7 +196,6 @@
         <div class="sub-items">
           <div class="sub-item" onclick="navigate('roadmap','smartphones',this)"><span class="sub-dot"></span>Smartphones</div>
           <div class="sub-item" onclick="navigate('roadmap','tablets',this)"><span class="sub-dot"></span>Tablettes</div>
-          <div class="sub-item" onclick="navigate('roadmap','laptops',this)"><span class="sub-dot"></span>PC Portable</div>
           <div class="sub-item" onclick="navigate('roadmap','wearables',this)"><span class="sub-dot"></span>Objets Connectés</div>
         </div>
       </div>
@@ -301,12 +300,11 @@
         const categories = [
             { id: 'smartphones', name: 'Smartphones',       icon: Smartphone },
             { id: 'tablets',     name: 'Tablettes',         icon: Tablet },
-            { id: 'laptops',     name: 'PC Portable',       icon: Laptop },
             { id: 'wearables',   name: 'Objets Connectés',  icon: Watch },
         ];
         const years = [2026, 2027];
 
-        const mockData = {
+                const mockData = {
     &quot;smartphones&quot;:  {
                         &quot;2026&quot;:  [
                                      {
@@ -352,8 +350,7 @@
                                                               &quot;rrp&quot;:  1969
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-800&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/209521981/samsung-galaxy-s26-ultra.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-800&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s26plus&quot;,
@@ -393,8 +390,7 @@
                                                               &quot;rrp&quot;:  1299
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-600&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/209522122/samsung-galaxy-s26-plus.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-600&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s26&quot;,
@@ -434,8 +430,7 @@
                                                               &quot;rrp&quot;:  959
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/209521888/samsung-galaxy-s26.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a57&quot;,
@@ -475,8 +470,7 @@
                                                               &quot;rrp&quot;:  599
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-500&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/209770533/samsung-galaxy-a57.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-500&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a37&quot;,
@@ -516,85 +510,7 @@
                                                               &quot;rrp&quot;:  499
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-400&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/209770158/samsung-galaxy-a37.html&quot;
-                                     },
-                                     {
-                                         &quot;id&quot;:  &quot;zfold7&quot;,
-                                         &quot;name&quot;:  &quot;Galaxy Z Fold7&quot;,
-                                         &quot;startMonth&quot;:  0,
-                                         &quot;endMonth&quot;:  6,
-                                         &quot;basePrice&quot;:  1999,
-                                         &quot;range&quot;:  &quot;Z&quot;,
-                                         &quot;colors&quot;:  [
-                                                        {
-                                                            &quot;name&quot;:  &quot;Noir Absolu&quot;,
-                                                            &quot;hex&quot;:  &quot;#4A4A4D&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Bleu Nuit&quot;,
-                                                            &quot;hex&quot;:  &quot;#3B5B8A&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Gris&quot;,
-                                                            &quot;hex&quot;:  &quot;#B0B7B9&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Vert d'Eau&quot;,
-                                                            &quot;hex&quot;:  &quot;#C8DDDD&quot;
-                                                        }
-                                                    ],
-                                         &quot;screen&quot;:  &quot;Interne : 7,6\&quot; Dynamic AMOLED 2X 120Hz | Externe : 6,3\&quot; Dynamic AMOLED 2X 120Hz&quot;,
-                                         &quot;variants&quot;:  [
-                                                          {
-                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
-                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
-                                                              &quot;rrp&quot;:  1999
-                                                          },
-                                                          {
-                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
-                                                              &quot;rom&quot;:  &quot;512 Go&quot;,
-                                                              &quot;rrp&quot;:  2099
-                                                          }
-                                                      ],
-                                         &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;,
-                                         &quot;idealoUrl&quot;:  null
-                                     },
-                                     {
-                                         &quot;id&quot;:  &quot;zflip7&quot;,
-                                         &quot;name&quot;:  &quot;Galaxy Z Flip7&quot;,
-                                         &quot;startMonth&quot;:  0,
-                                         &quot;endMonth&quot;:  6,
-                                         &quot;basePrice&quot;:  999,
-                                         &quot;range&quot;:  &quot;Z&quot;,
-                                         &quot;colors&quot;:  [
-                                                        {
-                                                            &quot;name&quot;:  &quot;Noir Absolu&quot;,
-                                                            &quot;hex&quot;:  &quot;#4A4A4D&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Bleu Nuit&quot;,
-                                                            &quot;hex&quot;:  &quot;#3B5B8A&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Corail&quot;,
-                                                            &quot;hex&quot;:  &quot;#EE6779&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Vert d'Eau&quot;,
-                                                            &quot;hex&quot;:  &quot;#C8DDDD&quot;
-                                                        }
-                                                    ],
-                                         &quot;screen&quot;:  &quot;Interne : 6,9\&quot; Dynamic AMOLED 2X 120Hz | Externe : 4,1\&quot; Super AMOLED 60/120Hz&quot;,
-                                         &quot;variants&quot;:  [
-                                                          {
-                                                              &quot;ram&quot;:  &quot;8 Go&quot;,
-                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
-                                                              &quot;rrp&quot;:  999
-                                                          }
-                                                      ],
-                                         &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/206912770/samsung-galaxy-z-flip7.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-400&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a27&quot;,
@@ -630,41 +546,7 @@
                                                               &quot;rrp&quot;:  399
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;,
-                                         &quot;idealoUrl&quot;:  null
-                                     },
-                                     {
-                                         &quot;id&quot;:  &quot;zflip7fe&quot;,
-                                         &quot;name&quot;:  &quot;Galaxy Z Flip7 FE&quot;,
-                                         &quot;startMonth&quot;:  0,
-                                         &quot;endMonth&quot;:  6,
-                                         &quot;basePrice&quot;:  799,
-                                         &quot;range&quot;:  &quot;Z&quot;,
-                                         &quot;colors&quot;:  [
-                                                        {
-                                                            &quot;name&quot;:  &quot;Noir&quot;,
-                                                            &quot;hex&quot;:  &quot;#212721&quot;
-                                                        },
-                                                        {
-                                                            &quot;name&quot;:  &quot;Blanc&quot;,
-                                                            &quot;hex&quot;:  &quot;#F5F7F6&quot;
-                                                        }
-                                                    ],
-                                         &quot;screen&quot;:  &quot;Interne : 6,7\&quot; Dynamic AMOLED 2X 120Hz | Externe : 3,4\&quot; Super AMOLED 60Hz&quot;,
-                                         &quot;variants&quot;:  [
-                                                          {
-                                                              &quot;ram&quot;:  &quot;8 Go&quot;,
-                                                              &quot;rom&quot;:  &quot;128 Go&quot;,
-                                                              &quot;rrp&quot;:  799
-                                                          },
-                                                          {
-                                                              &quot;ram&quot;:  &quot;8 Go&quot;,
-                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
-                                                              &quot;rrp&quot;:  899
-                                                          }
-                                                      ],
-                                         &quot;colorClass&quot;:  &quot;bg-zinc-500&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/206912771/samsung-galaxy-z-flip7-fe.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s25&quot;,
@@ -699,8 +581,7 @@
                                                               &quot;rrp&quot;:  799
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/205569450/samsung-galaxy-s25.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s25fe&quot;,
@@ -735,8 +616,7 @@
                                                               &quot;rrp&quot;:  749
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-400&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/207654118/samsung-galaxy-s25-fe.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-400&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s25edge&quot;,
@@ -772,8 +652,7 @@
                                                               &quot;rrp&quot;:  1449
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-700&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/206351120/samsung-galaxy-s25-edge.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-slate-700&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a26&quot;,
@@ -804,8 +683,7 @@
                                                               &quot;rrp&quot;:  319
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/206013932/samsung-galaxy-a26.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a17-5g&quot;,
@@ -836,8 +714,7 @@
                                                               &quot;rrp&quot;:  229
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-200&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/207227647/samsung-galaxy-a17-5g.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-200&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a17-4g&quot;,
@@ -868,8 +745,7 @@
                                                               &quot;rrp&quot;:  199
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-200&quot;,
-                                         &quot;idealoUrl&quot;:  &quot;https://www.idealo.fr/prix/207663975/samsung-galaxy-a17-4g.html&quot;
+                                         &quot;colorClass&quot;:  &quot;bg-blue-200&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;xcover7pro&quot;,
@@ -897,8 +773,7 @@
                                                               &quot;rrp&quot;:  679
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;xcover7&quot;,
@@ -921,8 +796,125 @@
                                                               &quot;rrp&quot;:  359
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;
+                                     },
+                                     {
+                                         &quot;id&quot;:  &quot;zfold8-ultra&quot;,
+                                         &quot;name&quot;:  &quot;Galaxy Z Fold8 Ultra&quot;,
+                                         &quot;startMonth&quot;:  7,
+                                         &quot;endMonth&quot;:  11,
+                                         &quot;basePrice&quot;:  2199,
+                                         &quot;range&quot;:  &quot;Z&quot;,
+                                         &quot;colors&quot;:  [
+                                                        {
+                                                            &quot;name&quot;:  &quot;Techno Violet&quot;,
+                                                            &quot;hex&quot;:  &quot;#564C5C&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Graphite&quot;,
+                                                            &quot;hex&quot;:  &quot;#5F6367&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Blanc&quot;,
+                                                            &quot;hex&quot;:  &quot;#F1F1EE&quot;
+                                                        }
+                                                    ],
+                                         &quot;screen&quot;:  &quot;Ecran Interne\n8,0” QXGA+ ; 2504 x 2256p ;\n422ppp\n120Hz adaptatif\nExterne\n6.5” FHD+ ; 2520 x 1080p ;\n422ppp\n120Hz adaptatif&quot;,
+                                         &quot;variants&quot;:  [
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
+                                                              &quot;rrp&quot;:  2199
+                                                          },
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;512 Go&quot;,
+                                                              &quot;rrp&quot;:  2399
+                                                          },
+                                                          {
+                                                              &quot;ram&quot;:  &quot;16 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;1 To&quot;,
+                                                              &quot;rrp&quot;:  2799
+                                                          }
+                                                      ],
+                                         &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;
+                                     },
+                                     {
+                                         &quot;id&quot;:  &quot;zfold8&quot;,
+                                         &quot;name&quot;:  &quot;Galaxy Z Fold8&quot;,
+                                         &quot;startMonth&quot;:  7,
+                                         &quot;endMonth&quot;:  11,
+                                         &quot;basePrice&quot;:  1999,
+                                         &quot;range&quot;:  &quot;Z&quot;,
+                                         &quot;colors&quot;:  [
+                                                        {
+                                                            &quot;name&quot;:  &quot;Lavande&quot;,
+                                                            &quot;hex&quot;:  &quot;#BCB7CA&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Graphite&quot;,
+                                                            &quot;hex&quot;:  &quot;#5F6367&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Blanc&quot;,
+                                                            &quot;hex&quot;:  &quot;#F1F1EE&quot;
+                                                        }
+                                                    ],
+                                         &quot;screen&quot;:  &quot;Ecran Interne\n7,6” QXGA+ ; 1848 x 2448p ;\n403ppp\n120Hz adaptatif\nExterne\n5.5” FHD+ ; 1248 x 1972p ; 428ppp\n120Hz adaptatif&quot;,
+                                         &quot;variants&quot;:  [
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
+                                                              &quot;rrp&quot;:  1999
+                                                          },
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;512 Go&quot;,
+                                                              &quot;rrp&quot;:  2199
+                                                          },
+                                                          {
+                                                              &quot;ram&quot;:  &quot;16 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;1 To&quot;,
+                                                              &quot;rrp&quot;:  2599
+                                                          }
+                                                      ],
+                                         &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;
+                                     },
+                                     {
+                                         &quot;id&quot;:  &quot;zflip8&quot;,
+                                         &quot;name&quot;:  &quot;Galaxy Z Flip8&quot;,
+                                         &quot;startMonth&quot;:  7,
+                                         &quot;endMonth&quot;:  11,
+                                         &quot;basePrice&quot;:  1299,
+                                         &quot;range&quot;:  &quot;Z&quot;,
+                                         &quot;colors&quot;:  [
+                                                        {
+                                                            &quot;name&quot;:  &quot;Rose&quot;,
+                                                            &quot;hex&quot;:  &quot;#EFC2E1&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Graphite&quot;,
+                                                            &quot;hex&quot;:  &quot;#5F6367&quot;
+                                                        },
+                                                        {
+                                                            &quot;name&quot;:  &quot;Blanc&quot;,
+                                                            &quot;hex&quot;:  &quot;#F1F1EE&quot;
+                                                        }
+                                                    ],
+                                         &quot;screen&quot;:  &quot;Ecran Interne\n6.9” FHD+ ; 2520 x 1080p ; 400ppp\n120Hz adaptatif\nDynamic AMOLED 2x\nExterne\n4,1” HD+ ; 1048 x 948p ; 342 ppp\n60/120Hz ; Super AMOLED&quot;,
+                                         &quot;variants&quot;:  [
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;256 Go&quot;,
+                                                              &quot;rrp&quot;:  1299
+                                                          },
+                                                          {
+                                                              &quot;ram&quot;:  &quot;12 Go&quot;,
+                                                              &quot;rom&quot;:  &quot;512 Go&quot;,
+                                                              &quot;rrp&quot;:  1499
+                                                          }
+                                                      ],
+                                         &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;
                                      }
                                  ],
                         &quot;2027&quot;:  [
@@ -969,8 +961,7 @@
                                                               &quot;rrp&quot;:  1969
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-800&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-slate-800&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s26plus-cont&quot;,
@@ -1006,8 +997,7 @@
                                                               &quot;rrp&quot;:  1299
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-600&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-slate-600&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;s26-cont&quot;,
@@ -1043,8 +1033,7 @@
                                                               &quot;rrp&quot;:  959
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-slate-500&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a57-cont&quot;,
@@ -1080,8 +1069,7 @@
                                                               &quot;rrp&quot;:  599
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-500&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-blue-500&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a37-cont&quot;,
@@ -1117,8 +1105,7 @@
                                                               &quot;rrp&quot;:  449
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-400&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-blue-400&quot;
                                      },
                                      {
                                          &quot;id&quot;:  &quot;a27-cont&quot;,
@@ -1154,8 +1141,7 @@
                                                               &quot;rrp&quot;:  399
                                                           }
                                                       ],
-                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;,
-                                         &quot;idealoUrl&quot;:  null
+                                         &quot;colorClass&quot;:  &quot;bg-blue-300&quot;
                                      }
                                  ]
                     },
@@ -1202,8 +1188,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-zinc-800&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabactive5&quot;,
@@ -1246,8 +1231,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-zinc-600&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;taba11+&quot;,
@@ -1304,8 +1288,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-blue-400&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-blue-400&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;taba11&quot;,
@@ -1362,8 +1345,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;4G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-blue-200&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-blue-200&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs10fe+&quot;,
@@ -1424,8 +1406,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-500&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-500&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs10fe&quot;,
@@ -1486,8 +1467,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-400&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-400&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs11ultra&quot;,
@@ -1559,8 +1539,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-800&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-800&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs11&quot;,
@@ -1632,8 +1611,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-500&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-500&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs10lite&quot;,
@@ -1694,8 +1672,7 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-400&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-400&quot;
                                  },
                                  {
                                      &quot;id&quot;:  &quot;tabs10+&quot;,
@@ -1752,17 +1729,8 @@
                                                               }
                                                           ],
                                      &quot;cellularLabel&quot;:  &quot;5G&quot;,
-                                     &quot;colorClass&quot;:  &quot;bg-slate-700&quot;,
-                                     &quot;idealoUrl&quot;:  null
+                                     &quot;colorClass&quot;:  &quot;bg-slate-700&quot;
                                  }
-                             ],
-                    &quot;2027&quot;:  [
-
-                             ]
-                },
-    &quot;laptops&quot;:  {
-                    &quot;2026&quot;:  [
-
                              ],
                     &quot;2027&quot;:  [
 
@@ -1994,7 +1962,7 @@
                                 <div className=&quot;bg-gray-50 p-4 rounded-xl text-sm border border-gray-200&quot;>{product.screen}</div>
                             </div>
 
-                            {/* Vue NORMALE : tableau variantes + colonne Idealo */}
+                            {/* Vue NORMALE : tableau variantes */}
                             {!betaUnlocked &amp;&amp; (
                                 <div>
                                     <h4 className=&quot;text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2&quot;>Variantes et Prix</h4>
@@ -2015,7 +1983,6 @@
                                                     <th className=&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;>RAM</th>
                                                     <th className=&quot;px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider&quot;>Stockage</th>
                                                     <th className=&quot;px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider&quot;>RRP</th>
-                                                    <th className=&quot;px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider&quot;>Page Idealo</th>
                                                 </tr>
                                             </thead>
                                             <tbody className=&quot;bg-white divide-y divide-gray-200&quot;>
@@ -2024,20 +1991,6 @@
                                                         <td className=&quot;px-4 py-4 text-sm font-medium&quot;>{variant.ram}</td>
                                                         <td className=&quot;px-4 py-4 text-sm text-gray-600&quot;>{variant.rom}</td>
                                                         <td className=&quot;px-4 py-4 text-sm text-right font-bold text-blue-600&quot;>{variant.rrp} €</td>
-                                                        {i === 0 &amp;&amp; (
-                                                            <td className=&quot;px-4 py-4 text-center align-middle&quot; rowSpan={group.list.length}>
-                                                                {product.idealoUrl ? (
-                                                                    <a
-                                                                        href={product.idealoUrl}
-                                                                        target=&quot;_blank&quot;
-                                                                        rel=&quot;noopener noreferrer&quot;
-                                                                        className=&quot;inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 hover:bg-orange-600 text-white text-xs font-semibold rounded-lg transition-colors&quot;
-                                                                    >Voir sur Idealo</a>
-                                                                ) : (
-                                                                    <span className=&quot;text-xs text-gray-400 italic&quot;>Lien a venir</span>
-                                                                )}
-                                                            </td>
-                                                        )}
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -2219,7 +2172,7 @@
                     name: 'Nouveau produit',
                     startMonth: 0, endMonth: 11, basePrice: 0, range: 'A',
                     colors: [], screen: '', variants: [{ ram: '', rom: '', rrp: 0 }],
-                    colorClass: 'bg-slate-500', idealoUrl: null
+                    colorClass: 'bg-slate-500'
                 };
                 updateProducts([...products, newProduct]);
             };
@@ -2292,11 +2245,6 @@
                             <div>
                                 <label className={labelCls}>Description ecran</label>
                                 <textarea className={`${inputCls} resize-none`} rows=&quot;2&quot; value={product.screen || ''} onChange={e => updateField(pIdx, 'screen', e.target.value)} />
-                            </div>
-
-                            <div>
-                                <label className={labelCls}>Lien Idealo</label>
-                                <input className={inputCls} value={product.idealoUrl || ''} onChange={e => updateField(pIdx, 'idealoUrl', e.target.value || null)} placeholder=&quot;https://www.idealo.fr/...&quot; />
                             </div>
 
                             {/* Couleurs */}
