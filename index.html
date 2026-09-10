@@ -232,6 +232,22 @@
         </div>
       </div>
 
+      <!-- 5. Documents Techniques et Certifications -->
+      <div class="nav-group" id="group-docs">
+        <div class="nav-item" onclick="toggleGroup('docs', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/>
+            <path d="m9 15 2 2 4-4"/>
+          </svg>
+          <span class="nav-label">Documents Techniques</span>
+          <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </div>
+        <div class="sub-items">
+          <div class="sub-item" onclick="navigate('docs','list',this)"><span class="sub-dot"></span>Certifications</div>
+        </div>
+      </div>
+
     </div>
 
   </nav>
@@ -2838,7 +2854,8 @@ window.addEventListener('message', function(e){ if(e.data &amp;&amp; e.data.sams
             'galaxya27': { name: 'Galaxy A27 5G', category: 'Smartphones - Gamme A', price: '369 €', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-07/Galaxy%20A27%205G%20Black%20-%20Front2.png?itok=gyoue4m2', ee: true, os: true, screen: '6,7&quot;', proc: ' Snapdragon 6 Gen 3', storage: '128 Go', battery: '5 000 mAh', photo: '50+12+5 MP', conn: 'Wi-Fi 6, BT 5.3', sim: 'Double SIM', security: 'Knox + Empreinte', weight: '200g', plus: 'RAM Plus', code: 'SM-A276B', fiche: 'https://www.samsungonepartner.com/media/11079/download?attachment&amp;node=1478' },
             'zfold8-ultra': { name: 'Galaxy Z Fold8 Ultra', category: 'Smartphones - Gamme Z', price: '2 199 €', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-07/Galaxy%20Z%20Fold8%20Ultra%20Graphite%20-%20Back%20unfolded.png?itok=uxD0xNEg', ee: true, os: true, screen: '8&quot; / 6.5&quot;', proc: 'Snapdragon 8 Elite Gen5', storage: '256 / 512 / 1 Tc', battery: '5 000 mAh', photo: '200 + 50 + 10 MP', conn: 'Wi-Fi 7, BT 6.0', sim: 'Double SIM (eSIM)', security: 'Knox + Biométrie', weight: '215g', plus: 'Samsung DeX', code: 'SM-F976B', fiche: 'https://www.samsungonepartner.com/media/11135/download?attachment&amp;node=1488' },
             'zfold8': { name: 'Galaxy Z Fold8', category: 'Smartphones - Gamme Z', price: '1 999€', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-07/Galaxy%20Z%20Fold8%20Graphite%20-%20Back%20unfolded.png?itok=eYMDNIS5', ee: true, os: true, screen: '7,6&quot; / 5,5&quot;', proc: 'Snapdragon 8 Elite Gen5', storage: '256 / 512 / 1 Tc', battery: '4 800 mAh', photo: '50 + 50 MP', conn: 'Wi-Fi 7, BT 6.0', sim: 'Double SIM (eSIM)', security: 'Knox + Biométrie', weight: '201g', plus: 'Samsung DeX', code: 'SM-F971B', fiche: 'https://www.samsungonepartner.com/media/11136/download?attachment&amp;node=1487' },
-            'zflip8': { name: 'Galaxy Z Flip8', category: 'Smartphones - Gamme Z', price: '1 299€', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-07/Galaxy%20Z%20Flip8%20Graphite%20-%20Front%20Side%20Flex%20Mode%20%20%20Back.png?itok=i34hCxMM', ee: false, os: true, screen: '6.9&quot; / 4.1&quot;', proc: 'Exynos 2600', storage: '256 / 512 Go ', battery: '4 300 mAh', photo: '50 + 12 MP', conn: 'Wi-Fi 7, BT 5.4', sim: 'Double SIM (eSIM)', security: 'Knox + Biométrie', weight: '180g', plus: 'Samsung DeX', code: 'SM-F776B', fiche: 'https://www.samsungonepartner.com/media/11133/download?attachment&amp;node=1489' }
+            'zflip8': { name: 'Galaxy Z Flip8', category: 'Smartphones - Gamme Z', price: '1 299€', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-07/Galaxy%20Z%20Flip8%20Graphite%20-%20Front%20Side%20Flex%20Mode%20%20%20Back.png?itok=i34hCxMM', ee: false, os: true, screen: '6.9&quot; / 4.1&quot;', proc: 'Exynos 2600', storage: '256 / 512 Go ', battery: '4 300 mAh', photo: '50 + 12 MP', conn: 'Wi-Fi 7, BT 5.4', sim: 'Double SIM (eSIM)', security: 'Knox + Biométrie', weight: '180g', plus: 'Samsung DeX', code: 'SM-F776B', fiche: 'https://www.samsungonepartner.com/media/11133/download?attachment&amp;node=1489' },
+            'S26fe': { name: 'Galaxy S26 FE', category: 'Smartphones - Gamme S', price: '799€', img: 'https://cdn.samsungonepartner.com/s3fs-public/styles/toolkit_teaser/public/2026-09/Galaxy%20S26%20FE%20Vert%20d%27eau%20-%20Front2.png?itok=3FZd5Fnx', ee: true, os: true, screen: '6.7&quot;', proc: 'Exynos 2500', storage: '128/256 Go', battery: '4900 mAh', photo: '50+12+8 MP', conn: 'Wi-Fi 6e BT 5.4', sim: 'Double SIM (eSIM)', security: 'Knox + Biométrie', weight: '193g', plus: 'Dex sans fil uniquement', code: 'SM-S741B', fiche: 'https://www.samsungonepartner.com/media/11376/download?attachment&amp;node=1497' }
         };
 
         const comparisonRows = [
@@ -2945,7 +2962,8 @@ Tablette,2024-01-01,Gamme Durcie,Galaxy Tab Active5,8 ans,Q1 2032
 Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,5 ans,Q4 2025
 Smartphone,2026-07-01,Gamme A,Galaxy A27 5G,6 ans,Q3 2032
 Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8 Ultra,7 ans,Q3 2033
-Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 ans,Q3 2033`;
+Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 ans,Q3 2033
+Smartphone,2026-09-04,Gamme S,Galaxy S26 FE,7 ans,Q2 2033`;
 
         const rawOSData = `Catégories,Lancement,Gamme,Modèle,Montées OS,Android Final
 Smartphone,2026-03-01,Gamme S,Galaxy S26 Ultra,7 montées d'OS,Android 23
@@ -3034,7 +3052,8 @@ Tablette,2024-01-01,Gamme Durcie,Galaxy Tab Active5,8 montées d'OS,Android 22
 Tablette,2020-10-01,Gamme Durcie,Galaxy Tab Active3,3 montées d'OS,Android 13
 Smartphone,2026-07-01,Gamme A,Galaxy A27 5G,6 montées d'OS,Android 22
 Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8 Ultra,7 montées d'OS,Android 23
-Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 montées d'OS,Android 23`;
+Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 montées d'OS,Android 23
+Smartphone,2026-09-04,Gamme S,Galaxy S26 FE,7 montées d'OS,Android 24`;
 
         const roadmapProducts = [
             { cat: 'Gamme S/Z', type: 'phone', name: 'Galaxy S26 Ultra', memory: '12/256Go', price: '1469€', start: '2026-03-01', end: '2028-03-30', notes: 'Disponible en 512Go (1669 €)' },
@@ -3062,7 +3081,8 @@ Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 montées d'OS,Android 23`;
             { cat: 'Durcie', type: 'tablet', name: 'Galaxy Tab Active5', memory: '6/128Go', price: '479 €', start: '2024-01-01', end: '2026-12-31', notes: '' },
             { cat: 'Gamme A', type: 'phone', name: 'Galaxy A27 5G', memory: '6/128Go', price: '369 €', start: '2026-07-03', end: '2027-06-30', notes: '' },
             { cat: 'Gamme S/Z', type: 'phone', name: 'Galaxy Z Fold8 Ultra', memory: '12/256Go', price: '2199 €', start: '2026-07-22', end: '2028-06-30', notes: 'EE mode projet' },
-            { cat: 'Gamme S/Z', type: 'phone', name: 'Galaxy Z Fold8', memory: '12/256Go', price: '1999 €', start: '2026-07-22', end: '2028-06-30', notes: 'EE mode projet' }
+            { cat: 'Gamme S/Z', type: 'phone', name: 'Galaxy Z Fold8', memory: '12/256Go', price: '1999 €', start: '2026-07-22', end: '2028-06-30', notes: 'EE mode projet' },
+            { cat: 'Gamme S/Z', type: 'phone', name: 'Galaxy S26 FE', memory: '6/128Go', price: '799€', start: '2026-09-04', end: '2028-09-04', notes: '' }
         ];
 
 
@@ -6423,6 +6443,736 @@ Smartphone,2026-07-22,Gamme Z,Galaxy Z Fold8,7 montées d'OS,Android 23`;
     </script>
 </body>
 </html>"></iframe>
+    <iframe id="frame-docs" class="section-frame" srcdoc="<!DOCTYPE html>
+<html lang=&quot;fr&quot;>
+<head>
+<meta charset=&quot;UTF-8&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<title>Documents Techniques et Certifications</title>
+
+<script src=&quot;https://unpkg.com/react@18/umd/react.production.min.js&quot; crossorigin></script>
+<script src=&quot;https://unpkg.com/react-dom@18/umd/react-dom.production.min.js&quot; crossorigin></script>
+<script src=&quot;https://unpkg.com/@babel/standalone@7.24.4/babel.min.js&quot;></script>
+<script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+
+<style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background:#f0f4f8; }
+    .sticky-col { position: sticky; left: 0; background: white; z-index: 20; box-shadow: 4px 0 8px rgba(0,0,0,0.04); }
+    .sticky-head { position: sticky; top: 0; z-index: 30; }
+    .popover { position: absolute; z-index: 50; }
+</style>
+</head>
+<body>
+
+<div id=&quot;access-banner&quot; style=&quot;background:#FEF9E7;color:#000;text-align:center;padding:8px;font-weight:700;font-size:13px;&quot;>
+    A disposition uniquement par les employes Samsung. Clients, partenaires, veuillez contacter votre commercial attitre pour recuperer ces documents.
+</div>
+
+<div id=&quot;root&quot;></div>
+
+<script type=&quot;text/babel&quot; data-presets=&quot;react&quot;>
+const { useState, useMemo, useEffect } = React;
+
+const CATEGORIES = [
+    { id: 'conformite', label: 'Declaration de conformite', tooltip: &quot;Une declaration de conformite est un document officiel par lequel le fabricant ou le responsable d'un projet atteste qu'un produit ou des travaux respectent toutes les lois et normes en vigueur.&quot; },
+    { id: 'rohs', label: 'ROHS', tooltip: &quot;La directive ROHS relative a la limitation de l'utilisation de certaines substances dangereuses dans les equipements electriques et electroniques&quot; },
+    { id: 'reach', label: 'REACH', tooltip: &quot;La declaration REACH est une demarche par laquelle une entreprise certifie que ses produits respectent le reglement europeen sur la securite des substances chimiques.&quot; },
+    { id: 'msds', label: 'MSDS', group: 'batterie', tooltip: &quot;La fiche de donnees de securite pour les batteries au lithium qui aident les utilisateurs, les transporteurs a comprendre comment gerer la batterie en toute securite&quot; },
+    { id: 'un383', label: 'UN 38.3', group: 'batterie', tooltip: &quot;Les tests UN 38.3 garantissent que les batteries au lithium sont sures pour tout type de transports&quot; },
+    { id: 'ecomaterial', label: 'EcoMaterial', tooltip: &quot;Document regroupant tous les resultats lies aux materiaux recycles&quot; },
+    { id: 'emvco', label: 'EMVCo (NFC)', tooltip: &quot;Document technique qui donne les informations relatives a la specificite de notre composant NFC et sa position&quot; },
+];
+
+const GROUP_LABELS = { batterie: 'Batterie' };
+
+const NOTIFY_TOOLTIP = &quot;Lien URL qui recense toutes les MAJ recues par l'appareil a ce jour&quot;;
+
+/* Regroupe les colonnes consecutives partageant le meme &quot;group&quot; (pour l'entete a deux niveaux) */
+const HEADER_GROUPS = (() => {
+    const groups = [];
+    CATEGORIES.forEach(c => {
+        const last = groups[groups.length - 1];
+        if (c.group &amp;&amp; last &amp;&amp; last.key === c.group) {
+            last.cols.push(c);
+        } else {
+            groups.push({ key: c.group || null, cols: [c] });
+        }
+    });
+    return groups;
+})();
+
+/* Liste de base des appareils (fixe dans le code source). Les produits
+   ajoutes via l'editeur (mode edition) sont stockes a part, dans
+   docsCertifDevices, et fusionnes a l'affichage. */
+const BASE_DEVICES = [
+    { id: 'zfold8ultra', name: 'Galaxy Z Fold8 Ultra', code: 'SM-F976B' },
+    { id: 'zfold8', name: 'Galaxy Z Fold8', code: 'SM-F971B' },
+    { id: 'zflip8', name: 'Galaxy Z Flip8', code: 'SM-F776B' },
+    { id: 's26ultra', name: 'Galaxy S26 Ultra', code: 'SM-S948B' },
+    { id: 's26plus', name: 'Galaxy S26+', code: 'SM-S947B' },
+    { id: 's26', name: 'Galaxy S26', code: 'SM-S942B' },
+    { id: 's26fe', name: 'Galaxy S26 FE', code: 'SM-S741B' },
+    { id: 'a57', name: 'Galaxy A57', code: 'SM-A576B' },
+    { id: 'a37', name: 'Galaxy A37', code: 'SM-A376B' },
+    { id: 'a27', name: 'Galaxy A27', code: 'SM-A276B' },
+    { id: 'a18-4g', name: 'Galaxy A18 4G', code: 'SM-A185F' },
+];
+
+function withNotifyUrl(d) {
+    return { ...d, notifyUrl: `https://doc.samsungmobile.com/${d.code}/EUX/doc.html` };
+}
+
+/* Liens SharePoint integres en dur (transmis par l'equipe via Exporter (JSON)).
+   Les liens ajoutes/modifies ensuite via l'editeur restent dans le
+   localStorage du navigateur jusqu'a la prochaine integration. */
+const DEFAULT_LINKS = {
+  &quot;zfold8ultra&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/01.%20SM-F976B_Declaration%20of%20Conformity%20Z%20Fold8%20Ultra.pdf?d=wd3b43a2d6f134c99bfa2eaad192dea10&amp;csf=1&amp;web=1&amp;e=dP7ZhK&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/02.%20SM-F976B%20EU%20RoHS%20Declaration.pdf?d=wfe6393d250924e13a57834703d70f627&amp;csf=1&amp;web=1&amp;e=odifnK&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/03.%20SM-F976B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w7a27079bda684f8682fce9af489c5e59&amp;csf=1&amp;web=1&amp;e=31y4Q1&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/04.%20SM-F976B_MSDS_EB-BF976DAY_EB-BF976DAE_FR_ATL.pdf?d=w91efd4c7f28f4165a36215e3e3606678&amp;csf=1&amp;web=1&amp;e=NE7A8s&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/05a.%20SM-F976B_UN38.3_EB-BF976DAE_ATL_20260302.pdf?d=w21310ab973394a02ad047d95029bd593&amp;csf=1&amp;web=1&amp;e=KSTNl9&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/05b.%20SM-F976B_UN38.3_EB-BF976DAY_ATL_20260302.pdf?d=wc8bee1b97b0e4b469f1a015d8f3223f9&amp;csf=1&amp;web=1&amp;e=icOtJc&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/06.%20SM-F976B_Z%20Fold8%20Ultra_Ecodesign_Materials_20260716.xlsx?d=wb0293684a593457e99a41dc7a49b9aca&amp;csf=1&amp;web=1&amp;e=4q27Wo&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8%20Ultra/07.%20SM-F976B_MTA_LOA_SAEL_06202_15Apr26.pdf?d=wb65a556f456047b98a407c5049d4feab&amp;csf=1&amp;web=1&amp;e=2u4J4Y&quot;
+    ]
+  },
+  &quot;zfold8&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/01.%20SM-F971B_Declaration%20of%20Conformity%20Z%20Fold8.pdf?d=w085570b584fe422c9a1e4185eee28bb3&amp;csf=1&amp;web=1&amp;e=WAwEJt&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/02.%20SM-F971B%20EU%20RoHS%20Declaration.pdf?d=w9e7c22de9aca4f0d81ad2c5d642ed10c&amp;csf=1&amp;web=1&amp;e=YRfS6q&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/03.%20SM-F971B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w79668bac58b14d2f9d05fb0b1b498186&amp;csf=1&amp;web=1&amp;e=pZWcNa&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/04.%20SM-F971B_MSDS_EB-BF971DAY_EB-BF971DAE_FR_ATL.pdf?d=wd1dab09fdade4bfaa15aea9db98a9809&amp;csf=1&amp;web=1&amp;e=hQnmJu&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/05.%20SM-F971B_UN38.3_EB-BF971DAE_EB-BF971DAY_SDI.pdf?d=wd58694a8542e4b2e998fb560605f6f86&amp;csf=1&amp;web=1&amp;e=eMCT3Q&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/06.%20SM-F971B_Z%20Fold8_Ecodesign_Materials_20260715.xlsx?d=wa7e2754955c64baa9e3155396b08bfc7&amp;csf=1&amp;web=1&amp;e=Oh8MST&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Fold8/07.%20SM-F971B_MTA_LOA_SAEL_06176_13Apr26.pdf?d=wff5747ee19fe462f97b6c61f145af707&amp;csf=1&amp;web=1&amp;e=YW6jXk&quot;
+    ]
+  },
+  &quot;zflip8&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/01.%20SM-F776B_Declaration%20of%20Conformity%20Z%20Flip8.pdf?d=w7581b7c9bec64fc195cb8814a2212a85&amp;csf=1&amp;web=1&amp;e=WFGcSC&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/02.%20SM-F776B%20EU%20RoHS%20Declaration.pdf?d=w5eff79581ad14196be9213d5c07ea387&amp;csf=1&amp;web=1&amp;e=zDgcG0&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/03.%20SM-F776B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w1fa33d40397441cf983527061d9631a5&amp;csf=1&amp;web=1&amp;e=7r7OgB&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/04.%20SM-F776B_MSDS%20EB-BF776BAE%20EB-BF776BAY_FR_ATL.pdf?d=w1fd8a65ca30d426d9363b9fea9472ed9&amp;csf=1&amp;web=1&amp;e=atD7ay&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/05.%20SM-F776B_UN38.3_EB-BF776BAY_EB-BF776BAE_SDI.pdf?d=w664da008216e44ed88c1fd363871e643&amp;csf=1&amp;web=1&amp;e=mAJcb4&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/06.%20SM-F776B_Z%20Flip8_Ecodesign_Materials_20260715.xlsx?d=w5aa4f308a978437fb50d831cffbe112b&amp;csf=1&amp;web=1&amp;e=T8XPQZ&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20Z%20Flip8/07.%20SM-F776B_EMVCo_F776B_MTA_LOA_SAEL_06232_11May26.pdf?d=w7f1e76e4b2c249b09808c0d62d15a2a7&amp;csf=1&amp;web=1&amp;e=qM3iea&quot;
+    ]
+  },
+  &quot;s26ultra&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/01.%20SM-S948B_Declaration%20of%20Conformity%20S26%20Ultra.pdf?d=w63c6bbb973134582b1d384b0c19d962b&amp;csf=1&amp;web=1&amp;e=VJjXGW&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/02.%20SM-S948B%20EU%20RoHS%20Declaration.pdf?d=w554ad8ec68e74dd89bccb16ed9b925af&amp;csf=1&amp;web=1&amp;e=FDEE9k&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/04.%20SM-S948B_MSDS_EB-BS948ABY_EB-BS948ABE_FR_SDI_260529.pdf?d=wd911267ae4e2478c86eb7d8b4257b2c9&amp;csf=1&amp;web=1&amp;e=foOjaW&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/05a.%20SM-S948B_UN38.3_EB-BS948ABE_Summary_ATL.pdf?d=w94a8d000460c4442bf5ad8567f6a1032&amp;csf=1&amp;web=1&amp;e=CbiEnj&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/05b.%20SM-S948B_UN38.3_EB-BS948ABY_Summary_ATL.pdf?d=w60c9fdd87c1b43138fd81f4c759539fe&amp;csf=1&amp;web=1&amp;e=rrxIWB&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/06.%20SM-S948B_S26%20Ultra_Ecodesign_Materials.xlsx?d=w28767f4477be478e92970215e73d9e34&amp;csf=1&amp;web=1&amp;e=2OUvhk&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20Ultra/07.%20SM-S948B_MTA_LOA_SAEL_06028_16Jul26_LONG.pdf?d=w31fda600aab24544943a79919e434899&amp;csf=1&amp;web=1&amp;e=WZBzNh&quot;
+    ]
+  },
+  &quot;s26plus&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/01.%20SM-S947B_Declaration%20of%20Conformity%20S26+.pdf?d=w6f5d84501bea4d4cbd43aeaf3064d883&amp;csf=1&amp;web=1&amp;e=WTlESe&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/02.%20SM-S947B_DS%20EU%20RoHS%20Declaration.pdf?d=w271a64b3f6084defa7867de829096055&amp;csf=1&amp;web=1&amp;e=Q6Vdm4&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/03.%20SM-S947B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w5db21764567f4f0e98040dfbcf8ca65e&amp;csf=1&amp;web=1&amp;e=LSEf8X&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/04.%20SM-S947B_MSDS_EB-BS946ABY_EB-BS946ABE_EN_SDI.pdf?d=w8ec6564eb94c4bd4b9d9905298356fa0&amp;csf=1&amp;web=1&amp;e=WeZNFE&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/05a.%20SM-S947B_UN38.3_EB-BS946ABE_Summary_ATL.pdf?d=w2a87dac927b54c7e9cc8de137432f53f&amp;csf=1&amp;web=1&amp;e=HQ758R&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/05b.%20SM-S947B_UN38.3_EB-BS946ABY_Summary_ATL.pdf?d=w44444d84a47d43569593fcc84e87e124&amp;csf=1&amp;web=1&amp;e=dN9UMK&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/06.%20SM-S947B_S26+_Ecodesign_Materials.xlsx?d=w6c5cc605a0734445b8c56f7660f8457e&amp;csf=1&amp;web=1&amp;e=NG4nRV&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26+/07.%20SM-S947B_MTA_LOA_SAEL_06029_10Dec25_LONG.pdf?d=w8f1d15f0597f452da552e3fc7ea0ce33&amp;csf=1&amp;web=1&amp;e=TfzFJH&quot;
+    ]
+  },
+  &quot;s26&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/01.%20SM-S942B_Declaration%20of%20Conformity%20S26.pdf?d=w625e20a0e5ae466cb9190259cb06cb3e&amp;csf=1&amp;web=1&amp;e=vqiE3d&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/02.%20SM-S942B_DS%20EU%20RoHS%20Declaration.pdf?d=w557024c2a5b046ada9308258b88bd152&amp;csf=1&amp;web=1&amp;e=tjd29L&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/03.%20SM-S942B_DS%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w9780f12b27d243ea8add685ffa776112&amp;csf=1&amp;web=1&amp;e=85dJ9C&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/04.%20SM-S942B_MSDS_EB-BS942ABY_EB-BS942ABE_FR_ATL.pdf?d=we7a14945040f4a13a7779a4f59083131&amp;csf=1&amp;web=1&amp;e=3m5vre&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/05a.%20SM-S942B_UN38.3_EB-BS942ABE_Summary_ATL.pdf?d=w0d14dbb7988444769d802ca514dd4b06&amp;csf=1&amp;web=1&amp;e=9tcCuB&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/05b.%20SM-S942B_UN38.3_EB-BS942ABY_Summary_ATL.pdf?d=w57bd56ab8629480daab62f39a30b238f&amp;csf=1&amp;web=1&amp;e=LwDfJ6&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/06.%20SM-S942B_S26_Ecodesign_Materials.xlsx?d=wc90e01f19aa741f5b48d70e33a8c49eb&amp;csf=1&amp;web=1&amp;e=vVONuc&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26/07.%20SM-S942B_MTA_LOA_SAEL_06030_04Dec25_LONG.pdf?d=w7f1f9f027f704853b6d5e0d9726814aa&amp;csf=1&amp;web=1&amp;e=gLKofx&quot;
+    ]
+  },
+  &quot;s26fe&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/01.%20SM-S741B_Declaration%20of%20Conformity%20S26%20FE.pdf?d=wd6013b09ed9645a89ebb6be763d284c4&amp;csf=1&amp;web=1&amp;e=BGzt2c&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/02.%20SM-S741B_RoHS_Declaration.pdf?d=wbdc58d434c244d219f233c189f8ed974&amp;csf=1&amp;web=1&amp;e=bdpabp&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/03.%20SM-S741B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w6c375968beba4a1393368053ca88966f&amp;csf=1&amp;web=1&amp;e=fSaA5T&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/05a.%20SM-S741B_UN38.3_EB-BS936ABY_Summary_ATL.pdf?d=wbec0fe34b8fb404a806cd830f2354fc8&amp;csf=1&amp;web=1&amp;e=rXwWmm&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/05b.%20SM-S741B_UN38.3_EB-BS936ABE_Summary_ATL.pdf?d=wbc0b226f1f244803b9823a720c07a379&amp;csf=1&amp;web=1&amp;e=y3IIlz&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/04a.%2001.%20SM-S741B_MSDS_EB-BS936ABE_EN_CN_ATL.pdf?d=w14db5803d5ad4f1088288bb070a02bcd&amp;csf=1&amp;web=1&amp;e=0DBRUy&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/04b.%20SM-S741B_MSDS_EB-BS936ABY_EB-BS936ABE_EN_SDI.pdf?d=wb600418203514868838f6a282f339276&amp;csf=1&amp;web=1&amp;e=sfDMCr&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/06.%20SM-S741B__Ecodesign_Materials_20260630.xlsx?d=w11e15fca74a94e95b15ae0e23a457a55&amp;csf=1&amp;web=1&amp;e=7KxOez&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20S26%20FE/07.%20SM-S741B__MTA_LOA_SAEL_06294_11Jun26_LONG.pdf?d=web452e4a3eb94e80aeeb8e730a9b52f8&amp;csf=1&amp;web=1&amp;e=iiv6q6&quot;
+    ]
+  },
+  &quot;a57&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/01.%20SM-A576B_Declaration%20of%20Conformity%20A57.pdf?d=wcda4a1b131484a8c81143c0e4c8d0e0a&amp;csf=1&amp;web=1&amp;e=fsQ8cT&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/02.%20SM-A576B_EU%20RoHS%20Declaration.pdf?d=w619544cc4976471b82ad531c544c1557&amp;csf=1&amp;web=1&amp;e=GQDhl0&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/03.%20SM-A576B_DS%20UK%20REACH%20SVHCs%20Declaration.pdf?d=w54adbf6a036e46009eb0c60b81644e61&amp;csf=1&amp;web=1&amp;e=dzgcup&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/04a.%20SM-A576B_MSDS_EB-BA566ASE.pdf?d=w7d324da497ff41dc909d075eec0057b6&amp;csf=1&amp;web=1&amp;e=YLgFNa&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/04b.%20SM-A576B_MSDS_Li-ion_battery_EB-BA566ASY,%20EB-BA566ASE.pdf?d=wb09be18cb6c24944a935cc27b567fcb9&amp;csf=1&amp;web=1&amp;e=pBl6A1&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/05a.%20SM-A576B_UN38.3_EB-BA566ASE_Summary_ATL.pdf?d=w3bbcdca51b5e413e90041e6d67560d20&amp;csf=1&amp;web=1&amp;e=jOUOzh&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/05b.%20SM-A576B_UN38.3_EB-BA566ASE_Report.pdf?d=wbcba0a92af11480a82793447e68f5132&amp;csf=1&amp;web=1&amp;e=pvAey8&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/06.%20SM-A576B_A57_Ecodesign_Materials.xlsx?d=w0839c4bb4fba404198ebae286be1a003&amp;csf=1&amp;web=1&amp;e=80VkGp&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A57/07.%20SM-A576B__MTA_LOA_SAEL_06070_04Dec25_LONG.pdf?d=wbcc7d08c808f4d5c9173fb63a81f1774&amp;csf=1&amp;web=1&amp;e=5rkk2c&quot;
+    ]
+  },
+  &quot;a37&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/01.%20SM-A376B%20Declaration%20of%20Conformity.pdf?d=w85214fb9396541a788c25486af138801&amp;csf=1&amp;web=1&amp;e=dTzKeW&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/02.%20SM-A376B%20EU%20RoHS%20Declaration.pdf?d=w976f35c6fe29484bbd08e4808f8be1ac&amp;csf=1&amp;web=1&amp;e=GFW4sG&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/03.%20SM-A376B%20UK%20REACH%20SVHCs%20Declaration.pdf?d=wb1a018a74c024cc7b1f2fdbe2190a803&amp;csf=1&amp;web=1&amp;e=K4Lr19&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/04a.%20SM-A376B_MSDS_EB-BA566ASY,%20EB-BA566ASE_241113_ver.02.pdf?d=w84f5c2ebda0a41178459963e37d802cf&amp;csf=1&amp;web=1&amp;e=Dvw460&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/05a.%20SM-A376B_UN38.3_EB-BA566ASE_Summary_ATL.pdf?d=w03c3ca5174eb48b29056874bdea1929c&amp;csf=1&amp;web=1&amp;e=r2aUh8&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/05b.%20SM-A376B_UN38.3_EB-BA566ASE_Report.pdf?d=wcc8a925ac82a42ddb3aeb3eb0c5a11ee&amp;csf=1&amp;web=1&amp;e=TBLIKb&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/06.%20SM-A376B_Ecodesign_Materials.xlsx?d=w2c890a8378fd41b2971c08c8ca873363&amp;csf=1&amp;web=1&amp;e=lhqxUj&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A37/07%20SM-A376B_MTA_LOA_SAEL_06076_05Dec25_LONG.pdf?d=w72d92518976f4415956cc5478f6cf98e&amp;csf=1&amp;web=1&amp;e=zoTBsd&quot;
+    ]
+  },
+  &quot;a27&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/01.%20SM-A276B%20Declaration%20of%20Conformity.pdf?d=we333091303684899aaeeac8e9fc5e8d4&amp;csf=1&amp;web=1&amp;e=jpJhcN&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/02.%20SM-A276B%20EU%20RoHS%20Declaration.pdf?d=w67adf7c860154c48b177b4e33be4fd5f&amp;csf=1&amp;web=1&amp;e=rbRL9D&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/03.%20SM-A276B%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w5f309d3da3c74d3680c74bd717336276&amp;csf=1&amp;web=1&amp;e=ak6RHI&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/04a.%20SM-A276B_MSDS_EB-BA166ASY_EB-BA166ASE_SDI.pdf?d=w84d01ac0a04c4e0d8baacce5eac35f74&amp;csf=1&amp;web=1&amp;e=PvZ0HI&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/04b.%20SM-A276B_MSDS_EB-BA166ABY_EB-BA166ABE_SDI.pdf?d=w8f220ec9b5704b978d6985a9d3ce954f&amp;csf=1&amp;web=1&amp;e=5dVNjp&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/05a.%20SM-A276B_UN38.3_EB-BA166ASE_Summary_ATL.pdf?d=w0c8fe41c2857424da086e76627ead297&amp;csf=1&amp;web=1&amp;e=rczjXC&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/05b.%20SM-A276B_UN38.3_EB-BA166ASE_Report_ATL.pdf?d=wd1b75bfd9a9c47439e7c098797243151&amp;csf=1&amp;web=1&amp;e=fvADcy&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/06.%20SM-A276B_Ecodesign_Materials_20260528.xlsx?d=w9da659c8653345dbbdea0fb065f79bfd&amp;csf=1&amp;web=1&amp;e=SOqgzy&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A27/07.%20SM-A276B_MTA_LOA_SAEL_06169_26Mar26_LONG.pdf?d=wef90ba4c30f947318060a3e08e4f6242&amp;csf=1&amp;web=1&amp;e=uELdon&quot;
+    ]
+  },
+  &quot;a18-4g&quot;: {
+    &quot;conformite&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/01.%20SM-A185F_Declaration%20of%20Conformity%20A18%204G.pdf?d=w7271b588e9af440e947eaa639b9f2cbb&amp;csf=1&amp;web=1&amp;e=a8LUxT&quot;
+    ],
+    &quot;rohs&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/02.%20SM-A185F%20EU%20RoHS%20Declaration.pdf?d=w45163e3633d84a4588bc304b87fa3b96&amp;csf=1&amp;web=1&amp;e=5fzTxD&quot;
+    ],
+    &quot;reach&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/03.%20SM-A185F%20EU%20REACH%20SVHCs%20Declaration.pdf?d=w14fc5b198a7e42f89e0d75dc91b2e880&amp;csf=1&amp;web=1&amp;e=XMa7tB&quot;
+    ],
+    &quot;msds&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/04a.%20SM-A185F_MSDS_EB-BA166ASE_EN_CN_ATL_251212.pdf?d=we2534a6ee74945a7b44a80814b426967&amp;csf=1&amp;web=1&amp;e=U2NDCv&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/04b.%20SM-A185F_MSDS_EB-BA166ASY_EN_CN_ATL_251212.pdf?d=w463f611641dc4db395948558b85d6b61&amp;csf=1&amp;web=1&amp;e=e4T2oK&quot;
+    ],
+    &quot;un383&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/05a.%20SM-A185F_UN38.3_EB-BA166ASE_Summary_ATL.pdf?d=w5f286fcf5c69453286586cf30fa59931&amp;csf=1&amp;web=1&amp;e=HXSIam&quot;,
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/05b.%20SM-A185F_UN38.3_EB-BA166ASY_Summary_ATL.pdf?d=wb6fc3751403c4d5dac6f0c2741de0e26&amp;csf=1&amp;web=1&amp;e=8vwIZv&quot;
+    ],
+    &quot;ecomaterial&quot;: [
+      &quot;https://samsung.sharepoint.com/:x:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/06.%20SM-A185F_A18%204G_Ecodesign_Materials_20260818.xlsx?d=w73cc4dc3c0d84161aefd8922429bf886&amp;csf=1&amp;web=1&amp;e=eFJ6Ce&quot;
+    ],
+    &quot;emvco&quot;: [
+      &quot;https://samsung.sharepoint.com/:b:/r/sites/IMB2BDIVISION/Shared%20Documents/General/14.%20Team%20Produit%20-%20Docs%20Techniques%20et%20Certifs/2026/Galaxy%20A18%204G/07.%20SM-A185F%20MTA_LOA_SAEL_06340_08Jul26_LONG.pdf?d=w3e44fc2e25744e3d831086265d6bbb31&amp;csf=1&amp;web=1&amp;e=XOWJ2U&quot;
+    ]
+  }
+};
+
+/* ========================================================= */
+
+function labelFromUrl(url, idx) {
+    try {
+        const clean = url.split('?')[0].split('#')[0];
+        const parts = clean.split('/').filter(Boolean);
+        const last = parts[parts.length - 1];
+        return last ? decodeURIComponent(last) : `Document ${idx + 1}`;
+    } catch (e) {
+        return `Document ${idx + 1}`;
+    }
+}
+
+function HeaderLabel({ label, tooltip }) {
+    return (
+        <span className=&quot;relative inline-flex items-center gap-1 group cursor-help normal-case font-bold&quot;>
+            <span className=&quot;uppercase text-xs&quot;>{label}</span>
+            <span className=&quot;text-gray-400 not-italic&quot;>ⓘ</span>
+            <span className=&quot;pointer-events-none absolute z-50 top-full left-1/2 -translate-x-1/2 mt-2 w-max max-w-xs bg-gray-800 text-white text-[11px] font-normal whitespace-normal leading-snug rounded-lg p-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity text-left&quot;>
+                {tooltip}
+            </span>
+        </span>
+    );
+}
+
+function Badge({ urls }) {
+    const [open, setOpen] = useState(false);
+    const files = (urls || []).map((url, i) => ({ url, label: labelFromUrl(url, i) }));
+    if (files.length === 0) {
+        return <span className=&quot;text-gray-300 text-xs&quot;>&amp;mdash;</span>;
+    }
+    return (
+        <div className=&quot;relative inline-block&quot;>
+            <button
+                onClick={() => setOpen(o => !o)}
+                className=&quot;ee-badge inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors&quot;
+            >
+                ✓ {files.length} fichier{files.length > 1 ? 's' : ''}
+            </button>
+            {open &amp;&amp; (
+                <>
+                    <div className=&quot;fixed inset-0 z-40&quot; onClick={() => setOpen(false)}></div>
+                    <div className=&quot;popover top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg p-2 w-64&quot;>
+                        {files.map((f, i) => (
+                            <a
+                                key={i}
+                                href={f.url}
+                                target=&quot;_blank&quot;
+                                rel=&quot;noopener noreferrer&quot;
+                                className=&quot;flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-gray-700 text-left&quot;
+                            >
+                                📄 <span className=&quot;truncate&quot;>{f.label}</span>
+                            </a>
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
+function EditableCell({ urls, onSave }) {
+    const [open, setOpen] = useState(false);
+    const [draft, setDraft] = useState((urls || []).join('\n'));
+    const count = (urls || []).length;
+
+    const openEditor = () => { setDraft((urls || []).join('\n')); setOpen(true); };
+    const save = () => {
+        const next = draft.split('\n').map(s => s.trim()).filter(Boolean);
+        onSave(next);
+        setOpen(false);
+    };
+
+    return (
+        <div className=&quot;relative inline-block&quot;>
+            <button
+                onClick={openEditor}
+                className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border transition-colors ${count > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100' : 'bg-gray-50 text-gray-400 border-dashed border-gray-300 hover:bg-gray-100'}`}
+            >
+                {count > 0 ? `✓ ${count} lien${count > 1 ? 's' : ''}` : '+ Ajouter'}
+            </button>
+            {open &amp;&amp; (
+                <>
+                    <div className=&quot;fixed inset-0 z-40&quot; onClick={() => setOpen(false)}></div>
+                    <div className=&quot;popover top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg p-3 w-72 text-left&quot;>
+                        <p className=&quot;text-[11px] text-gray-500 mb-1.5&quot;>Un lien SharePoint par ligne</p>
+                        <textarea
+                            value={draft}
+                            onChange={e => setDraft(e.target.value)}
+                            rows={4}
+                            className=&quot;w-full border border-gray-300 rounded-lg p-2 text-xs font-mono outline-none focus:border-blue-500&quot;
+                            placeholder=&quot;https://samsung.sharepoint.com/...&quot;
+                            autoFocus
+                        />
+                        <div className=&quot;flex justify-end gap-2 mt-2&quot;>
+                            <button onClick={() => setOpen(false)} className=&quot;text-xs font-semibold text-gray-500 px-2 py-1 hover:text-gray-700&quot;>Annuler</button>
+                            <button onClick={save} className=&quot;text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg&quot;>Enregistrer</button>
+                        </div>
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
+function AddDeviceForm({ onAdd }) {
+    const [name, setName] = useState('');
+    const [code, setCode] = useState('');
+
+    const submit = () => {
+        const trimmedName = name.trim();
+        const trimmedCode = code.trim().toUpperCase();
+        if (!trimmedName || !trimmedCode) return;
+        const slug = trimmedName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-+|-+$)/g, '');
+        const id = 'custom-' + (slug || 'produit') + '-' + Date.now().toString(36);
+        onAdd({ id, name: trimmedName, code: trimmedCode });
+        setName('');
+        setCode('');
+    };
+
+    return (
+        <div className=&quot;flex flex-wrap items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg mb-3&quot;>
+            <span className=&quot;text-xs font-bold text-blue-800 whitespace-nowrap&quot;>+ Nouveau produit :</span>
+            <input
+                value={name}
+                onChange={e => setName(e.target.value)}
+                placeholder=&quot;Nom (ex: Galaxy A17)&quot;
+                className=&quot;border border-gray-300 rounded-lg px-2 py-1.5 text-xs w-48 outline-none focus:border-blue-500&quot;
+            />
+            <input
+                value={code}
+                onChange={e => setCode(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') submit(); }}
+                placeholder=&quot;Reference (ex: SM-A177B)&quot;
+                className=&quot;border border-gray-300 rounded-lg px-2 py-1.5 text-xs w-40 outline-none focus:border-blue-500&quot;
+            />
+            <button onClick={submit} className=&quot;text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg&quot;>
+                Ajouter
+            </button>
+        </div>
+    );
+}
+
+function App() {
+    const [search, setSearch] = useState('');
+
+    const [links, setLinks] = useState(() => {
+        try {
+            const saved = localStorage.getItem('docsCertifData');
+            if (saved) return JSON.parse(saved);
+        } catch (e) {}
+        return DEFAULT_LINKS;
+    });
+    useEffect(() => {
+        try { localStorage.setItem('docsCertifData', JSON.stringify(links)); } catch (e) {}
+    }, [links]);
+
+    const [extraDevices, setExtraDevices] = useState(() => {
+        try {
+            const saved = localStorage.getItem('docsCertifDevices');
+            if (saved) return JSON.parse(saved);
+        } catch (e) {}
+        return [];
+    });
+    useEffect(() => {
+        try { localStorage.setItem('docsCertifDevices', JSON.stringify(extraDevices)); } catch (e) {}
+    }, [extraDevices]);
+
+    const allDevices = useMemo(() => [
+        ...BASE_DEVICES.map(withNotifyUrl),
+        ...extraDevices.map(withNotifyUrl)
+    ], [extraDevices]);
+
+    const updateLink = (deviceId, categoryId, urls) => {
+        setLinks(prev => ({
+            ...prev,
+            [deviceId]: { ...(prev[deviceId] || {}), [categoryId]: urls }
+        }));
+    };
+
+    const addDevice = (device) => {
+        setExtraDevices(prev => [...prev, device]);
+    };
+
+    const removeDevice = (deviceId) => {
+        if (!window.confirm('Retirer ce produit de la liste ?')) return;
+        setExtraDevices(prev => prev.filter(d => d.id !== deviceId));
+        setLinks(prev => {
+            const next = { ...prev };
+            delete next[deviceId];
+            return next;
+        });
+    };
+
+    const [editMode, setEditMode] = useState(false);
+    const [showAdminInput, setShowAdminInput] = useState(false);
+    const [adminPassword, setAdminPassword] = useState('');
+    const [adminError, setAdminError] = useState(false);
+
+    const handleAdminUnlock = () => {
+        if (adminPassword === 'admin') {
+            setEditMode(true);
+            setShowAdminInput(false);
+            setAdminError(false);
+            setAdminPassword('');
+        } else {
+            setAdminError(true);
+        }
+    };
+    const handleAdminLock = () => {
+        setEditMode(false);
+        setShowAdminInput(false);
+        setAdminPassword('');
+        setAdminError(false);
+    };
+    const handleExportData = () => {
+        const payload = { devices: extraDevices, links };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'docs-certifications-data.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+    const handleResetData = () => {
+        if (!window.confirm(&quot;Reinitialiser tous les liens/produits ajoutes et revenir aux donnees d'origine ?&quot;)) return;
+        setLinks(DEFAULT_LINKS);
+        setExtraDevices([]);
+    };
+
+    const filtered = useMemo(() => {
+        const q = search.trim().toLowerCase();
+        if (!q) return allDevices;
+        return allDevices.filter(d => d.name.toLowerCase().includes(q) || d.code.toLowerCase().includes(q));
+    }, [search, allDevices]);
+
+    return (
+        <div className=&quot;min-h-screen&quot;>
+            <div className=&quot;bg-white border-b border-gray-200 px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4&quot;>
+                <div>
+                    <h1 className=&quot;text-xl font-bold text-[#003057] flex items-center gap-2&quot;>
+                        📁 Documents Techniques et Certifications
+                    </h1>
+                    <p className=&quot;text-xs text-gray-500 mt-1&quot;>Declarations de conformite, ROHS, REACH, batterie, EcoMaterial, EMVCo</p>
+                </div>
+                <div className=&quot;flex gap-3 items-center w-full md:w-auto relative&quot;>
+                    <input
+                        type=&quot;text&quot;
+                        placeholder=&quot;Rechercher un appareil...&quot;
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                        className=&quot;border border-gray-300 rounded-lg px-3 py-2 text-sm w-full md:w-64 outline-none focus:border-blue-500&quot;
+                    />
+                    <button
+                        onClick={() => editMode ? handleAdminLock() : setShowAdminInput(v => !v)}
+                        className={`px-3 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition-colors shrink-0 ${editMode ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200' : 'border border-gray-300 text-gray-500 hover:bg-gray-50'}`}
+                        title={editMode ? 'Quitter le mode edition' : 'Mode edition'}
+                    >
+                        {editMode ? '🔓 Edition' : '🔒 Edition'}
+                    </button>
+                    {showAdminInput &amp;&amp; !editMode &amp;&amp; (
+                        <div className=&quot;absolute right-0 top-14 bg-[#003057] text-white rounded-lg shadow-lg p-3 flex items-center gap-2 z-50&quot;>
+                            <input
+                                type=&quot;password&quot;
+                                value={adminPassword}
+                                onChange={e => { setAdminPassword(e.target.value); setAdminError(false); }}
+                                onKeyDown={e => { if (e.key === 'Enter') handleAdminUnlock(); }}
+                                placeholder=&quot;Mot de passe&quot;
+                                className=&quot;px-2 py-1 rounded text-gray-800 text-sm outline-none&quot;
+                                autoFocus
+                            />
+                            <button onClick={handleAdminUnlock} className=&quot;bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1 rounded hover:bg-yellow-300&quot;>Acceder</button>
+                            {adminError &amp;&amp; <span className=&quot;text-red-300 text-xs whitespace-nowrap&quot;>Mot de passe incorrect</span>}
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {editMode &amp;&amp; (
+                <div className=&quot;bg-yellow-50 border-b border-yellow-200&quot;>
+                    <div className=&quot;px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-2&quot;>
+                        <span className=&quot;text-xs font-bold text-yellow-800&quot;>Mode edition active — cliquez sur une cellule pour ajouter/modifier ses liens SharePoint. Pensez a cliquer sur Exporter (JSON) pour transmettre les changements.</span>
+                        <div className=&quot;flex items-center gap-2&quot;>
+                            <button onClick={handleExportData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                                ⬇ Exporter (JSON)
+                            </button>
+                            <button onClick={handleResetData} className=&quot;flex items-center gap-1.5 text-xs font-bold text-yellow-800 border border-yellow-300 hover:bg-yellow-100 px-3 py-1.5 rounded-lg transition-colors&quot;>
+                                ↺ Reinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            <div className=&quot;p-4 md:p-6&quot;>
+                {editMode &amp;&amp; <AddDeviceForm onAdd={addDevice} />}
+                <div className=&quot;bg-white rounded-xl border border-gray-200 shadow-sm overflow-auto max-h-[75vh]&quot;>
+                    <table className=&quot;min-w-full text-sm border-collapse&quot;>
+                        <thead className=&quot;sticky-head&quot;>
+                            <tr className=&quot;bg-gray-50&quot;>
+                                <th rowSpan={2} className=&quot;sticky-col p-3 text-left text-xs font-bold text-gray-500 uppercase w-56 border-r border-gray-100 align-bottom&quot;>
+                                    Appareil
+                                </th>
+                                {HEADER_GROUPS.map((g, gi) => g.key ? (
+                                    <th key={'grp-' + gi} colSpan={g.cols.length} className=&quot;p-3 align-middle text-center text-xs font-bold text-gray-500 uppercase whitespace-nowrap bg-gray-50 border-b border-gray-200&quot;>
+                                        {GROUP_LABELS[g.key]}
+                                    </th>
+                                ) : (
+                                    <th key={g.cols[0].id} rowSpan={2} className=&quot;p-3 text-center text-xs font-bold text-gray-500 uppercase whitespace-nowrap bg-gray-50 align-middle&quot;>
+                                        <HeaderLabel label={g.cols[0].label} tooltip={g.cols[0].tooltip} />
+                                    </th>
+                                ))}
+                                <th rowSpan={2} className=&quot;p-3 text-center text-xs font-bold text-gray-500 uppercase whitespace-nowrap bg-gray-50 align-middle&quot;>
+                                    <HeaderLabel label=&quot;Notify Updates&quot; tooltip={NOTIFY_TOOLTIP} />
+                                </th>
+                            </tr>
+                            <tr className=&quot;bg-gray-50 border-b border-gray-200&quot;>
+                                {HEADER_GROUPS.flatMap(g => g.key ? g.cols.map(c => (
+                                    <th key={c.id} className=&quot;p-2 text-center text-[11px] font-bold text-gray-500 uppercase whitespace-nowrap bg-gray-50&quot;>
+                                        <HeaderLabel label={c.label} tooltip={c.tooltip} />
+                                    </th>
+                                )) : [])}
+                            </tr>
+                        </thead>
+                        <tbody className=&quot;divide-y divide-gray-100&quot;>
+                            {filtered.map((d, idx) => (
+                                <tr key={d.code} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}>
+                                    <td className=&quot;sticky-col p-3 border-r border-gray-100&quot;>
+                                        <div className=&quot;flex items-center gap-1.5&quot;>
+                                            <div className=&quot;font-semibold text-gray-800&quot;>{d.name}</div>
+                                            {editMode &amp;&amp; d.id.startsWith('custom-') &amp;&amp; (
+                                                <button onClick={() => removeDevice(d.id)} title=&quot;Retirer ce produit&quot; className=&quot;text-gray-300 hover:text-red-500 text-xs leading-none&quot;>✕</button>
+                                            )}
+                                        </div>
+                                        <div className=&quot;text-xs text-gray-400 font-mono&quot;>{d.code}</div>
+                                    </td>
+                                    {CATEGORIES.map(c => (
+                                        <td key={c.id} className=&quot;p-3 text-center&quot;>
+                                            {editMode ? (
+                                                <EditableCell
+                                                    urls={(links[d.id] || {})[c.id]}
+                                                    onSave={urls => updateLink(d.id, c.id, urls)}
+                                                />
+                                            ) : (
+                                                <Badge urls={(links[d.id] || {})[c.id]} />
+                                            )}
+                                        </td>
+                                    ))}
+                                    <td className=&quot;p-3 text-center&quot;>
+                                        <a
+                                            href={d.notifyUrl}
+                                            target=&quot;_blank&quot;
+                                            rel=&quot;noopener noreferrer&quot;
+                                            className=&quot;inline-flex items-center gap-1 px-3 py-1.5 bg-[#003057] text-white text-xs font-bold rounded-full hover:bg-[#1428A0] transition-colors&quot;
+                                        >
+                                            Ouvrir ↗
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                <p className=&quot;text-xs text-gray-400 mt-4&quot;>
+                    {editMode
+                        ? &quot;Les liens sont enregistres dans ce navigateur. Cliquez sur Exporter (JSON) et transmettez le fichier pour les rendre visibles a toute l'equipe.&quot;
+                        : &quot;Cliquez sur un badge pour ouvrir la liste des documents disponibles.&quot;}
+                </p>
+            </div>
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
+"></iframe>
   </div>
 
   <script>
