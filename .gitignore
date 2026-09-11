@@ -20,3 +20,6 @@ smt-data*.json
 galaxy-book-data*.json
 ecodesign-data*.json
 roadmap-gp-data*.json
+
+# Support de formation interne (contient login/mdp ajoutés à la main, pas à versionner)
+Formation Galaxy Hub.pptx
