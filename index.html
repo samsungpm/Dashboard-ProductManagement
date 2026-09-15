@@ -175,9 +175,9 @@
           <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="sub-items">
-          <div class="sub-item active" onclick="navigate('smt','roadmap',this)"><span class="sub-dot"></span>Roadmap EE</div>
-          <div class="sub-item" onclick="navigate('smt','os-smr',this)"><span class="sub-dot"></span>OS &amp; SMR</div>
-          <div class="sub-item" onclick="navigate('smt','comparison',this)"><span class="sub-dot"></span>Comparateur</div>
+          <div class="sub-item active" data-view="roadmap" onclick="navigate('smt','roadmap',this)"><span class="sub-dot"></span>Roadmap EE</div>
+          <div class="sub-item" data-view="os-smr" onclick="navigate('smt','os-smr',this)"><span class="sub-dot"></span>OS &amp; SMR</div>
+          <div class="sub-item" data-view="comparison" onclick="navigate('smt','comparison',this)"><span class="sub-dot"></span>Comparateur</div>
         </div>
       </div>
 
@@ -194,9 +194,9 @@
           <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="sub-items">
-          <div class="sub-item" onclick="navigate('roadmap','smartphones',this)"><span class="sub-dot"></span>Smartphones</div>
-          <div class="sub-item" onclick="navigate('roadmap','tablets',this)"><span class="sub-dot"></span>Tablettes</div>
-          <div class="sub-item" onclick="navigate('roadmap','wearables',this)"><span class="sub-dot"></span>Objets Connectés</div>
+          <div class="sub-item" data-view="smartphones" onclick="navigate('roadmap','smartphones',this)"><span class="sub-dot"></span>Smartphones</div>
+          <div class="sub-item" data-view="tablets" onclick="navigate('roadmap','tablets',this)"><span class="sub-dot"></span>Tablettes</div>
+          <div class="sub-item" data-view="wearables" onclick="navigate('roadmap','wearables',this)"><span class="sub-dot"></span>Objets Connectés</div>
         </div>
       </div>
 
@@ -210,9 +210,9 @@
           <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="sub-items">
-          <div class="sub-item" onclick="navigate('galaxybook','roadmap',this)"><span class="sub-dot"></span>Roadmap</div>
-          <div class="sub-item" onclick="navigate('galaxybook','comparator',this)"><span class="sub-dot"></span>Comparateur</div>
-          <div class="sub-item" onclick="navigate('galaxybook','referencement',this)"><span class="sub-dot"></span>Référencement</div>
+          <div class="sub-item" data-view="roadmap" onclick="navigate('galaxybook','roadmap',this)"><span class="sub-dot"></span>Roadmap</div>
+          <div class="sub-item" data-view="comparator" onclick="navigate('galaxybook','comparator',this)"><span class="sub-dot"></span>Comparateur</div>
+          <div class="sub-item" data-view="referencement" onclick="navigate('galaxybook','referencement',this)"><span class="sub-dot"></span>Référencement</div>
         </div>
       </div>
 
@@ -227,8 +227,8 @@
           <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="sub-items">
-          <div class="sub-item" onclick="navigate('ecodesign','materials',this)"><span class="sub-dot"></span>Matériaux</div>
-          <div class="sub-item" onclick="navigate('ecodesign','lca',this)"><span class="sub-dot"></span>Cycle de Vie (ACV)</div>
+          <div class="sub-item" data-view="materials" onclick="navigate('ecodesign','materials',this)"><span class="sub-dot"></span>Matériaux</div>
+          <div class="sub-item" data-view="lca" onclick="navigate('ecodesign','lca',this)"><span class="sub-dot"></span>Cycle de Vie (ACV)</div>
         </div>
       </div>
 
@@ -244,7 +244,7 @@
           <svg class="nav-arrow" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
         <div class="sub-items">
-          <div class="sub-item" onclick="navigate('docs','list',this)"><span class="sub-dot"></span>Certifications</div>
+          <div class="sub-item" data-view="list" onclick="navigate('docs','list',this)"><span class="sub-dot"></span>Certifications</div>
         </div>
       </div>
 
@@ -7227,6 +7227,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
         document.querySelectorAll('.sub-item').forEach(function(s){ s.classList.remove('active'); });
         if (firstSub) firstSub.classList.add('active');
         currentSection = id;
+        updateUrlHash(id, firstSub ? firstSub.getAttribute('data-view') : null);
       } else {
         // Same section: toggle open/close
         group.classList.toggle('open');
@@ -7261,11 +7262,29 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);
       if (frame && frame.contentWindow) {
         frame.contentWindow.postMessage({ samsungNav: view }, '*');
       }
+      updateUrlHash(section, view);
     }
 
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('collapsed');
     }
+
+    // Reflète la section/vue active dans l'URL (#section/vue), sans recharger la page
+    function updateUrlHash(section, view) {
+      var hash = '#' + section + (view ? '/' + view : '');
+      if (window.location.hash !== hash) history.replaceState(null, '', hash);
+    }
+
+    // Au chargement : si l'URL contient #section ou #section/vue, ouvre directement cette section/vue
+    (function initFromHash() {
+      var hash = window.location.hash.replace(/^#/, '');
+      var parts = hash.split('/');
+      var section = parts[0], view = parts[1];
+      var group = section ? document.getElementById('group-' + section) : null;
+      if (!group) { updateUrlHash(currentSection, document.querySelector('.sub-item.active') && document.querySelector('.sub-item.active').getAttribute('data-view')); return; }
+      var subEl = (view && group.querySelector('.sub-item[data-view="' + view + '"]')) || group.querySelector('.sub-item');
+      if (subEl) navigate(section, subEl.getAttribute('data-view'), subEl);
+    })();
   </script>
 
 </body>
